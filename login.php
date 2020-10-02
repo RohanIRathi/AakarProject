@@ -1,4 +1,27 @@
+<?php
 
+    include('./php-utils/db/db.variables.php');
+    include('./php-utils/db/db.connection.php');
+    include('./php-utils/login.utils.php');
+    $link = connetionToDB($host,$username,$pass,$db);
+    if(!empty($_POST["login_btn"])) {
+        //echo 'Set!';
+        $email = mysqli_real_escape_string($link,$_POST['email']);
+        $password = mysqli_real_escape_string($link,$_POST['passwordd']);
+        $id = checkValidPass('Admin',$email,$link,$password);
+        if($id != NULL){
+            echo 'login successful';
+            //header('Location : /');
+        } else {
+            $error = 'Invalid Credentials';
+            echo $error;
+        }
+    } else {  
+        echo 'unset!';
+    }
+    
+    
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,14 +50,14 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                                     </div>
-                                    <form class="user" action="#" method="POST">
+                                    <form class="user" method="POST">
                                         <div class="form-group">
-                                            <input type="text" name="usernamee" class="form-control form-control-user" placeholder="Enter username...">
+                                            <input type="text" name="email" class="form-control form-control-user" placeholder="Enter Email..." required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="passwordd" class="form-control form-control-user" placeholder="Password">
+                                            <input type="password" name="passwordd" class="form-control form-control-user" placeholder="Password" required>
                                         </div>
-                                        <button type="submit" name="login_btn" class="btn btn-primary btn-user btn-block"> Login </button>
+                                        <input type="submit" name="login_btn" class="btn btn-primary btn-user btn-block" value='Login'>  
                                         <hr>
                                     </form>
                                 </div>
