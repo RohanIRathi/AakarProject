@@ -17,7 +17,7 @@ include('navbar_2.php');
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="usernamee" class="form-control form-control-user" placeholder="Enter Name...">
+                                <input type="text" name="username" class="form-control form-control-user" placeholder="Enter Name...">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2020 at 03:50 PM
+-- Generation Time: Oct 02, 2020 at 09:38 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `aakar`
 --
-CREATE DATABASE IF NOT EXISTS `aakar` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `aakar`;
 
 -- --------------------------------------------------------
 
@@ -151,9 +149,21 @@ ALTER TABLE `visitor`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hod`
+--
+ALTER TABLE `hod`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -176,7 +186,7 @@ ALTER TABLE `visitor`
 -- Constraints for table `employee`
 --
 ALTER TABLE `employee`
-  ADD CONSTRAINT `hod_id` FOREIGN KEY (`hod_id`) REFERENCES `hod` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `hod_id` FOREIGN KEY (`hod_id`) REFERENCES `hod` (`id`);
 
 --
 -- Constraints for table `hod`
