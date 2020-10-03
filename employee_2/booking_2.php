@@ -17,7 +17,7 @@ include('navbar_2.php');
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="username" class="form-control form-control-user" placeholder="Enter Name...">
+                                <input type="text" name="usernamee" class="form-control form-control-user" placeholder="Enter Name...">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
@@ -167,12 +167,6 @@ include('navbar_2.php');
     </main>
 <?php
 include('footer_2.php'); 
+include('scripts_2.php'); 
 ?>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="js/scripts.js"></script>
-    </body>
-
-    </html>
+        
