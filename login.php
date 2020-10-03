@@ -8,9 +8,11 @@
         //echo 'Set!';
         $email = mysqli_real_escape_string($link,$_POST['email']);
         $password = mysqli_real_escape_string($link,$_POST['passwordd']);
-        $id = checkValidPass('Admin',$email,$link,$password);
+        $type = mysqli_real_escape_string($link,$_POST['option']);
+        $id = checkValidPass($type,$email,$link,$password);
+        echo $_POST['option'];
         if($id != NULL){
-            echo 'login successful';
+            echo $id;
             //header('Location : /');
         } else {
             $error = 'Invalid Credentials';
@@ -56,6 +58,15 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="passwordd" class="form-control form-control-user" placeholder="Password" required>
+                                        </div>
+                                        <div class="form-group">
+                                        <label>Choose Role</label>
+                                        <select class="form-control form-control-user" name="option">
+                                            <option selected>Admin</option>
+                                            <option>HOD</option>
+                                            <option>Employee</option>
+                                            <option>Security</option>
+                                        </select>
                                         </div>
                                         <input type="submit" name="login_btn" class="btn btn-primary btn-user btn-block" value='Login'>  
                                         <hr>
