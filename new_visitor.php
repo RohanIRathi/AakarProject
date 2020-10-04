@@ -11,22 +11,38 @@
                                     <h1 class="h4 text-gray-900 mb-4">Add Visitor</h1>
                                 </div>
                                 <form class="user" action="#" method="POST">
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input type="text" name="usernamee" class="form-control form-control-user" placeholder="Enter Name...">
-                                    </div>
+                                   <div class="row">
+                                        <div class="col">
+                                            <div class="form-group pb-2">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control form-control-user" placeholder="Enter First Name" required >
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group pb-2">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control form-control-user" placeholder="Enter Last Name" required>
+                                            </div>
+                                        </div>
+                                    </div>       
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="email" name="email" class="form-control form-control-user" placeholder="Enter Email">
                                     </div>
-                                    <div class="form-group">
-                                    <label>Date</label>
-                                        <input type="date" name="date" class="form-control form-control-user" placeholder="Enter Date of Visit">
-                                    </div>
-                                    <div class="form-group">
-                                    <label>Time</label>
-                                        <input type="time" name="time" class="form-control form-control-user" placeholder="Enter Time of Visit">
-                                    </div>
+                                       <div class="row">
+                                        <div class="col">
+                                            <div class="form-group pb-2">
+                                                <label>Date</label>
+                                                <input type="date" class="form-control form-control-user" placeholder="Enter Date" required >
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group pb-2">
+                                                <label>Time</label>
+                                                <input type="time" class="form-control form-control-user" placeholder="Enter Time" required>
+                                            </div>
+                                        </div>
+                                    </div>    
                                     <div class="form-group">
                                         <label>No.of Visitors</label>
                                         <input type="number" name="no_of_visitor" class="form-control form-control-user" placeholder="Enter No.of Visitors">
@@ -55,13 +71,13 @@
                                     <div class="form-group">
                                         <label>Hospitality</label><br>
                                         <label class="radio-inline mr-3">
-                                            <input type="radio" class="form-control form-control-user" name="optradio">Breakfast
+                                            <input type="radio" class="form-control form-control-user" name="optradio1">Breakfast
                                         </label>
                                         <label class="radio-inline mr-3">
-                                            <input type="radio" class="form-control form-control-user" name="optradio">Lunch
+                                            <input type="radio" class="form-control form-control-user" name="optradio1">Lunch
                                         </label>
                                         <label class="radio-inline  mr-3">
-                                            <input type="radio"class="form-control form-control-user" name="optradio">Dinner
+                                            <input type="radio"class="form-control form-control-user" name="optradio1">Dinner
                                         </label>
                                     </div>
                                     <div class="form-group">
