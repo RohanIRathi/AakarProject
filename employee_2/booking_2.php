@@ -1,7 +1,10 @@
 <?php
-session_start();
-include('header_2.php'); 
-include('navbar_2.php'); 
+    session_start();
+    include('../php-utils/login.utils.php');
+    isValidUser();
+    include('header_2.php'); 
+    include('navbar_2.php'); 
+
 ?>
     <main style="margin-top: 30px;">
         <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

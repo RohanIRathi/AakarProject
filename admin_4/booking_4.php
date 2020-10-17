@@ -1,7 +1,11 @@
 <?php
-session_start();
-include('header_4.php'); 
-include('navbar_4.php'); 
+    session_start();
+    include('../php-utils/login.utils.php');
+    //print_r($_SESSION);
+    isValidUser();
+    include('header_4.php'); 
+    include('navbar_4.php'); 
+    
 ?>
     <main>
         <div class="container-fluid">

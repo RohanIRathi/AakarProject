@@ -1,7 +1,10 @@
 <?php
-session_start();
-include('header_3.php'); 
-include('navbar_3.php'); 
+    session_start();
+    include('../php-utils/login.utils.php');
+    isValidUser();
+    include('header_3.php'); 
+    include('navbar_3.php'); 
+    
 ?>
     <main style="margin-top: 30px;">
         <div class="container-fluid">

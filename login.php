@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     include('./php-utils/db/db.variables.php');
     include('./php-utils/db/db.connection.php');
     include('./php-utils/login.utils.php');
@@ -21,13 +21,17 @@
 
             if(strcmp($type,'Admin') == 0) {
                 header('location: ./admin_4/booking_4.php');
+                exit();
             } else if (strcmp($type,'HOD') == 0) {
                 header('location: ./hod_3/booking_3.php');
-            } else if (strcmp($type,'HOD') == 0) {
+                exit();
+            } else if (strcmp($type,'Employee') == 0) {
                 header('location: ./employee_2/booking_2.php');
+                exit();
             } else {
                 header('location: ./security_1/booking_1.php');
-            } exit();
+                exit();
+            } 
         } else {
             $error = 'Invalid Credentials';
             $error = '<div class="alert alert-danger" role="alert">'.$error.'</div>';
