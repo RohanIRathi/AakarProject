@@ -26,5 +26,5 @@ The front end code for admin adding an admin is in the file `admin_4/admin_regis
 The code for database connection is in the file `php-utils/db/db.connection.php`
 
 The the variables for storing database related data is in the file `php-utils/db/db.variables.php`  
-  
+  <br />
 The code for login validation is in the file `php-utils/login.utils.php`
