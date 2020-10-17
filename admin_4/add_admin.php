@@ -2,13 +2,13 @@
 
 	include('../php-utils/user_variables.php');
 
-	if($_SESSION['type'] == "admin")
-	{
-		$query = "INSERT INTO `admin`(`username`, `email`, `password`) VALUES (`$username`,`$email`,`$password`)";
-
-		$run = mysqli_query($mysqli, $query);
+	$query = 'INSERT INTO `admin` (`username`, `email`, `password`) VALUES ("'.$username.'","'.$email.'","'.$password.'")';
+	if(mysqli_query($link, $query)) {
+		$success = 'Admin added successfully';
+	} else {
+		echo mysqli_error($link);
 	}
-	else
-		echo "Not an admin! Can't add Admin!";
+	
+	
 
 ?>

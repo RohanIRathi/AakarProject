@@ -3,7 +3,8 @@
     include('./php-utils/db/db.variables.php');
     include('./php-utils/db/db.connection.php');
     include('./php-utils/login.utils.php');
-    $link = connetionToDB($host,$username,$pass,$db);
+    //if (!function_exists('connetionToDB')) { echo 'exists'; }
+    $link = connectionToDB($host,$username,$pass,$db);
     $error = NULL;
     if(!empty($_POST["login_btn"])) {
         //echo 'Set!';

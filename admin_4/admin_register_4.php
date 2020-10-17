@@ -1,7 +1,17 @@
 <?php
 session_start();
 include('header_4.php'); 
-include('navbar_4.php'); 
+include('navbar_4.php');
+$success = ''; 
+if(isset($_POST['registerbtn'])) {
+    include('./add_admin.php');
+}
+
+if($success != '') {
+    echo '<div class="alert alert-success">
+    <strong>Admin SignUp Successful!</strong> 
+  </div>';
+}
 ?>
 
     <main style="margin-top: 30px;">
@@ -14,23 +24,23 @@ include('navbar_4.php');
                     <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
-                    <form action="code.php" method="POST">
+                    <form method="POST">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label> Username </label>
-                                <input type="text" name="username" class="form-control" placeholder="Enter Username">
+                                <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                                <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                                <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                             </div>
                             <div class="form-group">
                                 <label>Confirm Password</label>
-                                <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password">
+                                <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password" required>
                             </div>
                             <input type="hidden" name="usertype" value="admin">
 
