@@ -12,7 +12,7 @@
         $password = mysqli_real_escape_string($link,$_POST['passwordd']);
         $type = mysqli_real_escape_string($link,$_POST['option']);
         $id = checkValidPass($type,$email,$link,$password);
-        echo $_POST['option'];
+        //echo $_POST['option'];
         if($id != NULL){
             //echo $id;
             //header('Location : /');
