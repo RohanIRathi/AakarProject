@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('../php-utils/login.utils.php');
+    userLogout();
     isValidUser();
     include('header_2.php'); 
     include('navbar_2.php'); 

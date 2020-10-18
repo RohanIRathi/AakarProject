@@ -1,9 +1,8 @@
 <?php
     session_start();
-    include('../php-utils/login.utils.php');
-    isValidUser();
     include('header_4.php'); 
     include('navbar_4.php'); 
+    
     
 ?>
 

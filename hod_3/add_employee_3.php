@@ -1,22 +1,20 @@
 <?php
 session_start();
-include('header_4.php'); 
-include('navbar_4.php');
-$success = ''; 
-$error = '';
-if(isset($_POST['registerbtn'])) {
-    include('./add_admin.php');
-}
+include('header_3.php');
+include('navbar_3.php');
+include('../php-utils/user_variables.php');
 
-if($success) {
-    echo '<div class="alert alert-success">
-            <strong>Admin SignUp Successful!</strong> 
-          </div>';
-} else if($error) {
-    echo '<div class="alert alert-danger">
-            <strong>User already exists!</strong> 
-          </div>';
-}
+
+	if($_SESSION['type'] == "hod")
+	{
+		$id = $mysqli -> real_escape_string($_SESSION["id"]);
+		$query = "INSERT INTO `employee`(`username`, `email`, `password`, `hod_id`) VALUES (`$username`,`$email`,`$password`,`$id`)";
+
+		$run = mysqli_query($mysqli, $query);
+	}
+	else
+		echo "Not an HOD! Can't add employee!";
+
 ?>
 
     <main style="margin-top: 30px;">
@@ -24,7 +22,7 @@ if($success) {
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Admin Data</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add Employee Data</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -32,7 +30,7 @@ if($success) {
                     <form method="POST">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label> Display Name </label>
+                                <label> Name </label>
                                 <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
                             </div>
                             <div class="form-group">
@@ -61,7 +59,7 @@ if($success) {
         <div class="container-fluid">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Admin Profile
+                    <h6 class="m-0 font-weight-bold text-primary">Employee Registration
                         <button type="button" class="ml-3 btn btn-primary text-left" data-toggle="modal" data-target="#addadminprofile">Add</button>
                     </h6>
                 </div>
@@ -104,8 +102,7 @@ if($success) {
             </div>
         </div>
     </main>
-
-<?php
-include('footer_4.php'); 
-include('scripts_4.php'); 
-?>
+		<?php
+		include('footer_3.php');
+		include('scripts_3.php');
+		?>
