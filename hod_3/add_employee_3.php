@@ -2,7 +2,8 @@
 session_start();
 include('header_3.php');
 include('navbar_3.php');
-	include('../php-utils/user_variables.php');
+include('../php-utils/user_variables.php');
+
 
 	if($_SESSION['type'] == "hod")
 	{

@@ -1,13 +1,22 @@
 <?php
 
 	include('../php-utils/user_variables.php');
+	include('../php-utils/signup.utils.php');
+	if(checkIfEmailAlreadyExists($email,'admin',$link)) {
 
-	$query = 'INSERT INTO `admin` (`username`, `email`, `password`) VALUES ("'.$username.'","'.$email.'","'.$password.'")';
-	if(mysqli_query($link, $query)) {
-		$success = 'Admin added successfully';
+		$error = true;
+		
 	} else {
-		echo mysqli_error($link);
+
+		$query = 'INSERT INTO `admin` (`username`, `email`, `password`) VALUES ("'.$username.'","'.$email.'","'.$password.'")';
+		if(mysqli_query($link, $query)) {
+			$success = true;;
+		} else {
+			echo mysqli_error($link);
+		}
+
 	}
+
 	
 	
 

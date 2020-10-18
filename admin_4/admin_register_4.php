@@ -3,14 +3,19 @@ session_start();
 include('header_4.php'); 
 include('navbar_4.php');
 $success = ''; 
+$error = '';
 if(isset($_POST['registerbtn'])) {
     include('./add_admin.php');
 }
 
-if($success != '') {
+if($success) {
     echo '<div class="alert alert-success">
-    <strong>Admin SignUp Successful!</strong> 
-  </div>';
+            <strong>Admin SignUp Successful!</strong> 
+          </div>';
+} else if($error) {
+    echo '<div class="alert alert-danger">
+            <strong>User already exists!</strong> 
+          </div>';
 }
 ?>
 
