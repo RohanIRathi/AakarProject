@@ -3,7 +3,7 @@
     function checkValidPass($type,$email,$link,$password) {
 
         $type = strtolower($type);
-        $query = "SELECT `id`,`password` FROM `".$type."` WHERE `email` = '".$email."'";
+        $query = "SELECT `id`,`password`,`username` FROM `".$type."` WHERE `email` = '".$email."'";
         $success = false;
         if($result = mysqli_query($link,$query)) {
             if($row = mysqli_fetch_array($result)) {
@@ -29,7 +29,9 @@
         }
 
         if($success) {
-            return $row['id'];
+            $userCred['id'] = $row['id']; 
+            $userCred['username'] = $row['username']; 
+            return $userCred;
         } else {
             return NULL;
         }
@@ -68,6 +70,16 @@
                 exit();
                 
             } 
+        }
+    }
+
+    function userLogout() {
+        if(isset($_POST['logout-btn'])) {
+            session_destroy();
+            header('location: ../login.php');
+            exit;
+            
+            
         }
     }
 

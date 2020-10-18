@@ -27,7 +27,7 @@ if($success != '') {
                     <form method="POST">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label> Username </label>
+                                <label> Display Name </label>
                                 <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
                             </div>
                             <div class="form-group">
