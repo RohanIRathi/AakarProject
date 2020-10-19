@@ -4,7 +4,7 @@
 
 	if($_SESSION['type'] == "admin") {
 		
-		$id = $mysqli -> real_escape_string($_SESSION["id"]);
+		$id = mysqli_real_escape_string($mysqli, $_SESSION["id"]);
 		$query = "INSERT INTO `hod`(`username`, `email`, `password`, `admin_id`) VALUES (`$username`,`$email`,`$password`,`$id`)";
 
 		$run = mysqli_query($mysqli, $query);
