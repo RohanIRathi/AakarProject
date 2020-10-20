@@ -2,14 +2,13 @@
          line-height: 1.5rem
      }
      
-   form.user .form-control-user {
+     form.user .form-control-user {
          font-size: .8rem;
          border-radius: 10rem;
          padding: 1.5rem 1rem
      }
-
+     
      form.user .form-control-role {
-        
          border-radius: 10rem;
      }
      
@@ -18,7 +17,7 @@
          border-radius: 10rem;
          padding: .75rem 1rem
      }
-
+     
      .btn-google {
          color: #fff;
          background-color: #ea4335;
