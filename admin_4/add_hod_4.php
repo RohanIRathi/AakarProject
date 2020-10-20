@@ -2,8 +2,17 @@
 session_start();
 include('header_4.php'); 
 include('navbar_4.php');
+include('../php-utils/db/db.variables.php');
+include('../php-utils/db/db.connection.php');
+include('../php-utils/signup.utils.php');
 
-include('add_hod.php');
+$link = connectionToDB($host, $username, $pass, $db);
+
+if(isset($_POST['registerbtn'])) {
+
+    signUpUser($link,'hod',$_SESSION['id']);
+
+}
 ?>
 
  <main style="margin-top: 30px;">

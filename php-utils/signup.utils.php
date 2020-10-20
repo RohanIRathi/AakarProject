@@ -13,4 +13,55 @@ if(!function_exists("checkIfEmailAlreadyExists")) {
 
 }
 
+if(!function_exists("signUpUser")) {
+
+  function signUpUser($link,$type,$assignedBy) {
+
+    include('../php-utils/user_variables.php');
+    //print_r($userCred);
+    $success = false; 
+    $error = false;
+    if(checkIfEmailAlreadyExists($userCred['email'],$type,$link)) {
+      $error = 'User already exists!';
+    } else {
+      
+      $query = "INSERT INTO `".$type."`(`username`, `email`, `password`,`first_name`,`last_name`".
+      (
+        (strcmp($type,'admin')==0) ? "" : 
+        (
+          (strcmp($type,'hod')==0) ? ",`admin_id`" : ",`hod_id`"
+        )
+      )
+  
+      .") VALUES ('".$userCred['username']."','".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
+  
+      ( (strcmp($type,'admin')==0) ? "" : ",".$assignedBy."" )
+      
+      .")";
+      //echo '<br>'.$query;
+  
+      if(mysqli_query($link, $query)) {
+        $success = true;
+      } else {
+        $error =  mysqli_error($link);
+        //return array(false,'Something went wrong!');
+      }
+    }
+
+    if($success) {
+      echo '<div class="alert alert-success">
+              <strong>Admin SignUp Successful!</strong> 
+            </div>';
+    } else if($error) {
+        echo '<div class="alert alert-danger">
+                <strong>'.$error.'</strong> 
+              </div>';
+    }
+
+  
+
+  }
+
+}
+
 ?>

@@ -2,18 +2,17 @@
 session_start();
 include('header_3.php');
 include('navbar_3.php');
-include('../php-utils/user_variables.php');
+include('../php-utils/db/db.variables.php');
+include('../php-utils/db/db.connection.php');
+include('../php-utils/signup.utils.php');
 
+$link = connectionToDB($host, $username, $pass, $db);
 
-	if($_SESSION['type'] == "hod")
-	{
-		$id = $mysqli_real_escape_string($mysqli, $_SESSION["id"]);
-		$query = "INSERT INTO `employee`(`username`, `email`, `password`, `hod_id`) VALUES (`$username`,`$email`,`$password`,`$id`)";
+if(isset($_POST['registerbtn'])) {
 
-		$run = mysqli_query($mysqli, $query);
-	}
-	else
-		echo "Not an HOD! Can't add employee!";
+    signUpUser($link,'employee',$_SESSION['id']);
+
+}
 
 ?>
 

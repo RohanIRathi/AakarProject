@@ -2,20 +2,16 @@
 session_start();
 include('header_4.php'); 
 include('navbar_4.php');
-$success = ''; 
-$error = '';
-if(isset($_POST['registerbtn'])) {
-    include('./add_admin.php');
-}
+include('../php-utils/db/db.variables.php');
+include('../php-utils/db/db.connection.php');
+include('../php-utils/signup.utils.php');
 
-if($success) {
-    echo '<div class="alert alert-success">
-            <strong>Admin SignUp Successful!</strong> 
-          </div>';
-} else if($error) {
-    echo '<div class="alert alert-danger">
-            <strong>User already exists!</strong> 
-          </div>';
+$link = connectionToDB($host, $username, $pass, $db);
+
+if(isset($_POST['registerbtn'])) {
+
+    signUpUser($link,'admin',$_SESSION['id']);
+
 }
 ?>
 

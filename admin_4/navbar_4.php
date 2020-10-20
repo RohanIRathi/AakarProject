@@ -40,7 +40,7 @@ isValidUser();
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="admin_register_4.php">
+                        <a class="nav-link" href="add_admin_4.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Admin Registration
                         </a>
