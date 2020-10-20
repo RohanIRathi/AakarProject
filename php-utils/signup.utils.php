@@ -25,7 +25,7 @@ if(!function_exists("signUpUser")) {
       $error = 'User already exists!';
     } else {
       
-      $query = "INSERT INTO `".$type."`(`username`, `email`, `password`,`first_name`,`last_name`".
+      $query = "INSERT INTO `".$type."`( `email`, `password`,`first_name`,`last_name`".
       (
         (strcmp($type,'admin')==0) ? "" : 
         (
@@ -33,7 +33,7 @@ if(!function_exists("signUpUser")) {
         )
       )
   
-      .") VALUES ('".$userCred['username']."','".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
+      .") VALUES ('".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
   
       ( (strcmp($type,'admin')==0) ? "" : ",".$assignedBy."" )
       
@@ -50,7 +50,7 @@ if(!function_exists("signUpUser")) {
 
     if($success) {
       echo '<div class="alert alert-success">
-              <strong>Admin SignUp Successful!</strong> 
+              <strong>User SignUp Successful!</strong> 
             </div>';
     } else if($error) {
         echo '<div class="alert alert-danger">

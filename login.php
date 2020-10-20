@@ -16,7 +16,7 @@
         
             $_SESSION['type'] = $type;
             $_SESSION['id'] = $userCredArr['id'];
-            $_SESSION['username'] = $userCredArr['username'];
+            $_SESSION['firstname'] = $userCredArr['first_name'];
 
             if(strcmp($type,'Admin') == 0) {
                 header('location: ./admin_4/booking_4.php');

@@ -26,8 +26,12 @@ if(isset($_POST['registerbtn'])) {
                     <form method="POST">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Name </label>
-                                <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
+                                <label> First Name </label>
+                                <input type="text" name="firstname" class="form-control" placeholder="Enter Firstname">
+                            </div>
+                            <div class="form-group">
+                                <label> Last Name </label>
+                                <input type="text" name="lastname" class="form-control" placeholder="Enter Lastname">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

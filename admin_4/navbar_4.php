@@ -12,7 +12,7 @@ isValidUser();
         <span class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 navbar-brand" >
             Welcome, 
             <?php
-                echo $_SESSION['username'];
+                echo $_SESSION['firstname'];
             ?>
         </span>
         <!-- Navbar-->

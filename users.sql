@@ -1,11 +1,20 @@
+CREATE DATABASE IF NOT EXISTS `aakar` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `aakar`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
 -- phpMyAdmin SQL Dump
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 03, 2020 at 10:38 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Host: localhost:3306
+-- Generation Time: Oct 20, 2020 at 07:46 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +29,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `aakar`
 --
-CREATE DATABASE IF NOT EXISTS `aakar` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `aakar`;
 
 -- --------------------------------------------------------
 
@@ -33,7 +40,7 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` text DEFAULT NULL,
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -43,7 +50,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `first_name`, `last_name`) VALUES
-(3, 'Dummy', 'dummy@email.id', 'dummyrow', 'Dummy', 'Dummy');
+(16, '', 'admin@gmail.com', '$2y$10$rSDD/KcGB9Yd6KRJNhSCmef9fbnaJ0B9nlmThEeNtsdF77bG8QoM2', 'Admin', '');
 
 -- --------------------------------------------------------
 
@@ -55,18 +62,11 @@ CREATE TABLE `employee` (
   `id` int(11) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` text NOT NULL,
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL,
   `hod_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `employee`
---
-
-INSERT INTO `employee` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `hod_id`) VALUES
-(1, 'Dummy', 'dummy@email.id', 'dummyrow', 'Dummy', 'Dummy', 3);
 
 -- --------------------------------------------------------
 
@@ -78,18 +78,11 @@ CREATE TABLE `hod` (
   `id` int(11) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` text NOT NULL,
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL,
   `admin_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `hod`
---
-
-INSERT INTO `hod` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `admin_id`) VALUES
-(3, 'Dummy', 'dummy@email.id', 'dummyrow', 'Dummy', 'Dummy', 3);
 
 -- --------------------------------------------------------
 
@@ -101,7 +94,7 @@ CREATE TABLE `security` (
   `id` int(11) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` text NOT NULL,
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -128,9 +121,7 @@ CREATE TABLE `visitor` (
   `room_purpose` varchar(45) DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
-  `employee_id` int(11) NOT NULL,
-  `hod_id` int(11) NOT NULL,
-  `admin_id` int(11) NOT NULL
+  `visitee` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -167,10 +158,7 @@ ALTER TABLE `security`
 -- Indexes for table `visitor`
 --
 ALTER TABLE `visitor`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `hod` (`hod_id`),
-  ADD KEY `admin` (`admin_id`),
-  ADD KEY `employee` (`employee_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -180,19 +168,19 @@ ALTER TABLE `visitor`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `hod`
 --
 ALTER TABLE `hod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `security`
@@ -221,14 +209,6 @@ ALTER TABLE `employee`
 --
 ALTER TABLE `hod`
   ADD CONSTRAINT `admin_id` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`);
-
---
--- Constraints for table `visitor`
---
-ALTER TABLE `visitor`
-  ADD CONSTRAINT `admin` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`),
-  ADD CONSTRAINT `employee` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
-  ADD CONSTRAINT `hod` FOREIGN KEY (`hod_id`) REFERENCES `hod` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

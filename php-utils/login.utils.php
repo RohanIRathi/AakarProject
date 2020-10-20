@@ -4,7 +4,7 @@
         function checkValidPass($type,$email,$link,$password) {
     
             $type = strtolower($type);
-            $query = "SELECT `id`,`password`,`username` FROM `".$type."` WHERE `email` = '".$email."'";
+            $query = "SELECT `id`,`password`,`first_name` FROM `".$type."` WHERE `email` = '".$email."'";
             $success = false;
             if($result = mysqli_query($link,$query)) {
                 if($row = mysqli_fetch_array($result)) {
@@ -31,7 +31,7 @@
     
             if($success) {
                 $userCred['id'] = $row['id']; 
-                $userCred['username'] = $row['username']; 
+                $userCred['first_name'] = $row['first_name'];
                 return $userCred;
             } else {
                 return NULL;
