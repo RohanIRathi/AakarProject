@@ -9,8 +9,8 @@
             if($result = mysqli_query($link,$query)) {
                 if($row = mysqli_fetch_array($result)) {
                 //email exists, check password  
-                    //if(password_verify($_POST['password'],$row['password'])){   
-                    if(strcmp($password,$row['password']) == 0) {
+                    if(password_verify($password,$row['password'])){   
+                    //if(strcmp($password,$row['password']) == 0) {
                         //echo $row['id'];
                         $success = true;
                         //echo "Correct Password";

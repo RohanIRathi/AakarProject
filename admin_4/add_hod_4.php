@@ -9,9 +9,7 @@ include('../php-utils/signup.utils.php');
 $link = connectionToDB($host, $username, $pass, $db);
 
 if(isset($_POST['registerbtn'])) {
-
     signUpUser($link,'hod',$_SESSION['id']);
-
 }
 ?>
 
