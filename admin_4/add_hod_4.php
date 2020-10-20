@@ -1,28 +1,17 @@
 <?php
 session_start();
-include('header_3.php');
-include('navbar_3.php');
-include('../php-utils/user_variables.php');
+include('header_4.php'); 
+include('navbar_4.php');
 
-
-	if($_SESSION['type'] == "hod")
-	{
-		$id = $mysqli_real_escape_string($mysqli, $_SESSION["id"]);
-		$query = "INSERT INTO `employee`(`username`, `email`, `password`, `hod_id`) VALUES (`$username`,`$email`,`$password`,`$id`)";
-
-		$run = mysqli_query($mysqli, $query);
-	}
-	else
-		echo "Not an HOD! Can't add employee!";
-
+include('add_hod.php');
 ?>
 
-    <main style="margin-top: 30px;">
-        <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <main style="margin-top: 30px;">
+        <div class="modal fade" id="addhodprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Employee Data</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add HOD Data</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -30,7 +19,7 @@ include('../php-utils/user_variables.php');
                     <form method="POST">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label> Name </label>
+                                <label>Name </label>
                                 <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
                             </div>
                             <div class="form-group">
@@ -59,8 +48,8 @@ include('../php-utils/user_variables.php');
         <div class="container-fluid">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Employee Registration
-                        <button type="button" class="ml-3 btn btn-primary text-left" data-toggle="modal" data-target="#addadminprofile">Add</button>
+                    <h6 class="m-0 font-weight-bold text-primary">HOD Profile
+                        <button type="button" class="ml-3 btn btn-primary text-left" data-toggle="modal" data-target="#addhodprofile">Add</button>
                     </h6>
                 </div>
                 <div class="card-body">
@@ -102,7 +91,7 @@ include('../php-utils/user_variables.php');
             </div>
         </div>
     </main>
-		<?php
-		include('footer_3.php');
-		include('scripts_3.php');
-		?>
+<?php
+include('footer_4.php'); 
+include('scripts_4.php'); 
+?>

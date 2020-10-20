@@ -7,24 +7,23 @@
 
     echo mysqli_connect_error($mysqli);
 
-    $first_name = $mysqli -> real_escape_string($_POST['first_name']);
-    $last_name = $mysqli -> real_escape_string($_POST['last_name']);
-    $email = $mysqli -> real_escape_string($_POST['email']);
-    $date = $mysqli -> real_escape_string($_POST['date']);
-    $time = $mysqli -> real_escape_string($_POST['time']);
-    $no_of_visitors = $mysqli -> real_escape_string($_POST['no_of_visitor']);
-    $id_photo = $mysqli -> real_escape_string($_POST['id_photo']);
-    $id_number = $mysqli -> real_escape_string($_POST['id_number']);
-    $phone_no = $mysqli -> real_escape_string($_POST['phone_no']);
-    $purpose = $mysqli -> real_escape_string($_POST['purpose']);
-    $hospitality = $mysqli -> real_escape_string($_POST['hospitality']);
+    $first_name = mysqli_real_escape_string($mysqli, $_POST['first_name']);
+    $last_name = mysqli_real_escape_string($mysqli, $_POST['last_name']);
+    $email = mysqli_real_escape_string($mysqli, $_POST['email']);
+    $date = mysqli_real_escape_string($mysqli, $_POST['datetime']);
+    $novisitors = mysqli_real_escape_string($mysqli, $_POST['no_of_visitor']);
+    $photoid = mysqli_real_escape_string($mysqli, $_POST['img']);
+    $photoidvalue = mysqli_real_escape_string($mysqli, $_POST['Govt_ID']);
+    $phone = mysqli_real_escape_string($mysqli, $_POST['phone_no']);
+    $purpose = mysqli_real_escape_string($mysqli, $_POST['otpradio']);
+    $hospitality = mysqli_real_escape_string($mysqli, $_POST['optradio1']);
     if(!empty($_POST['conference']))
     {
         $conference = 'TRUE';
-        $room_no = $mysqli -> real_escape_string($_POST['room_no']);
-        $room_purpose = $mysqli -> real_escape_string($_POST['room_purpose']);
-        $start_time = $mysqli -> real_escape_string($_POST['start_time']);
-        $end_time = $mysqli -> real_escape_string($_POST['end_time']);
+        $room_no = mysqli_real_escape_string($mysqli, $_POST['room_no']);
+        $room_purpose = mysqli_real_escape_string($mysqli, $_POST['room_purpose']);
+        $start_time = mysqli_real_escape_string($mysqli, $_POST['start_time']);
+        $end_time = mysqli_real_escape_string($mysqli, $_POST['end_time']);
     }
     else
     {

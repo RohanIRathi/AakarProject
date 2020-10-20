@@ -42,7 +42,11 @@ isValidUser();
                         </a>
                         <a class="nav-link" href="admin_register_4.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Admin Register
+                            Admin Registration
+                        </a>
+                        <a class="nav-link" href="add_hod_4.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            HOD Registration
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
