@@ -7,8 +7,8 @@
 
     echo mysqli_connect_error($mysqli);
 
-    $fname = mysqli_real_escape_string($mysqli, $_POST['fname']);
-    $lname = mysqli_real_escape_string($mysqli, $_POST['lname']);
+    $first_name = mysqli_real_escape_string($mysqli, $_POST['first_name']);
+    $last_name = mysqli_real_escape_string($mysqli, $_POST['last_name']);
     $email = mysqli_real_escape_string($mysqli, $_POST['email']);
     $date = mysqli_real_escape_string($mysqli, $_POST['datetime']);
     $novisitors = mysqli_real_escape_string($mysqli, $_POST['no_of_visitor']);
@@ -20,16 +20,16 @@
     if(!empty($_POST['conference']))
     {
         $conference = 'TRUE';
-        $room = mysqli_real_escape_string($mysqli, $_POST['conference_room']);
-        $roompurpose = mysqli_real_escape_string($mysqli, $_POST['room_purpose']);
+        $room_no = mysqli_real_escape_string($mysqli, $_POST['room_no']);
+        $room_purpose = mysqli_real_escape_string($mysqli, $_POST['room_purpose']);
         $start_time = mysqli_real_escape_string($mysqli, $_POST['start_time']);
         $end_time = mysqli_real_escape_string($mysqli, $_POST['end_time']);
     }
     else
     {
         $conference = 'FALSE';
-        $room = null;
-        $roompurpose = null;
+        $room_no = null;
+        $room_purpose = null;
         $start_time = null;
         $end_time = null;
     }
