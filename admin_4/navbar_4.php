@@ -1,8 +1,8 @@
 <?php
 
 include('../php-utils/login.utils.php');
-userLogout();
 isValidUser();
+userLogout();
 
 ?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
