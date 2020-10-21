@@ -1,11 +1,11 @@
 <?php
 
 include('../php-utils/login.utils.php');
-userLogout();
 isValidUser();
+userLogout();
 
 ?>
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="booking_4.php">Aakar Foundation</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
