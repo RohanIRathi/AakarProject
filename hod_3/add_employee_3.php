@@ -1,7 +1,19 @@
 <?php
 session_start();
-include('header_4.php'); 
-include('navbar_4.php'); 
+include('header_3.php');
+include('navbar_3.php');
+include('../php-utils/db/db.variables.php');
+include('../php-utils/db/db.connection.php');
+include('../php-utils/signup.utils.php');
+
+$link = connectionToDB($host, $username, $pass, $db);
+
+if(isset($_POST['registerbtn'])) {
+
+    signUpUser($link,'employee',$_SESSION['id']);
+
+}
+
 ?>
 
     <main style="margin-top: 30px;">
@@ -9,12 +21,12 @@ include('navbar_4.php');
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Admin Data</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add Employee Data</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
-                    <form action="code.php" method="POST">
+                    <form method="POST">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label> First Name </label>
@@ -26,15 +38,15 @@ include('navbar_4.php');
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                                <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                                <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                             </div>
                             <div class="form-group">
                                 <label>Confirm Password</label>
-                                <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password">
+                                <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password" required>
                             </div>
                             <input type="hidden" name="usertype" value="admin">
 
@@ -50,7 +62,7 @@ include('navbar_4.php');
         <div class="container-fluid">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Admin Profile
+                    <h6 class="m-0 font-weight-bold text-primary">Employee Registration
                         <button type="button" class="ml-3 btn btn-primary text-left" data-toggle="modal" data-target="#addadminprofile">Add</button>
                     </h6>
                 </div>
@@ -93,8 +105,7 @@ include('navbar_4.php');
             </div>
         </div>
     </main>
-
-<?php
-include('footer_4.php'); 
-include('scripts_4.php'); 
-?>
+		<?php
+		include('footer_3.php');
+		include('scripts_3.php');
+		?>

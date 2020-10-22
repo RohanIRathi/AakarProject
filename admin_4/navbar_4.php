@@ -1,7 +1,20 @@
+<?php
 
+include('../php-utils/login.utils.php');
+isValidUser();
+userLogout();
+
+?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="booking_4.php">Aakar Foundation</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <span class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 navbar-brand" >
+            Welcome, 
+            <?php
+                echo $_SESSION['firstname'];
+            ?>
+        </span>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ">
             <li class="nav-item dropdown">
@@ -10,7 +23,9 @@
                     <a class="dropdown-item" href="#">Settings</a>
                     <a class="dropdown-item" href="#">Activity Log</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <form method='POST'>
+                        <button class="dropdown-item" type='submit' name='logout-btn'>Logout</button>
+                    </form>
                 </div>
             </li>
         </ul>
@@ -25,9 +40,13 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="admin_register_4.php">
+                        <a class="nav-link" href="add_admin_4.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Admin Register
+                            Admin Registration
+                        </a>
+                        <a class="nav-link" href="add_hod_4.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            HOD Registration
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -53,7 +72,7 @@
                         </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
+                    <div class="large">Logged in as: Admin</div>
                 </div>
             </nav>
         </div>

@@ -1,8 +1,33 @@
 <?php
-session_start();
-include('header_1.php'); 
-include('navbar_1.php'); 
+    session_start();
+    include('../php-utils/login.utils.php');
+    userLogout();
+    isValidUser(); 
+    include('header_1.php'); 
+    include('navbar_1.php');
+    
 ?>
+
+<?php 
+    include('../php-utils/db/db.variables.php');
+    include('../php-utils/db/db.connection.php');
+    $con = connectionToDB($host, $username, $pass, $db);
+
+    function showData()
+    {
+        global $con;
+        $query = "select * from visitor";
+        $result = mysqli_query($con,$query);
+        if ($result == TRUE) {
+            return $result;
+        }
+        else{
+            echo "Error!";
+        }
+    }
+
+    
+ ?>
     <main style="margin-top: 30px;">
         <div class="container-fluid">
             <!-- DataTales Example -->
@@ -27,12 +52,18 @@ include('navbar_1.php');
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                    $dataArray=showData();
+                                    while ($data=mysqli_fetch_assoc($dataArray)) {
+                                        
+                                 ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?php echo $data["id"]; ?></td>
+                                    <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
+                                    <td><?php echo $data["email"] ?></td>
+                                    <td><?php echo $data["noofvisitors"] ?></td>
+                                    <td><?php echo $data["time"] ?></td>
+                                    
                                     <td>
                                         <form action="#" method="post">
                                             <input type="hidden" name="edit_id" value="">
@@ -46,6 +77,9 @@ include('navbar_1.php');
                                         </form>
                                     </td>
                                 </tr>
+                                <?php 
+                                    }
+                                 ?>
                             </tbody>
                         </table>
 

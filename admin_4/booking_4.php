@@ -1,8 +1,31 @@
 <?php
-session_start();
-include('header_4.php'); 
-include('navbar_4.php'); 
+    session_start();
+    include('header_4.php'); 
+    include('navbar_4.php'); 
+    
+    
 ?>
+
+<?php 
+    include('../php-utils/db/db.variables.php');
+    include('../php-utils/db/db.connection.php');
+    $con = connectionToDB($host, $username, $pass, $db);
+
+    function showData()
+    {
+        global $con;
+        $query = "select * from visitor";
+        $result = mysqli_query($con,$query);
+        if ($result == TRUE) {
+            return $result;
+        }
+        else{
+            echo "Error!";
+        }
+    }
+
+    
+ ?>
     <main>
         <div class="container-fluid">
             <h1 class="mt-4">Dashboard</h1>
@@ -14,7 +37,7 @@ include('navbar_4.php');
                     <div class="card bg-primary text-white mb-4">
                         <div class="card-body">Total Admin Card</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="admin_card_4.php">View Details</a>
+                            <a class="small text-white stretched-link" href="add_admin_4.php">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -73,12 +96,18 @@ include('navbar_4.php');
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                    $dataArray=showData();
+                                    while ($data=mysqli_fetch_assoc($dataArray)) {
+                                        
+                                 ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?php echo $data["id"]; ?></td>
+                                    <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
+                                    <td><?php echo $data["email"] ?></td>
+                                    <td><?php echo $data["noofvisitors"] ?></td>
+                                    <td><?php echo $data["time"] ?></td>
+                                    
                                     <td>
                                         <form action="#" method="post">
                                             <input type="hidden" name="edit_id" value="">
@@ -92,6 +121,9 @@ include('navbar_4.php');
                                         </form>
                                     </td>
                                 </tr>
+                                <?php 
+                                    }
+                                 ?>
                             </tbody>
                         </table>
 

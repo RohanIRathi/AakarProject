@@ -10,18 +10,20 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Add Visitor</h1>
                                 </div>
-                                <form class="user" action="#" method="POST">
+                                <form class="user" method="post" enctype="multipart/form-data">
                                    <div class="row">
                                         <div class="col">
                                             <div class="form-group pb-2">
                                                 <label>First Name</label>
-                                                <input type="text" class="form-control form-control-user" placeholder="Enter First Name" required >
+                                                <input type="text" class="form-control form-control-user" placeholder="Enter First Name"
+                                                name="first_name" required >
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group pb-2">
                                                 <label>Last Name</label>
-                                                <input type="text" class="form-control form-control-user" placeholder="Enter Last Name" required>
+                                                <input type="text" class="form-control form-control-user" placeholder="Enter Last Name" 
+                                                name="last_name"required>
                                             </div>
                                         </div>
                                     </div> 
@@ -43,13 +45,15 @@
                                         <div class="col">
                                             <div class="form-group pb-2">
                                                 <label>Date</label>
-                                                <input type="date" class="form-control form-control-user" placeholder="Enter Date" required >
+                                                <input type="date" class="form-control form-control-user" placeholder="Enter Date" 
+                                                name="date"required >
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group pb-2">
                                                 <label>Time</label>
-                                                <input type="time" class="form-control form-control-user" placeholder="Enter Time" required>
+                                                <input type="time" class="form-control form-control-user" placeholder="Enter Time" 
+                                                name="time"required>
                                             </div>
                                         </div>
                                     </div> 
@@ -137,13 +141,13 @@
                                                         <div class="col">
                                                             <div class="form-group pb-2">
                                                                 <label>Start Time</label>
-                                                                <input type="time" class="form-control form-control-user" placeholder="Start Time" required>
+                                                                <input type="time" class="form-control form-control-user" placeholder="Start Time" name="start_time" required>
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-group pb-2">
                                                                 <label>End Time</label>
-                                                                <input type="time" class="form-control form-control-user" placeholder="End Time" required>
+                                                                <input type="time" class="form-control form-control-user" placeholder="End Time" name="end_time"required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -151,7 +155,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" name="login_btn" class="btn btn-primary btn-user btn-block"style="border-radius: 10rem;"> Book </button>
+                                    <input type="submit" name="add_btn" value="Add" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">                                    
                                     <hr>
                                 </form>
                             </div>
