@@ -66,16 +66,17 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-group pb-2">
-                                                <label>ID Proof Photo</label>
-                                                <input type="file" id="img" name="img" accept="image/*" class="form-control " placeholder="Photo" style="border: none;">
-                                            </div>
-                                        </div>
-                                    </div> 
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group pb-2">
                                                 <label>Phone No.</label>
                                                 <input type="text" name="Phone_no" class="form-control form-control-user" placeholder="Enter Phone No.">
+                                            </div>
+                                        </div>
+                                        
+                                    </div> 
+                                    <div class="row">
+                                    <div class="col">
+                                            <div class="form-group pb-2">
+                                                <label>ID Proof Photo</label>
+                                                <input type="file" id="img" name="img" accept="image/*" class="form-control " placeholder="Photo" style="border: none;">
                                             </div>
                                         </div>
                                         <div class="col">

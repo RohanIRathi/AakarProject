@@ -92,7 +92,7 @@
                                     <th> No.of Visitors </th>
                                     <th> Time </th>
                                     <th> EDIT </th>
-                                    <th> SCAN </th>
+                                    <th> DELETE </th>
                                 </tr>
                             </thead>
                             <tbody>
