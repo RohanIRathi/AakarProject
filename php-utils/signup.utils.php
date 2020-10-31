@@ -27,7 +27,7 @@ if(!function_exists("signUpUser")) {
       
       $query = "INSERT INTO `".$type."`( `email`, `password`,`first_name`,`last_name`".
       (
-        (strcmp($type,'admin')==0) ? "" : 
+        (strcmp($type,'admin')==0 || strcmp($type,'security')==0) ? "" : 
         (
           (strcmp($type,'hod')==0) ? ",`admin_id`" : ",`hod_id`"
         )
@@ -35,7 +35,10 @@ if(!function_exists("signUpUser")) {
   
       .") VALUES ('".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
   
-      ( (strcmp($type,'admin')==0) ? "" : ",".$assignedBy."" )
+      ( 
+      (strcmp($type,'admin')==0 || strcmp($type,'security')==0) 
+      ? "" : ",".$assignedBy."" 
+      )
       
       .")";
       //echo '<br>'.$query;
@@ -57,11 +60,32 @@ if(!function_exists("signUpUser")) {
                 <strong>'.$error.'</strong> 
               </div>';
     }
+  }
+}
 
-  
+if(!function_exists("getUserData")) {
+  function getUserData($link,$type,$assignedBy) {
+
+    $query = "SELECT * FROM `".$type."` ".
+    (
+      (strcmp($type,'employee')==0) ? "WHERE `hod_id` = ".$assignedBy : ""
+
+    )
+    .";";
+    //echo $query;
+    $result = mysqli_query($link,$query);
+    if(!$result) {
+      echo mysqli_error($link);
+      return ;
+    } 
+    return $result;
+    // while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+    //   echo '<br>';
+    //   print_r($row);
+    //   echo '<br>';
+    // }
 
   }
-
 }
 
 ?>
