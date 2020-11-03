@@ -1,12 +1,12 @@
 <?php
     session_start();
-    include('header_4.php'); 
-    include('navbar_4.php'); 
-    
-    
+    include('header_4.php');
+    include('navbar_4.php');
+
+
 ?>
 
-<?php 
+<?php
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
     $con = connectionToDB($host, $username, $pass, $db);
@@ -24,14 +24,11 @@
         }
     }
 
-    
+
  ?>
     <main>
         <div class="container-fluid">
             <h1 class="mt-4">Dashboard</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-primary text-white mb-4">
@@ -70,10 +67,10 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-danger text-white mb-4">
+                    <div class="card bg-info text-white mb-4">
                         <div class="card-body">Notification</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="notification.php">View Details</a>
+                            <a class="small text-white stretched-link" href="notification_4.php">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -95,7 +92,6 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> ID </th>
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> No.of Visitors </th>
@@ -105,18 +101,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                     $dataArray=showData();
                                     while ($data=mysqli_fetch_assoc($dataArray)) {
-                                        
+
                                  ?>
                                 <tr>
-                                    <td><?php echo $data["id"]; ?></td>
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
                                     <td><?php echo $data["noofvisitors"] ?></td>
                                     <td><?php echo $data["time"] ?></td>
-                                    
+
                                     <td>
                                         <form action="#" method="post">
                                             <input type="hidden" name="edit_id" value="">
@@ -130,7 +125,7 @@
                                         </form>
                                     </td>
                                 </tr>
-                                <?php 
+                                <?php
                                     }
                                  ?>
                             </tbody>
@@ -144,7 +139,6 @@
         <!-- /.container-fluid -->
     </main>
 <?php
-include('footer_4.php'); 
-include('scripts_4.php'); 
+include('footer_4.php');
+include('scripts_4.php');
 ?>
-     
