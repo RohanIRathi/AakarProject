@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('header_4.php'); 
+include('header_4.php');
 include('navbar_4.php');
 include('../php-utils/db/db.variables.php');
 include('../php-utils/db/db.connection.php');
@@ -71,7 +71,6 @@ $result = getUserData($link,'admin',$_SESSION['id']);
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> ID </th>
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> Role </th>
@@ -85,7 +84,6 @@ $result = getUserData($link,'admin',$_SESSION['id']);
 while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 
 echo '<tr>
-<td>'.$row['id'].'</td>
 <td>'.$row['first_name'].' '.$row['last_name'].'</td>
 <td>'.$row['email'].'</td>
 <td>Admin</td>
@@ -100,7 +98,7 @@ echo '<tr>
 }
 
 ?>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -110,6 +108,6 @@ echo '<tr>
     </main>
 
 <?php
-include('footer_4.php'); 
-include('scripts_4.php'); 
+include('footer_4.php');
+include('scripts_4.php');
 ?>

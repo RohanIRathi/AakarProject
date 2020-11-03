@@ -10,7 +10,7 @@ userLogout();
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <span class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 navbar-brand" >
-            Welcome, 
+            Welcome,
             <?php
                 echo $_SESSION['firstname'];
             ?>
@@ -57,6 +57,10 @@ userLogout();
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Registration
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <a class="nav-link" href="notification_4.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Notifications
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">

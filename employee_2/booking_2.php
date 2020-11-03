@@ -3,12 +3,12 @@
     include('../php-utils/login.utils.php');
     userLogout();
     isValidUser();
-    include('header_2.php'); 
-    include('navbar_2.php'); 
+    include('header_2.php');
+    include('navbar_2.php');
 
 ?>
 
-<?php 
+<?php
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
     $con = connectionToDB($host, $username, $pass, $db);
@@ -26,8 +26,42 @@
         }
     }
 
-    
+
  ?>
+ <main>
+        <div class="container-fluid">
+            <h1 class="mt-4 mb-4">Dashboard</h1>
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">Total Visitor</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="total_visitor_4.php">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-danger text-white mb-4">
+                        <div class="card-body">Booked but not Visited</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="not_visited_4.php">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-info text-white mb-4">
+                        <div class="card-body">Notification</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="notification_4.php">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <main style="margin-top: 30px;">
         <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -95,10 +129,10 @@
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-custom form-toggle" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                <span class="sr-only"> Toggle navigation</span>Conference Room 
+                                <span class="sr-only"> Toggle navigation</span>Conference Room
                                 </button>
-                                <button class="btn btn-custom form-toggle" type="button" data-toggle="collapse" data-target="#" aria-expanded="false" aria-controls=""> 
-                                <span class="sr-only"> Toggle navigation</span> None 
+                                <button class="btn btn-custom form-toggle" type="button" data-toggle="collapse" data-target="#" aria-expanded="false" aria-controls="">
+                                <span class="sr-only"> Toggle navigation</span> None
                                 </button>
                                 <hr>
                                 <div id="collapseExample" class="navbar-collapse collapse">
@@ -152,7 +186,6 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> ID </th>
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> No.of Visitors </th>
@@ -162,18 +195,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                     $dataArray=showData();
                                     while ($data=mysqli_fetch_assoc($dataArray)) {
-                                        
+
                                  ?>
                                 <tr>
-                                    <td><?php echo $data["id"]; ?></td>
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
                                     <td><?php echo $data["noofvisitors"] ?></td>
                                     <td><?php echo $data["time"] ?></td>
-                                    
+
                                     <td>
                                         <form action="#" method="post">
                                             <input type="hidden" name="edit_id" value="">
@@ -187,7 +219,7 @@
                                         </form>
                                     </td>
                                 </tr>
-                                <?php 
+                                <?php
                                     }
                                  ?>
                             </tbody>
@@ -200,7 +232,6 @@
         <!-- /.container-fluid -->
     </main>
 <?php
-include('footer_2.php'); 
-include('scripts_2.php'); 
+include('footer_2.php');
+include('scripts_2.php');
 ?>
-        
