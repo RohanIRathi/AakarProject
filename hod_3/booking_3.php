@@ -9,6 +9,7 @@
 ?>
 
 <?php 
+/*
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
     $con = connectionToDB($host, $username, $pass, $db);
@@ -25,7 +26,7 @@
             echo "Error!";
         }
     }
-
+*/
     
  ?>
 
@@ -54,11 +55,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><?php echo $data["id"]; ?></td>
-                                    <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
-                                    <td><?php echo $data["email"] ?></td>
-                                    <td><?php echo $data["noofvisitors"] ?></td>
-                                    <td><?php echo $data["time"] ?></td>
+                                    <td><?php //echo $data["id"]; ?></td>
+                                    <td><?php //echo $data["first_name"]." ".$data["last_name"] ?></td>
+                                    <td><?php //echo $data["email"] ?></td>
+                                    <td><?php //echo $data["noofvisitors"] ?></td>
+                                    <td><?php //echo $data["time"] ?></td>
                                     
                                     <td>
                                         <form action="#" method="post">

@@ -10,7 +10,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Add Visitor</h1>
                                 </div>
-                                <form class="user" method="post" enctype="multipart/form-data">
+                                <form class="user" method="POST" enctype="multipart/form-data">
                                    <div class="row">
                                         <div class="col">
                                             <div class="form-group pb-2">
@@ -123,7 +123,7 @@
                                         <hr>
                                         <div id="collapseExample" class="navbar-collapse collapse">
                                             <div class="pt-2">
-                                                <form action="">
+                                            <form method="POST">
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-group pb-2">
@@ -156,7 +156,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="submit" name="add_btn" value="Add" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">                                    
+                                    <button type="submit" name="add_btn" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">Add</button>                                
                                     <hr>
                                 </form>
                             </div>
