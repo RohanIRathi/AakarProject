@@ -34,4 +34,18 @@ if(!function_exists("addNewVisitor")) {
 
 }
 
+if(!function_exists("addNewVisitor")) {
+    function showData($link) {
+        
+        $query = "SELECT * FROM `visitor` WHERE `visitee` = ".$_SESSION['id']." AND `dateofappointment` = '".date("m-d-y")."'";
+        $result = mysqli_query($link,$query);
+        if ($result == TRUE) {
+            return $result;
+        }
+        else{
+            echo "Error!";
+        }
+    }
+}
+
 ?>

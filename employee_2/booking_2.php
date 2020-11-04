@@ -11,20 +11,9 @@
 <?php
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
-    $con = connectionToDB($host, $username, $pass, $db);
+    $link = connectionToDB($host, $username, $pass, $db);
 
-    function showData()
-    {
-        global $con;
-        $query = "select * from visitor";
-        $result = mysqli_query($con,$query);
-        if ($result == TRUE) {
-            return $result;
-        }
-        else{
-            echo "Error!";
-        }
-    }
+    include('../php-utils/visitor.utils.php');
 
 
  ?>
@@ -177,7 +166,7 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">New Visitor
+                    <h6 class="m-0 font-weight-bold text-primary">Upcoming Appointments
                         <a href="new_visitor_2.php"class="ml-3 btn btn-primary text-left">Add</a>
                     </h6>
                 </div>
@@ -196,7 +185,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $dataArray=showData();
+                                    $dataArray=showData($link);
                                     while ($data=mysqli_fetch_assoc($dataArray)) {
 
                                  ?>
@@ -204,7 +193,7 @@
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
                                     <td><?php echo $data["noofvisitors"] ?></td>
-                                    <td><?php echo $data["time"] ?></td>
+                                    <td><?php echo date("F j, Y, g:i a",$data["time"]); ?></td>
 
                                     <td>
                                         <form action="#" method="post">

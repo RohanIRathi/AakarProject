@@ -2,29 +2,13 @@
     session_start();
     include('header_4.php');
     include('navbar_4.php');
-
-
 ?>
 
 <?php
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
-    $con = connectionToDB($host, $username, $pass, $db);
-
-    function showData()
-    {
-        global $con;
-        $query = "select * from visitor";
-        $result = mysqli_query($con,$query);
-        if ($result == TRUE) {
-            return $result;
-        }
-        else{
-            echo "Error!";
-        }
-    }
-
-
+    $link = connectionToDB($host, $username, $pass, $db);
+    include('../php-utils/visitor.utils.php');
  ?>
     <main>
         <div class="container-fluid">
@@ -43,7 +27,7 @@
                     <div class="card bg-primary  text-white mb-4">
                         <div class="card-body">Total Registraions</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="total_registration_4.php">View Details</a>
+                            <a class="small text-white stretched-link" href="display_visitors.php?data=tot_reg">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -52,7 +36,7 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body">Total Visitor</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="total_visitor_4.php">View Details</a>
+                            <a class="small text-white stretched-link" href="display_visitors.php?data=tot_visitors">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -61,7 +45,7 @@
                     <div class="card bg-danger text-white mb-4">
                         <div class="card-body">Booked but not Visited</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="not_visited_4.php">View Details</a>
+                            <a class="small text-white stretched-link" href="display_visitors.php?data=not_visited">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -83,7 +67,7 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">New Visitor
+                    <h6 class="m-0 font-weight-bold text-primary">Upcoming Appointments
                         <a href="new_visitor_4.php"class="ml-3 btn btn-primary text-left">Add</a>
                     </h6>
                 </div>
@@ -92,7 +76,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> Username </th>
+                                    <th> Name </th>
                                     <th> Email </th>
                                     <th> No.of Visitors </th>
                                     <th> Time </th>
@@ -102,7 +86,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $dataArray=showData();
+                                    $dataArray=showData($link);
                                     while ($data=mysqli_fetch_assoc($dataArray)) {
 
                                  ?>
@@ -110,7 +94,7 @@
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
                                     <td><?php echo $data["noofvisitors"] ?></td>
-                                    <td><?php echo $data["time"] ?></td>
+                                    <td><?php echo date("F j, Y, g:i a",$data["time"]); ?></td>
 
                                     <td>
                                         <form action="#" method="post">
