@@ -67,23 +67,10 @@
                                         <div class="col">
                                             <div class="form-group pb-2">
                                                 <label>Phone No.</label>
-                                                <input type="text" name="Phone_no" class="form-control form-control-user" placeholder="Enter Phone No.">
+                                                <input type="text" name="phone_no" class="form-control form-control-user" placeholder="Enter Phone No.">
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div class="row">
-                                    <div class="col">
-                                            <div class="form-group pb-2">
-                                                <label>ID Proof Photo</label>
-                                                <input type="file" id="img" name="img" accept="image/*" class="form-control " placeholder="Photo" style="border: none;">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group pb-2">
-
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -113,7 +100,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input class="btn btn-custom form-toggle" type="checkbox" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        <input class="btn btn-custom form-toggle" type="checkbox" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" name="conference">
                                         <span class="sr-only"> Toggle navigation</span>Conference Room
                                         <hr>
                                         <div id="collapseExample" class="navbar-collapse collapse">
@@ -122,13 +109,13 @@
                                                         <div class="col">
                                                             <div class="form-group pb-2">
                                                                 <label>Room Name</label>
-                                                                <input type="text" class="form-control form-control-user" placeholder="Enter Room Name">
+                                                                <input type="text" class="form-control form-control-user" placeholder="Enter Room Name" name="room_no">
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-group pb-2">
                                                                 <label>Purpose of Room</label>
-                                                                <input type="text" class="form-control form-control-user" placeholder="Enter Purpose">
+                                                                <input type="text" class="form-control form-control-user" placeholder="Enter Purpose" name="room_purpose">
                                                             </div>
                                                         </div>
                                                     </div>
