@@ -13,10 +13,10 @@
     include('../php-utils/db/db.connection.php');
     $link = connectionToDB($host, $username, $pass, $db);
 
-    function showData($link)
+    function showUpcomingData($link)
     {
         
-        $query = "SELECT * FROM visitor WHERE `dateofappointment` = '".date("m-d-y")."'";
+        $query = "SELECT * FROM visitor WHERE `dateofappointment` = '".date("m-d-y")."' AND `status` = 'BOOKED'";
         $result = mysqli_query($link,$query);
         if ($result == TRUE) {
             return $result;
@@ -24,10 +24,97 @@
         else{
             echo "Error!";
         }
+    } function showAcceptedOrRejectedEntry($link){
+        $popAccepted[0] = '<div class="container-fluid">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Notifications
+                </h6>
+            </div>';
+        $popAccepted[1] = '';
+        $popAccepted[2] = '</div></div>';
+        $query = "SELECT `id`,`first_name`,`last_name`,`status` from `visitor` WHERE `status` = 'ACCEPTED_1' OR `status` = 'REJECTED_1'";
+
+        $result = mysqli_query($link,$query);
+
+        while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+            if( strcmp($row['status'],'ACCEPTED_1') ===0 ) {
+                $popAccepted[1] .= '<div class="alert alert-success" role="alert">
+                    Access to '.$row['first_name'].' '.$row['last_name'].' has been <b>GRANTED<b>. 
+
+            <form method="POST">
+            <input type="hidden" name="id" value="'.$row['id'].'">
+            <input type="hidden" name="status" value="acc">
+            <button type="submit" name="closeNotification" class="btn">&#10006;</button>
+            </form>
+
+                </div>';
+            } else {
+                $popAccepted[1] .= '<div class="alert alert-danger" role="alert">
+                    Access to '.$row['first_name'].' '.$row['last_name'].' has been <b>REJECTED<b>.
+
+                    <form method="POST">
+            <input type="hidden" name="id" value="'.$row['id'].'">
+            <input type="hidden" name="status" value="acc">
+            <button type="submit" name="closeNotification" class="btn">&#10006;</button>
+            </form>
+                </div>';
+            }
+            
+        }
+        if($popAccepted[0] != ''){
+            return $popAccepted;
+        } else {
+            return NULL;
+        }
+    }
+    $arr = showAcceptedOrRejectedEntry($link);
+
+    if(isset($_POST['closeNotification'])) {
+        $query = "UPDATE `visitor` SET `status` = '".(
+            (strcmp($_POST['status'],'acc') == 0) ? "ONGOING" : "REJECTED"
+        )."' WHERE `id` = ".$_POST['id'];
+        //echo $query;
+        if(mysqli_query($link,$query)) {
+            //echo 'success';
+        } else {
+            //echo mysqli_error($link);
+        }
+        $arr = showAcceptedOrRejectedEntry($link);
+
     }
 
     
  ?>
+
+<?php
+
+if(isset($_POST['verify_btn'])) {
+    //print_r($_POST);
+    $query = "SELECT `tokenid` FROM `visitor` WHERE `id` = ".$_POST['id'];
+    //echo $query;
+
+    $result = mysqli_query($link,$query);
+
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    //echo '<br>Token id : '.$row['tokenid'];
+    if(password_verify($_POST['scan_id'],$row['tokenid'])){
+        echo '<div class="alert alert-success" role="alert">
+            <b>Token Id is Valid. Request sent.</b>
+            </div>';
+        
+        $query = "UPDATE `visitor` SET `status` = 'REQUEST_SENT' WHERE `id` = ".$_POST['id'];
+        mysqli_query($link,$query);
+
+    } else {
+        echo '<div class="alert alert-danger" role="alert">
+        <b>Token Id is Invalid.</b>
+      </div>';
+    }
+}
+
+?>
     <main style="margin-top: 30px;">
         <div class="container-fluid">
             <!-- DataTales Example -->
@@ -42,40 +129,36 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> ID </th>
-                                    <th> Username </th>
+                                    <th> Name </th>
                                     <th> Email </th>
                                     <th> No.of Visitors </th>
                                     <th> Time </th>
-                                    <th> EDIT </th>
-                                    <th> SCAN </th>
+                                    <th> TOKEN ID </th>
+                                    <th> VERIFY TOKEN ID </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $dataArray=showData($link);
+                                    $dataArray=showUpcomingData($link);
                                     while ($data=mysqli_fetch_assoc($dataArray)) {
                                         
                                  ?>
                                 <tr>
-                                    <td><?php echo $data["id"]; ?></td>
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
                                     <td><?php echo $data["noofvisitors"] ?></td>
                                     <td><?php echo date("F j, Y, g:i a",$data["time"]); ?></td>
                                     
-                                    <td>
-                                        <form action="#" method="post">
-                                            <input type="hidden" name="edit_id" value="">
-                                            <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="#" method="post">
-                                            <input type="hidden" name="scan_id" value="">
-                                            <button type="submit" name="scan_btn" class="btn btn-danger"> SCAN </button>
-                                        </form>
-                                    </td>
+                                    <form method="POST">
+                                        <td>
+                                            <input name="scan_id" placeholder="TOKEN ID" >
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="id" value="<?php
+                                            echo $data['id']; ?>">
+                                            <button type="submit" name="verify_btn" class="btn btn-success"> VERIFY</button>
+                                        </td>
+                                    </form>
                                 </tr>
                                 <?php 
                                     }
@@ -89,6 +172,13 @@
 
         </div>
         <!-- /.container-fluid -->
+        <?php
+            
+            if($arr) {
+                echo $arr[0].$arr[1].$arr[2];
+            }
+
+        ?>
     </main>
 <?php
 include('footer_1.php'); 

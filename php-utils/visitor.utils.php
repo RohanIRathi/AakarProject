@@ -14,10 +14,10 @@ if(!function_exists("addNewVisitor")) {
         $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
         //send mail to given email id 
         $subject = 'Token of verification for your appointment at Aakar Foundation.';
-        $message = '<b>Verification Token Id : '.$tokenId.'</b><br>Kindly show this token id to the receptionist upon your arrival at Aakar Foundation. Without this token id, you wont be granted entry. ';
-        // if(mail($email,$subject,$message,$headers)) {
-        //     echo '<br>Mail Sent!';
-        // }
+        $message = '<b>Verification Token Id : '.$tokenId.'</b><br>Kindly show this token id to the receptionist upon your arrival at Aakar Foundation on '.date("F j, Y, g:i a",$timeStamp).'. Without this token id, you wont be granted entry. ';
+        if(mail($email,$subject,$message,$headers)) {
+            //echo '<br>Mail Sent!';
+        }
 
         $hashedTokenId = password_hash($tokenId,PASSWORD_BCRYPT);
 
@@ -37,7 +37,7 @@ if(!function_exists("addNewVisitor")) {
 if(!function_exists("addNewVisitor")) {
     function showData($link) {
         
-        $query = "SELECT * FROM `visitor` WHERE `visitee` = ".$_SESSION['id']." AND `dateofappointment` = '".date("m-d-y")."'";
+        $query = "SELECT * FROM `visitor` WHERE `visitee` = ".$_SESSION['id']." AND `dateofappointment` = '".date("m-d-y")."' AND `status` = 'BOOKED'";
         $result = mysqli_query($link,$query);
         if ($result == TRUE) {
             return $result;
