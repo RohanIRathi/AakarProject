@@ -11,7 +11,9 @@ $link = connectionToDB($host, $username, $pass, $db);
 
 
 if(isset($_POST['add_btn'])) {
-    echo 'heyyy clicked';
+    //echo 'heyyy clicked';
+    addNewVisitorAppointment($link,$_SESSION['id']);
+    //echo '<br>Function ended';
 } 
 
 
