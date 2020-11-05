@@ -34,14 +34,14 @@
             </div>';
         $popAccepted[1] = '';
         $popAccepted[2] = '</div></div>';
-        $query = "SELECT `id`,`first_name`,`last_name`,`status` from `visitor` WHERE `status` = 'ACCEPTED_1' OR `status` = 'REJECTED_1'";
+        $query = "SELECT `id`,`first_name`,`last_name`,`status` from `visitor` WHERE `status` = 'ACCEPTED_1' OR `status` = 'REJECTED_1' OR `status` = 'REQUEST_SENT'";
 
         $result = mysqli_query($link,$query);
 
         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
             if( strcmp($row['status'],'ACCEPTED_1') ===0 ) {
                 $popAccepted[1] .= '<div class="alert alert-success" role="alert">
-                    Access to '.$row['first_name'].' '.$row['last_name'].' has been <b>GRANTED<b>. 
+                    Access to <b>'.$row['first_name'].' '.$row['last_name'].' </b> has been <b>GRANTED<b>. 
 
             <form method="POST">
             <input type="hidden" name="id" value="'.$row['id'].'">
@@ -50,15 +50,19 @@
             </form>
 
                 </div>';
-            } else {
+            } else if(strcmp($row['status'],'REJECTED_1') ===0) {
                 $popAccepted[1] .= '<div class="alert alert-danger" role="alert">
-                    Access to '.$row['first_name'].' '.$row['last_name'].' has been <b>REJECTED<b>.
+                    Access to <b>'.$row['first_name'].' '.$row['last_name'].'</b> has been <b>REJECTED<b>.
 
                     <form method="POST">
             <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="acc">
             <button type="submit" name="closeNotification" class="btn">&#10006;</button>
             </form>
+                </div>';
+            } else {
+                $popAccepted[1] .=  '<div class="alert alert-primary" role="alert">
+                Request to visit for <b> '.$row['first_name'].' '.$row['last_name'].' </b> is <b>PENDING</b>.
                 </div>';
             }
             
@@ -174,7 +178,7 @@ if(isset($_POST['verify_btn'])) {
         <!-- /.container-fluid -->
         <?php
             
-            if($arr) {
+            if($arr != NULL) {
                 echo $arr[0].$arr[1].$arr[2];
             }
 
