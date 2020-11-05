@@ -11,13 +11,13 @@
 <?php 
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
-    $con = connectionToDB($host, $username, $pass, $db);
+    $link = connectionToDB($host, $username, $pass, $db);
 
-    function showData()
+    function showData($link)
     {
-        global $con;
-        $query = "select * from visitor";
-        $result = mysqli_query($con,$query);
+        
+        $query = "SELECT * FROM visitor WHERE `dateofappointment` = '".date("m-d-y")."'";
+        $result = mysqli_query($link,$query);
         if ($result == TRUE) {
             return $result;
         }
@@ -33,8 +33,8 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">New Visitor
-                        <a href="new_visitor_1.php"class="ml-3 btn btn-primary text-left">Add</a>
+                    <h6 class="m-0 font-weight-bold text-primary">Upcoming Appointments
+                        <a href="new_visitor_1.php"class="ml-3 btn btn-primary text-left">Add Walk-In Visitor</a>
                     </h6>
                 </div>
                 <div class="card-body">
@@ -53,7 +53,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $dataArray=showData();
+                                    $dataArray=showData($link);
                                     while ($data=mysqli_fetch_assoc($dataArray)) {
                                         
                                  ?>
@@ -62,7 +62,7 @@
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
                                     <td><?php echo $data["noofvisitors"] ?></td>
-                                    <td><?php echo $data["time"] ?></td>
+                                    <td><?php echo date("F j, Y, g:i a",$data["time"]); ?></td>
                                     
                                     <td>
                                         <form action="#" method="post">
