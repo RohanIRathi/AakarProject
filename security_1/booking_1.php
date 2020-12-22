@@ -56,7 +56,7 @@
 
                     <form method="POST">
             <input type="hidden" name="id" value="'.$row['id'].'">
-            <input type="hidden" name="status" value="acc">
+            <input type="hidden" name="status" value="rej">
             <button type="submit" name="closeNotification" class="btn">&#10006;</button>
             </form>
                 </div>';
@@ -77,7 +77,7 @@
 
     if(isset($_POST['closeNotification'])) {
         $query = "UPDATE `visitor` SET `status` = '".(
-            (strcmp($_POST['status'],'acc') == 0) ? "ONGOING" : "REJECTED"
+            (strcmp($_POST['status'],'acc') == 0) ? "ONGOING" : "REJECTED_FINISHED"
         )."' WHERE `id` = ".$_POST['id'];
         //echo $query;
         if(mysqli_query($link,$query)) {

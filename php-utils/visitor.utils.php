@@ -34,7 +34,7 @@ if(!function_exists("addNewVisitor")) {
 
 }
 
-if(!function_exists("addNewVisitor")) {
+if(!function_exists("showData")) {
     function showData($link) {
         
         $query = "SELECT * FROM `visitor` WHERE `visitee` = ".$_SESSION['id']." AND `dateofappointment` = '".date("m-d-y")."' AND `status` = 'BOOKED'";
