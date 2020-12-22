@@ -155,7 +155,8 @@ if(isset($_POST['verify_btn'])) {
                                     
                                     <form method="POST">
                                         <td>
-                                            <input name="scan_id" placeholder="TOKEN ID" >
+                                            <input name="scan_id" placeholder="TOKEN ID" 
+                                            type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==6) return false;">
                                         </td>
                                         <td>
                                             <input type="hidden" name="id" value="<?php
