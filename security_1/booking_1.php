@@ -56,7 +56,7 @@
 
                     <form method="POST">
             <input type="hidden" name="id" value="'.$row['id'].'">
-            <input type="hidden" name="status" value="acc">
+            <input type="hidden" name="status" value="rej">
             <button type="submit" name="closeNotification" class="btn">&#10006;</button>
             </form>
                 </div>';
@@ -77,7 +77,7 @@
 
     if(isset($_POST['closeNotification'])) {
         $query = "UPDATE `visitor` SET `status` = '".(
-            (strcmp($_POST['status'],'acc') == 0) ? "ONGOING" : "REJECTED"
+            (strcmp($_POST['status'],'acc') == 0) ? "ONGOING" : "REJECTED_FINISHED"
         )."' WHERE `id` = ".$_POST['id'];
         //echo $query;
         if(mysqli_query($link,$query)) {
@@ -139,6 +139,7 @@ if(isset($_POST['verify_btn'])) {
                                     <th> Time </th>
                                     <th> TOKEN ID </th>
                                     <th> VERIFY TOKEN ID </th>
+                                    <th> Out </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -155,12 +156,16 @@ if(isset($_POST['verify_btn'])) {
                                     
                                     <form method="POST">
                                         <td>
-                                            <input name="scan_id" placeholder="TOKEN ID" >
+                                            <input name="scan_id" placeholder="TOKEN ID" 
+                                            type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==6) return false;">
                                         </td>
                                         <td>
                                             <input type="hidden" name="id" value="<?php
                                             echo $data['id']; ?>">
                                             <button type="submit" name="verify_btn" class="btn btn-success"> VERIFY</button>
+                                        </td>
+                                        <td>
+                                            <button type="submit" name="out_btn" class="btn btn-danger"> OUT</button>
                                         </td>
                                     </form>
                                 </tr>
