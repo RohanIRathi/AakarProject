@@ -39,6 +39,10 @@ $result = getUserData($link,'hod',$_SESSION['id']);
                                 <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
                             </div>
                             <div class="form-group">
+                                <label>Employee ID</label>
+                                <input type="text" name="employee ID" class="form-control" placeholder="Enter Employee ID" required>
+                            </div>
+                            <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                             </div>
