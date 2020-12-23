@@ -1,6 +1,26 @@
 <?php
+    session_start();
     include('header_1.php');
     include('navbar_1.php');
+
+    include('../php-utils/db/db.variables.php');
+    include('../php-utils/db/db.connection.php');
+    $link = connectionToDB($host, $username, $pass, $db);
+
+    include('../php-utils/visitor.utils.php');
+
+    if(isset($_POST['out_btn'])) {
+        $t=time();
+        //echo date("F j, Y, g:i a",$t);
+        $query = "UPDATE `visitor` SET `end_time` = '".$t."', `status` = 'ACCEPTED_FINISHED' WHERE `id` = ".$_POST['id'];
+
+        if(mysqli_query($link,$query)) {
+            echo 'success';
+        } else {
+            echo mysqli_error($link);
+        }
+    }
+
 ?>
 <main style="margin-top: 30px;">
         <div class="container-fluid">
@@ -23,15 +43,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <button type="submit" name="out_btn" class="btn btn-danger">OUT</button>
-                                    </td>
-                                </tr>
+                            <?php
+                    $result = getOngoingData($link);
+                    while ($row=mysqli_fetch_assoc($result)) {
+                        echo '<form method="POST"><tr>
+                        <td>'.$row['first_name'].' '.$row['last_name'].'</td>
+                        <td>'.$row['email'].'</td>
+                        <td>'.$row['noofvisitors'].'</td>
+                        <td>'.date("F j, Y, g:i a",$row["time"]).'</td>
+                        <td>
+                            <input type="hidden" name="id" value="'.$row['id'].'">
+                            <button type="submit" name="out_btn" class="btn btn-danger">OUT</button>
+                        </td>
+                        </tr></form>';
+                    }
+                ?>
+                                
                             </tbody>
                         </table>
                     </div>

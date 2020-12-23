@@ -48,4 +48,23 @@ if(!function_exists("showData")) {
     }
 }
 
+
+if(!function_exists("getOngoingData")) {
+
+    function getOngoingData($link) {
+
+        $query = "SELECT `id`,`first_name`,`last_name`,`email`,`time`,`noofvisitors` FROM `visitor` WHERE `status` = 'ONGOING' ";
+        $result = mysqli_query($link,$query);
+        echo mysqli_error($link);
+        if ($result == TRUE) {
+            return $result;
+        }
+        else{
+            echo "Error!";
+        }
+
+    }
+
+}
+
 ?>

@@ -96,7 +96,7 @@
                                     <td><?php echo $data["noofvisitors"] ?></td>
                                     <td><?php echo date("F j, Y, g:i a",$data["time"]); ?></td>
 
-                                    <td>
+                                    <td>    
                                         <form action="#" method="post">
                                             <input type="hidden" name="edit_id" value="">
                                             <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
