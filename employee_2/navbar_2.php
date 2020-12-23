@@ -4,9 +4,9 @@
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <span class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 navbar-brand" >
-            Welcome, 
+            Welcome,
             <?php
-                echo $_SESSION['username'];
+                echo $_SESSION['firstname'];
             ?>
         </span>
         <!-- Navbar-->
@@ -19,7 +19,7 @@
                     <div class="dropdown-divider"></div>
                     <form method='POST'>
                         <button class="dropdown-item" type='submit' name='logout-btn'>Logout</button>
-                    </form>                
+                    </form>
                 </div>
             </li>
         </ul>
@@ -50,6 +50,10 @@
                                 <a class="nav-link" href="#">Delete visitor</a>
                             </nav>
                         </div>
+                        <a class="nav-link" href="notification_2.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Notification
+                        </a>
                         <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

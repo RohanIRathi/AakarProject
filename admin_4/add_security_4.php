@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('header_3.php');
-include('navbar_3.php');
+include('header_4.php');
+include('navbar_4.php');
 include('../php-utils/db/db.variables.php');
 include('../php-utils/db/db.connection.php');
 include('../php-utils/signup.utils.php');
@@ -9,19 +9,18 @@ include('../php-utils/signup.utils.php');
 $link = connectionToDB($host, $username, $pass, $db);
 
 if(isset($_POST['registerbtn'])) {
-
-    signUpUser($link,'employee',$_SESSION['id']);
-
+    signUpUser($link,'security',$_SESSION['id']);
 }
-$result = getUserData($link,'employee',$_SESSION['id']);
-?>
 
-    <main style="margin-top: 30px;">
-        <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+$result = getUserData($link,'security',$_SESSION['id']);
+
+?>
+ <main style="margin-top: 30px;">
+        <div class="modal fade" id="addsecurityprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Employee Data</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add Security Data</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -62,8 +61,8 @@ $result = getUserData($link,'employee',$_SESSION['id']);
         <div class="container-fluid">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Employee Registration
-                        <button type="button" class="ml-3 btn btn-primary text-left" data-toggle="modal" data-target="#addadminprofile">Add</button>
+                    <h6 class="m-0 font-weight-bold text-primary">Security Profile
+                        <button type="button" class="ml-3 btn btn-primary text-left" data-toggle="modal" data-target="#addsecurityprofile">Add</button>
                     </h6>
                 </div>
                 <div class="card-body">
@@ -71,6 +70,7 @@ $result = getUserData($link,'employee',$_SESSION['id']);
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
+                                    <th> ID </th>
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> Role </th>
@@ -84,9 +84,10 @@ $result = getUserData($link,'employee',$_SESSION['id']);
 while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 
 echo '<tr>
+<td>'.$row['id'].'</td>
 <td>'.$row['first_name'].' '.$row['last_name'].'</td>
 <td>'.$row['email'].'</td>
-<td>Employee</td>
+<td>Security</td>
 <td>
 <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
 </td>
@@ -105,7 +106,7 @@ echo '<tr>
             </div>
         </div>
     </main>
-		<?php
-		include('footer_3.php');
-		include('scripts_3.php');
-		?>
+<?php
+include('footer_4.php');
+include('scripts_4.php');
+?>

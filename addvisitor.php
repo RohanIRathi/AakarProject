@@ -4,19 +4,19 @@
 
     if($_SESSION['type'] == 'employee')
     {
-        $employee = $mysqli -> real_escape_string($_SESSION['id']);
+        $employee = mysqli_real_escape_string($mysqli, $_SESSION['id']);
         $hod = 3;
         $admin = 3;
     }
     else if($_SESSION['type'] == 'hod')
     {
-        $hod = $mysqli -> real_escape_string($_SESSION['id']);
+        $hod = mysqli_real_escape_string($mysqli, $_SESSION['id']);
         $employee = 3;
         $admin = 3;
     }
     else if($_SESSION['type'] == 'admin')
     {
-        $admin = $mysqli -> real_escape_string($_SESSION['id']);
+        $admin = mysqli_real_escape_string($mysqli, $_SESSION['id']);
         $hod = 3;
         $employee = 3;
     }

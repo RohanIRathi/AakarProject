@@ -16,7 +16,7 @@
         
             $_SESSION['type'] = $type;
             $_SESSION['id'] = $userCredArr['id'];
-            $_SESSION['username'] = $userCredArr['username'];
+            $_SESSION['firstname'] = $userCredArr['first_name'];
 
             if(strcmp($type,'Admin') == 0) {
                 header('location: ./admin_4/booking_4.php');
@@ -55,7 +55,7 @@
   <script src="include/email_validation.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <!-- Outer Row -->
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-6 col-md-6">

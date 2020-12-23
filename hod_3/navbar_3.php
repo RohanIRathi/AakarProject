@@ -1,4 +1,10 @@
+<?php
 
+include('../php-utils/login.utils.php');
+userLogout();
+isValidUser();
+
+?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <a class="navbar-brand" href="booking_3.php">Aakar Foundation</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
@@ -6,7 +12,7 @@
         <span class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 navbar-brand" >
             Welcome,
             <?php
-                echo $_SESSION['username'];
+                echo $_SESSION['firstname'];
             ?>
         </span>
         <!-- Navbar-->
@@ -44,12 +50,17 @@
                             Registration
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
+
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="new_visitor_3.php">ADD new visitor</a>
                                 <a class="nav-link" href="#">Delete visitor</a>
                             </nav>
                         </div>
+                        <a class="nav-link" href="notification_3.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Notification
+                        </a>
                         <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
