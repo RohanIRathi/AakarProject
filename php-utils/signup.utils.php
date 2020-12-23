@@ -25,7 +25,7 @@ if(!function_exists("signUpUser")) {
       $error = 'User already exists!';
     } else {
       
-      $query = "INSERT INTO `".$type."`( `email`, `password`,`first_name`,`last_name`".
+      $query = "INSERT INTO `".$type."`( `id`,`email`, `password`,`first_name`,`last_name`".
       (
         (strcmp($type,'admin')==0 || strcmp($type,'security')==0) ? "" : 
         (
@@ -33,15 +33,15 @@ if(!function_exists("signUpUser")) {
         )
       )
   
-      .") VALUES ('".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
+      .") VALUES ('".$userCred['employee_Id']."','".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
   
       ( 
       (strcmp($type,'admin')==0 || strcmp($type,'security')==0) 
-      ? "" : ",".$assignedBy."" 
+      ? "" : ",'".$assignedBy."'" 
       )
       
       .")";
-      //echo '<br>'.$query;
+      echo '<br>'.$query;
   
       if(mysqli_query($link, $query)) {
         $success = true;

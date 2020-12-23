@@ -6,7 +6,8 @@
     $password = password_hash($password,PASSWORD_BCRYPT);
     $firstName = mysqli_real_escape_string($link,$_POST['firstname']);
     $lastName = mysqli_real_escape_string($link,$_POST['lastname']);
+    $employeeId = mysqli_real_escape_string($link,$_POST['employee_ID']);
 
 
-    $userCred = array("email"=>$email,"password"=>$password,"firstName"=>$firstName,"lastName"=>$lastName);
+    $userCred = array("email"=>$email,"password"=>$password,"firstName"=>$firstName,"lastName"=>$lastName,"employee_Id" => $employeeId);
 ?>

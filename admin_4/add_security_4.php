@@ -75,7 +75,7 @@ $result = getUserData($link,'security',$_SESSION['id']);
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> ID </th>
+                                    <th> Employee ID </th>
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> Role </th>
