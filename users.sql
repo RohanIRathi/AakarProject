@@ -1,12 +1,11 @@
 CREATE DATABASE IF NOT EXISTS `aakar` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `aakar`;
-
 -- phpMyAdmin SQL Dump
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 23, 2020 at 02:18 PM
+-- Generation Time: Dec 23, 2020 at 06:44 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -121,7 +120,7 @@ INSERT INTO `security` (`id`, `username`, `email`, `password`, `first_name`, `la
 --
 
 CREATE TABLE `visitor` (
-  `id` varchar(20) NOT NULL,
+  `id` int(10) NOT NULL,
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
@@ -142,6 +141,13 @@ CREATE TABLE `visitor` (
   `dateofappointment` varchar(10) NOT NULL,
   `status` varchar(20) NOT NULL DEFAULT 'BOOKED'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visitor`
+--
+
+INSERT INTO `visitor` (`id`, `first_name`, `last_name`, `email`, `purpose`, `photo_id`, `time`, `noofvisitors`, `photo_id_no`, `hospitality`, `conference`, `conference_room`, `room_purpose`, `start_time`, `end_time`, `visitee`, `tokenid`, `phone_no`, `dateofappointment`, `status`) VALUES
+(1, 'Vinay', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1608746400', 5, 1234567890, 0, 0, '', '', '', '1608745475', '00001', '$2y$10$yyRpnoPoNhNGw0tH514Qn.70nUJBFjKbAYco6AOhmxmjZntEwNtym', '+17021019903', '12-23-20', 'ACCEPTED_FINISHED');
 
 --
 -- Indexes for dumped tables
@@ -187,6 +193,12 @@ ALTER TABLE `visitor`
 --
 ALTER TABLE `security`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `visitor`
+--
+ALTER TABLE `visitor`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

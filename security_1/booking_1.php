@@ -139,7 +139,6 @@ if(isset($_POST['verify_btn'])) {
                                     <th> Time </th>
                                     <th> TOKEN ID </th>
                                     <th> VERIFY TOKEN ID </th>
-                                    <th> Out </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -163,10 +162,6 @@ if(isset($_POST['verify_btn'])) {
                                             <input type="hidden" name="id" value="<?php
                                             echo $data['id']; ?>">
                                             <button type="submit" name="verify_btn" class="btn btn-success"> VERIFY</button>
-                                        </td>
-                                        <td>
-                                            <button type="submit" name="out_btn" class="btn btn-danger"> OUT</button>
-                                        </td>
                                     </form>
                                 </tr>
                                 <?php 
