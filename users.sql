@@ -5,7 +5,7 @@ USE `aakar`;
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 23, 2020 at 06:44 PM
+-- Generation Time: Dec 25, 2020 at 09:46 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -43,7 +43,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `first_name`, `last_name`) VALUES
-('00001', '', 'admin@gmail.com', '$2y$10$rSDD/KcGB9Yd6KRJNhSCmef9fbnaJ0B9nlmThEeNtsdF77bG8QoM2', 'Admin', '');
+('00001', '', 'admin@gmail.com', '$2y$10$rSDD/KcGB9Yd6KRJNhSCmef9fbnaJ0B9nlmThEeNtsdF77bG8QoM2', 'Admin', ''),
+('00002', '', 'siddharthkothari655@gmail.com', '$2y$10$OWPwst9ma9nPi6GxRPaYWukfQZXNGpx8OVVYQYwT9WN.oNABPoyRO', 'Siddharth', 'Kothari');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,9 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `hod_id`) VALUES
-('00001', '', 'admin@gmail.com', '$2y$10$ZDYsPNnsiqUL6QonhFIloOnlbWsH3q/l4tiGWK.xcPoqES/ZXQuHm', 'Admin', '', '00001');
+('00001', '', 'admin@gmail.com', '$2y$10$ZDYsPNnsiqUL6QonhFIloOnlbWsH3q/l4tiGWK.xcPoqES/ZXQuHm', 'Admin', '', '00001'),
+('00004', '', 'dhwanikothari.nmims@gmail.com', '$2y$10$/wpvGHi1MwlA6qMBpweJZOm.R8RaaTb0gUyKN7.R5EsPvXKNRzglq', 'Dhwani', 'Kothari', '00003'),
+('00003', '', 'vknk986@gmail.com', '$2y$10$8q4mX94SZvG28dbwbhhj/uYOrHC2RxpiJaCIeWgcZQaOml4Cj5rAu', 'Vinay', 'Kothari', '00003');
 
 -- --------------------------------------------------------
 
@@ -89,7 +92,8 @@ CREATE TABLE `hod` (
 --
 
 INSERT INTO `hod` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `admin_id`) VALUES
-('00001', '', 'admin@gmail.com', '$2y$10$oIpRCA0tbZyHJc7O2XgMWOg2HXHpGq6RovOKAnSlmtl4mnv9o5po6', 'Admin', '', '00001');
+('00001', '', 'admin@gmail.com', '$2y$10$oIpRCA0tbZyHJc7O2XgMWOg2HXHpGq6RovOKAnSlmtl4mnv9o5po6', 'Admin', '', '00001'),
+('00003', '', 'vknk986@gmail.com', '$2y$10$lGenWXiiqrwm/6WRV.l0M.zOZkWDF2ckwokYI46FOc6vClG6jOwKy', 'Vinay', 'Kothari', '00002');
 
 -- --------------------------------------------------------
 
@@ -98,7 +102,7 @@ INSERT INTO `hod` (`id`, `username`, `email`, `password`, `first_name`, `last_na
 --
 
 CREATE TABLE `security` (
-  `id` int(11) NOT NULL,
+  `id` varchar(20) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` text NOT NULL,
@@ -111,7 +115,7 @@ CREATE TABLE `security` (
 --
 
 INSERT INTO `security` (`id`, `username`, `email`, `password`, `first_name`, `last_name`) VALUES
-(1, '', 'admin@gmail.com', '$2y$10$MdLm1e2V4.Bo7JPfUrsVAOpzyRnGBa/QB4uuhrgdV9bBf8fX2wbci', 'Admin', '');
+('1', '', 'admin@gmail.com', '$2y$10$MdLm1e2V4.Bo7JPfUrsVAOpzyRnGBa/QB4uuhrgdV9bBf8fX2wbci', 'Admin', '');
 
 -- --------------------------------------------------------
 
@@ -147,7 +151,9 @@ CREATE TABLE `visitor` (
 --
 
 INSERT INTO `visitor` (`id`, `first_name`, `last_name`, `email`, `purpose`, `photo_id`, `time`, `noofvisitors`, `photo_id_no`, `hospitality`, `conference`, `conference_room`, `room_purpose`, `start_time`, `end_time`, `visitee`, `tokenid`, `phone_no`, `dateofappointment`, `status`) VALUES
-(1, 'Vinay', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1608746400', 5, 1234567890, 0, 0, '', '', '', '1608745475', '00001', '$2y$10$yyRpnoPoNhNGw0tH514Qn.70nUJBFjKbAYco6AOhmxmjZntEwNtym', '+17021019903', '12-23-20', 'ACCEPTED_FINISHED');
+(1, 'Vinay', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1608746400', 5, 1234567890, 0, 0, '', '', '', '1608745475', '00001', '$2y$10$yyRpnoPoNhNGw0tH514Qn.70nUJBFjKbAYco6AOhmxmjZntEwNtym', '+17021019903', '12-23-20', 'REJECTED_FINISHED'),
+(2, 'Dhwani', 'Kothari', 'dhwanikothari.nmims@gmail.com', 'on', '', '1608798600', 2, 1234567890, 0, 0, '', '', '', '1608885747', '00001', '$2y$10$VICiNU4.OOknBebS0Ikd1.bz7AV3Di4MVAF6bHrFWnNqGzuBrU8hW', '+17021019903', '12-24-20', 'ACCEPTED_FINISHED'),
+(3, 'Siddharth', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1608888600', 123, 123, 0, 0, '', '', '', '1608885255', '00003', '$2y$10$L8FcduFY7VJTYZr7ww6mE./OPvEEum0KjHs2p5X7zjyD/Sa.LiAZm', '+17021019903', '12-25-20', 'ACCEPTED_FINISHED');
 
 --
 -- Indexes for dumped tables
@@ -189,16 +195,10 @@ ALTER TABLE `visitor`
 --
 
 --
--- AUTO_INCREMENT for table `security`
---
-ALTER TABLE `security`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `visitor`
 --
 ALTER TABLE `visitor`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

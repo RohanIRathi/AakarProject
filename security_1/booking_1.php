@@ -5,7 +5,6 @@
     isValidUser(); 
     include('header_1.php'); 
     include('navbar_1.php');
-    
 ?>
 
 <?php 
@@ -14,8 +13,7 @@
     $link = connectionToDB($host, $username, $pass, $db);
 
     function showUpcomingData($link)
-    {
-        
+    {   
         $query = "SELECT * FROM visitor WHERE `dateofappointment` = '".date("m-d-y")."' AND `status` = 'BOOKED'";
         $result = mysqli_query($link,$query);
         if ($result == TRUE) {
@@ -41,23 +39,26 @@
         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
             if( strcmp($row['status'],'ACCEPTED_1') ===0 ) {
                 $popAccepted[1] .= '<div class="alert alert-success" role="alert">
+                <form method="POST">
+                <button type="submit" name="closeNotification" class="btn">&#10006;</button>
                     Access to <b>'.$row['first_name'].' '.$row['last_name'].' </b> has been <b>GRANTED<b>. 
 
-            <form method="POST">
+            
             <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="acc">
-            <button type="submit" name="closeNotification" class="btn">&#10006;</button>
+            
             </form>
 
                 </div>';
             } else if(strcmp($row['status'],'REJECTED_1') ===0) {
                 $popAccepted[1] .= '<div class="alert alert-danger" role="alert">
+                <form method="POST">
+                <button type="submit" name="closeNotification" class="btn">&#10006;</button>
                     Access to <b>'.$row['first_name'].' '.$row['last_name'].'</b> has been <b>REJECTED<b>.
 
-                    <form method="POST">
+                    
             <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="rej">
-            <button type="submit" name="closeNotification" class="btn">&#10006;</button>
             </form>
                 </div>';
             } else {

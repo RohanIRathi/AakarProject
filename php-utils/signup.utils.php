@@ -41,7 +41,7 @@ if(!function_exists("signUpUser")) {
       )
       
       .")";
-      echo '<br>'.$query;
+      //echo '<br>'.$query;
   
       if(mysqli_query($link, $query)) {
         $success = true;
