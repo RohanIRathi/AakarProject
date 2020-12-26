@@ -1,4 +1,6 @@
+
 <?php
+
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
 
@@ -105,6 +107,8 @@ include('navbar_1.php');
                                             <div class="form-group pb-2">
                                                 <label>Date</label>
                                                 <input type="date" class="form-control form-control-user" placeholder="Enter Date"
+                                                value="yyyy-MM-dd" 
+                                                id="currentDate" 
                                                 name="date"required >
                                             </div>
                                         </div>
@@ -112,6 +116,8 @@ include('navbar_1.php');
                                             <div class="form-group pb-2">
                                                 <label>Time</label>
                                                 <input type="time" class="form-control form-control-user" placeholder="Enter Time"
+                                                value="HH:mm" 
+                                                id="currentTime" 
                                                 name="time"required>
                                             </div>
                                         </div>
@@ -223,8 +229,16 @@ include('navbar_1.php');
             </div>
         </div>
     </div>
+     
 </main>
 <?php 
 include('footer_1.php'); 
 include('scripts_1.php'); 
  ?>
+<script>
+var date = new Date();
+var currentDate = date.toISOString().slice(0,10);
+var currentTime = date.getHours() + ':' + date.getMinutes();
+document.getElementById('currentDate').value = currentDate;
+document.getElementById('currentTime').value = currentTime;
+</script>
