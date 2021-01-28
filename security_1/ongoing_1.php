@@ -15,7 +15,7 @@
         $query = "UPDATE `visitor` SET `end_time` = '".$t."', `status` = 'ACCEPTED_FINISHED' WHERE `id` = ".$_POST['id'];
 
         if(mysqli_query($link,$query)) {
-            echo 'success';
+            //echo 'success';
         } else {
             echo mysqli_error($link);
         }

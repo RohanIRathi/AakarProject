@@ -43,7 +43,9 @@ if(!function_exists("showData")) {
             return $result;
         }
         else{
-            echo "Error!";
+            echo mysqli_error($link);
+            echo "<br>Error!here q : ".$query;
+            echo '<br>id : '.$_SESSION['id'].'<br>';
         }
     }
 }

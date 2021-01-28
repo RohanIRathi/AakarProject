@@ -109,7 +109,7 @@ if(isset($_POST['verify_btn'])) {
             <b>Token Id is Valid. Request sent.</b>
             </div>';
         
-        $query = "UPDATE `visitor` SET `status` = 'REQUEST_SENT' WHERE `id` = ".$_POST['id'];
+        $query = "UPDATE `visitor` SET `status` = 'REQUEST_SENT',`start_time` = '".time()."' WHERE `id` = ".$_POST['id'];
         mysqli_query($link,$query);
 
     } else {

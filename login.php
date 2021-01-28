@@ -11,12 +11,15 @@
         $email = mysqli_real_escape_string($link,$_POST['email']);
         $password = mysqli_real_escape_string($link,$_POST['passwordd']);
         $type = mysqli_real_escape_string($link,$_POST['option']);
+        echo 'type : '.$type.'<br>';
         $userCredArr = checkValidPass($type,$email,$link,$password);
         if($userCredArr != NULL){
         
+            
             $_SESSION['type'] = $type;
             $_SESSION['id'] = $userCredArr['id'];
             $_SESSION['firstname'] = $userCredArr['first_name'];
+            $_SESSION['lastname'] = $userCredArr['last_name'];
 
             if(strcmp($type,'Admin') == 0) {
                 header('location: ./admin_4/booking_4.php');

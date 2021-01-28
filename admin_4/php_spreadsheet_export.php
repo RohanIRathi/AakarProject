@@ -152,9 +152,9 @@ include('navbar_4.php');
 
       				foreach($result as $row)
       				{
-      					$dt = date('Y-m-d h:i:s',$row['time']);
-      					$start_dt= date('Y-m-d h:i:s',(int)$row["start_time"]);
-      					$end_dt= date('Y-m-d h:i:s',(int)$row["end_time"]);
+      					$dt = date('F j, Y, g:i a',$row['time']);
+      					$start_dt= date('F j, Y, g:i a',(int)$row["start_time"]);
+      					$end_dt= date('F j, Y, g:i a',(int)$row["end_time"]);
       					echo '
       					<tr>
       					<td>'.$row["id"].'</td>

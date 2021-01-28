@@ -45,13 +45,6 @@
 
     }
     $str = generateEmpList($link);
-    if(isset($_POST["add_btn"])) {
-        include('../php-utils/visitor_variables.php');
-        include('../php-utils/visitor.utils.php');
-        $visiteeId = $_POST['option'];
-        addNewVisitorAppointment($link,$visiteeId);
-        
-    }
 
 ?>
 <?php
@@ -61,6 +54,16 @@ include('navbar_1.php');
 ?>
 <main>
     <div class="container">
+    <?php
+    if(isset($_POST["add_btn"])) {
+        include('../php-utils/visitor_variables.php');
+        include('../php-utils/visitor.utils.php');
+        $visiteeId = $_POST['option'];
+        addNewVisitorAppointment($link,$visiteeId);
+        
+    }
+
+    ?>
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card o-hidden border-0 shadow-lg my-5">

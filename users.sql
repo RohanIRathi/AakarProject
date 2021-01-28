@@ -9,6 +9,15 @@ USE `aakar`;
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jan 28, 2021 at 10:32 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.5
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -44,7 +53,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `first_name`, `last_name`) VALUES
 ('00001', '', 'admin@gmail.com', '$2y$10$rSDD/KcGB9Yd6KRJNhSCmef9fbnaJ0B9nlmThEeNtsdF77bG8QoM2', 'Admin', ''),
-('00002', '', 'siddharthkothari655@gmail.com', '$2y$10$OWPwst9ma9nPi6GxRPaYWukfQZXNGpx8OVVYQYwT9WN.oNABPoyRO', 'Siddharth', 'Kothari');
+('00002', '', 'siddharthkothari655@gmail.com', '$2y$10$OWPwst9ma9nPi6GxRPaYWukfQZXNGpx8OVVYQYwT9WN.oNABPoyRO', 'Siddharth', 'Kothari'),
+('00003', '', 'shrinidhi.21810366@viit.ac.in', '$2y$10$j9TKwq1oKAtOCZb2kH.hu.3gM1.6x.qqbR0S8j6anYgysI8abPsTK', 'Shrinidhi', ' -');
 
 -- --------------------------------------------------------
 
@@ -53,7 +63,7 @@ INSERT INTO `admin` (`id`, `username`, `email`, `password`, `first_name`, `last_
 --
 
 CREATE TABLE `employee` (
-  `id` varchar(20) NOT NULL,
+  `employee_id` varchar(20) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` text NOT NULL,
@@ -66,10 +76,38 @@ CREATE TABLE `employee` (
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `hod_id`) VALUES
+INSERT INTO `employee` (`employee_id`, `username`, `email`, `password`, `first_name`, `last_name`, `hod_id`) VALUES
 ('00001', '', 'admin@gmail.com', '$2y$10$ZDYsPNnsiqUL6QonhFIloOnlbWsH3q/l4tiGWK.xcPoqES/ZXQuHm', 'Admin', '', '00001'),
-('00004', '', 'dhwanikothari.nmims@gmail.com', '$2y$10$/wpvGHi1MwlA6qMBpweJZOm.R8RaaTb0gUyKN7.R5EsPvXKNRzglq', 'Dhwani', 'Kothari', '00003'),
-('00003', '', 'vknk986@gmail.com', '$2y$10$8q4mX94SZvG28dbwbhhj/uYOrHC2RxpiJaCIeWgcZQaOml4Cj5rAu', 'Vinay', 'Kothari', '00003');
+('00003', '', 'vknk986@gmail.com', '$2y$10$8q4mX94SZvG28dbwbhhj/uYOrHC2RxpiJaCIeWgcZQaOml4Cj5rAu', 'Vinay', 'Kothari', '00003'),
+('00004', '', 'dhwanikothari.nmims@gmail.com', '$2y$10$/wpvGHi1MwlA6qMBpweJZOm.R8RaaTb0gUyKN7.R5EsPvXKNRzglq', 'Dhwani', 'Kothari', '00003');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `emp_leave_pass`
+--
+
+CREATE TABLE `emp_leave_pass` (
+  `leave_pass_id` int(11) NOT NULL,
+  `employee_id` varchar(20) NOT NULL,
+  `emp_name` varchar(40) NOT NULL,
+  `hod_id` varchar(20) NOT NULL,
+  `Purpose` text NOT NULL,
+  `start_time` varchar(20) NOT NULL,
+  `end_time` varchar(20) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `emp_leave_pass`
+--
+
+INSERT INTO `emp_leave_pass` (`leave_pass_id`, `employee_id`, `emp_name`, `hod_id`, `Purpose`, `start_time`, `end_time`, `status`) VALUES
+(1, '00003', 'Vinay ', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', ''),
+(2, '00003', 'Vinay Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', ''),
+(3, '00003', 'Vinay Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', 'REQ_SENT'),
+(4, '00003', 'Vinay Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', 'REQ_SENT'),
+(5, '00003', 'Vinay Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', 'REQ_SENT');
 
 -- --------------------------------------------------------
 
@@ -78,7 +116,7 @@ INSERT INTO `employee` (`id`, `username`, `email`, `password`, `first_name`, `la
 --
 
 CREATE TABLE `hod` (
-  `id` varchar(20) NOT NULL,
+  `hod_id` varchar(20) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` text NOT NULL,
@@ -91,7 +129,7 @@ CREATE TABLE `hod` (
 -- Dumping data for table `hod`
 --
 
-INSERT INTO `hod` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `admin_id`) VALUES
+INSERT INTO `hod` (`hod_id`, `username`, `email`, `password`, `first_name`, `last_name`, `admin_id`) VALUES
 ('00001', '', 'admin@gmail.com', '$2y$10$oIpRCA0tbZyHJc7O2XgMWOg2HXHpGq6RovOKAnSlmtl4mnv9o5po6', 'Admin', '', '00001'),
 ('00003', '', 'vknk986@gmail.com', '$2y$10$lGenWXiiqrwm/6WRV.l0M.zOZkWDF2ckwokYI46FOc6vClG6jOwKy', 'Vinay', 'Kothari', '00002');
 
@@ -147,15 +185,6 @@ CREATE TABLE `visitor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `visitor`
---
-
-INSERT INTO `visitor` (`id`, `first_name`, `last_name`, `email`, `purpose`, `photo_id`, `time`, `noofvisitors`, `photo_id_no`, `hospitality`, `conference`, `conference_room`, `room_purpose`, `start_time`, `end_time`, `visitee`, `tokenid`, `phone_no`, `dateofappointment`, `status`) VALUES
-(1, 'Vinay', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1608746400', 5, 1234567890, 0, 0, '', '', '', '1608745475', '00001', '$2y$10$yyRpnoPoNhNGw0tH514Qn.70nUJBFjKbAYco6AOhmxmjZntEwNtym', '+17021019903', '12-23-20', 'REJECTED_FINISHED'),
-(2, 'Dhwani', 'Kothari', 'dhwanikothari.nmims@gmail.com', 'on', '', '1608798600', 2, 1234567890, 0, 0, '', '', '', '1608885747', '00001', '$2y$10$VICiNU4.OOknBebS0Ikd1.bz7AV3Di4MVAF6bHrFWnNqGzuBrU8hW', '+17021019903', '12-24-20', 'ACCEPTED_FINISHED'),
-(3, 'Siddharth', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1608888600', 123, 123, 0, 0, '', '', '', '1608885255', '00003', '$2y$10$L8FcduFY7VJTYZr7ww6mE./OPvEEum0KjHs2p5X7zjyD/Sa.LiAZm', '+17021019903', '12-25-20', 'ACCEPTED_FINISHED');
-
---
 -- Indexes for dumped tables
 --
 
@@ -169,13 +198,22 @@ ALTER TABLE `admin`
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
+  ADD PRIMARY KEY (`employee_id`),
   ADD KEY `FKK` (`hod_id`);
+
+--
+-- Indexes for table `emp_leave_pass`
+--
+ALTER TABLE `emp_leave_pass`
+  ADD PRIMARY KEY (`leave_pass_id`),
+  ADD KEY `empIdFD` (`employee_id`),
+  ADD KEY `hodIdFK` (`hod_id`);
 
 --
 -- Indexes for table `hod`
 --
 ALTER TABLE `hod`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`hod_id`),
   ADD KEY `FK` (`admin_id`);
 
 --
@@ -195,10 +233,16 @@ ALTER TABLE `visitor`
 --
 
 --
+-- AUTO_INCREMENT for table `emp_leave_pass`
+--
+ALTER TABLE `emp_leave_pass`
+  MODIFY `leave_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `visitor`
 --
 ALTER TABLE `visitor`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -208,7 +252,14 @@ ALTER TABLE `visitor`
 -- Constraints for table `employee`
 --
 ALTER TABLE `employee`
-  ADD CONSTRAINT `FKK` FOREIGN KEY (`hod_id`) REFERENCES `hod` (`id`);
+  ADD CONSTRAINT `FKK` FOREIGN KEY (`hod_id`) REFERENCES `hod` (`hod_id`);
+
+--
+-- Constraints for table `emp_leave_pass`
+--
+ALTER TABLE `emp_leave_pass`
+  ADD CONSTRAINT `empIdFD` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`),
+  ADD CONSTRAINT `hodIdFK` FOREIGN KEY (`hod_id`) REFERENCES `hod` (`hod_id`);
 
 --
 -- Constraints for table `hod`
