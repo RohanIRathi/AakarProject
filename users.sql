@@ -5,16 +5,7 @@ USE `aakar`;
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 25, 2020 at 09:46 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
-
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Jan 28, 2021 at 10:32 AM
+-- Generation Time: Feb 04, 2021 at 03:05 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -95,6 +86,7 @@ CREATE TABLE `emp_leave_pass` (
   `Purpose` text NOT NULL,
   `start_time` varchar(20) NOT NULL,
   `end_time` varchar(20) NOT NULL,
+  `timestamp` varchar(50) NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -102,12 +94,9 @@ CREATE TABLE `emp_leave_pass` (
 -- Dumping data for table `emp_leave_pass`
 --
 
-INSERT INTO `emp_leave_pass` (`leave_pass_id`, `employee_id`, `emp_name`, `hod_id`, `Purpose`, `start_time`, `end_time`, `status`) VALUES
-(1, '00003', 'Vinay ', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', ''),
-(2, '00003', 'Vinay Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', ''),
-(3, '00003', 'Vinay Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', 'REQ_SENT'),
-(4, '00003', 'Vinay Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', 'REQ_SENT'),
-(5, '00003', 'Vinay Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '12:12', '12:12', 'REQ_SENT');
+INSERT INTO `emp_leave_pass` (`leave_pass_id`, `employee_id`, `emp_name`, `hod_id`, `Purpose`, `start_time`, `end_time`, `timestamp`, `status`) VALUES
+(11, '00004', 'Dhwani Kothari', '00003', 'next year', '19:28', '19:28', '1643913000', 'REQ_SENT'),
+(12, '00004', 'Dhwani Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '19:28', '19:28', '1612447099', 'REQ_SENT');
 
 -- --------------------------------------------------------
 
@@ -236,7 +225,7 @@ ALTER TABLE `visitor`
 -- AUTO_INCREMENT for table `emp_leave_pass`
 --
 ALTER TABLE `emp_leave_pass`
-  MODIFY `leave_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `leave_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `visitor`

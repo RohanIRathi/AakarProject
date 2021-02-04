@@ -11,7 +11,7 @@ if(isset($_POST['Submit_btn'])) {
     $eT = mysqli_real_escape_string($link,$_POST['end_time']);
 
     $query = "SELECT `hod_id` from `employee` WHERE `employee_id` = '".$_SESSION['id']."'";
-
+    $time = time();
     $hodId = "";
     if($result = mysqli_query($link,$query)) {
         while($row = mysqli_fetch_array($result)) {
@@ -22,7 +22,7 @@ if(isset($_POST['Submit_btn'])) {
     }
     $empName = $_SESSION['firstname'].' '.$_SESSION['lastname'];
     //echo 'hiii'.$hodId;
-    $query = "INSERT INTO `emp_leave_pass`(`employee_id`,`emp_name`,`hod_id`,`Purpose`,`start_time`,`end_time`,`status`) VALUES ('".$_SESSION['id']."','".$empName."','".$hodId."','".$purpose."','".$sT."','".$eT."','REQ_SENT')";
+    $query = "INSERT INTO `emp_leave_pass`(`employee_id`,`emp_name`,`hod_id`,`Purpose`,`start_time`,`end_time`,`timestamp`,`status`) VALUES ('".$_SESSION['id']."','".$empName."','".$hodId."','".$purpose."','".$sT."','".$eT."','".$time."','REQ_SENT')";
 
     if(mysqli_query($link,$query)) {
         echo '<div class="alert alert-success" role="alert">

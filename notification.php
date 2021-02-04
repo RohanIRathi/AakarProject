@@ -3,7 +3,7 @@
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
     $link = connectionToDB($host, $username, $pass, $db);
-
+    //showing visitor accept or reject 
     function showNotifications($link){
         $query = "SELECT `id`,`first_name`,`last_name`,`email`,`noofvisitors`,`time` FROM `visitor` WHERE `visitee` = ".$_SESSION['id']." AND `status` = 'REQUEST_SENT' ";
 
@@ -37,7 +37,7 @@
 ?>
 
 <?php
-
+    //if accept or reject button is clicked
     if(isset($_POST['accept_btn']) || isset($_POST['reject_btn'])) {
         if(isset($_POST['accept_btn'])){
             $x = true;
@@ -60,6 +60,41 @@
         }
         
     }
+    
+    
+
+?>
+
+<?php
+//showing leave passes ONLY FOR HOD
+
+if($_SESSION['type'] === 'HOD'){
+    echo 'hod<br>';
+    $tomorrow  = mktime(0, 0, 0, date("m")+1  , date("d")+1, date("Y"));
+    $yesterday  = mktime(0, 0, 0, date("m")-1  , date("d"), date("Y"));
+    $lastmonth = mktime(0, 0, 0, date("m")-1, date("d"),   date("Y"));
+    $nextyear  = mktime(0, 0, 0, date("m"),   date("d"),   date("Y")+1);
+    echo '<br>Tomorrow : '.$tomorrow.'<br>Yesterday : '.$yesterday;
+    echo '<br>Last Month : '.$lastmonth;
+    echo '<br>Next Year : '.$nextyear.'<br>';
+    function fetchEmpLeavePass($link) {
+        $lT = strtotime('today midnight');
+        $rT = strtotime('tomorrow');
+        $query = 'SELECT `emp_name`,`Purpose`,`start_time`,`end_time` FROM `emp_leave_pass` WHERE `hod_id` = '.$_SESSION['id'].' AND `timestamp` BETWEEN '.$lT.' AND '.$rT.' ';
+
+        if($result = mysqli_query($link,$query)) {
+            while($row = mysqli_fetch_array($result)) {
+                echo '<br>';
+                print_r($row);
+                echo '<br>';
+            }
+        } else {
+            echo '<br>error : '.mysqli_error($link);
+        }
+        
+        
+    }fetchEmpLeavePass($link);
+}
 
 ?>
     
@@ -103,5 +138,10 @@
             </div>
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.container-fluid
+        Tomorrow : 1612463400
+Yesterday : 1609698600
+Last Month : 1609698600
+Next Year : 1643913000
+ -->
     </main>
