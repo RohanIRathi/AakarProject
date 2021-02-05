@@ -1,8 +1,4 @@
 <?php
-    session_start();
-    include('../php-utils/login.utils.php');
-    userLogout();
-    isValidUser(); 
     include('header_1.php'); 
     include('navbar_1.php');
 ?>
@@ -132,22 +128,25 @@ if(isset($_POST['verify_btn'])) {
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th> Name </th>
-                                    <th> Email </th>
-                                    <th> No.of Visitors </th>
-                                    <th> Time </th>
-                                    <th> TOKEN ID </th>
-                                    <th> VERIFY TOKEN ID </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
+                        <?php 
                                     $dataArray=showUpcomingData($link);
-                                    while ($data=mysqli_fetch_assoc($dataArray)) {
-                                        
+                                    $rC = $dataArray->num_rows;
+                                    if($rC>0) {
+                                        echo '<thead>
+                                        <tr>
+                                            <th> Name </th>
+                                            <th> Email </th>
+                                            <th> No.of Visitors </th>
+                                            <th> Time </th>
+                                            <th> TOKEN ID </th>
+                                            <th> VERIFY TOKEN ID </th>
+                                        </tr>
+                                    </thead>';
+                                        while ($data=mysqli_fetch_assoc($dataArray)) {
                                  ?>
+                            
+                            <tbody>
+                                
                                 <tr>
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
@@ -166,6 +165,8 @@ if(isset($_POST['verify_btn'])) {
                                     </form>
                                 </tr>
                                 <?php 
+                                    }} else {
+                                        echo 'No upcoming Appointments';
                                     }
                                  ?>
                             </tbody>
@@ -174,6 +175,32 @@ if(isset($_POST['verify_btn'])) {
                     </div>
                 </div>
             </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Upcoming Employee Leaves 
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th> Sample </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                    <td>Sample Row</td>
+                              </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            
 
         </div>
         <!-- /.container-fluid -->

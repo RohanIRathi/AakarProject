@@ -1,4 +1,7 @@
-
+<?php
+include('header_1.php'); 
+include('navbar_1.php'); 
+?>
 <?php
 
     include('../php-utils/db/db.variables.php');
@@ -17,20 +20,20 @@
             array_push($empNameArr,$name);
         }
 
-        $query = "SELECT `id`,`first_name`,`last_name` from `hod` WHERE `id` != `admin_id`";
+        $query = "SELECT `hod_id`,`first_name`,`last_name` from `hod` WHERE `hod_id` != `admin_id`";
         $result = mysqli_query($link,$query);
         echo mysqli_error($link);
         while($row = mysqli_fetch_array($result)) {
-            array_push($empIdArr,$row['id']);
+            array_push($empIdArr,$row['hod_id']);
             $name = $row['first_name'].' '.$row['last_name'];
             array_push($empNameArr,$name);
         }
 
-        $query = "SELECT `id`,`first_name`,`last_name` from `employee` WHERE `id` != `hod_id`";
+        $query = "SELECT `employee_id`,`first_name`,`last_name` from `employee` WHERE `employee_id` != `hod_id`";
         $result = mysqli_query($link,$query);
-        //echo mysqli_error($link);
+        echo mysqli_error($link);
         while($row = mysqli_fetch_array($result)) {
-            array_push($empIdArr,$row['id']);
+            array_push($empIdArr,$row['employee_id']);
             $name = $row['first_name'].' '.$row['last_name'];
             array_push($empNameArr,$name);
         }
@@ -46,11 +49,6 @@
     }
     $str = generateEmpList($link);
 
-?>
-<?php
-session_start();
-include('header_1.php'); 
-include('navbar_1.php'); 
 ?>
 <main>
     <div class="container">

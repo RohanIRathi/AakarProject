@@ -97,7 +97,6 @@ if($rowcount > 0) {
 }
 
 ?>
-                            </tr>
                         </thead>
                     </table>
 

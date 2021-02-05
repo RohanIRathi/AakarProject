@@ -64,10 +64,23 @@
 ?>
 
 <?php
-
-if($_SESSION['type']=== 'Employee') {
-    showAcceptedOrRejectedLeavePass($link);
-}
+if(isset($_POST['closeNotificationEmp'])) {
+    $a = false;
+    if($_POST['status'] === 'acc') {
+      $a = true;
+    }
+  
+    $query = "UPDATE `emp_leave_pass` SET `status` = '".(
+      ($a ? 'ACCEPTED_2' : 'REJECTED_F')
+      )."' WHERE `leave_pass_id` = ".$_POST['id']; 
+  
+    //echo $query;
+    if(mysqli_query($link,$query)) {
+      //echo 'success';
+    } else {
+      echo mysqli_error($link);
+    }
+  }
 
 ?>
     
@@ -93,7 +106,15 @@ if($_SESSION['type']=== 'Employee') {
                                     <th> ACCEPT </th>
                                     <th> REJECT </th>
                                 </tr>';
-                                } else {
+                                } else if($_SESSION['type']=== 'Employee') {
+                                    $arr = showAcceptedOrRejectedLeavePass($link);
+                                    if($arr) {
+                                        echo $arr;
+                                    } else {
+                                        echo 'You have no Notifications. Kindly refresh the page to see if you have any new notifications.';
+                                    }
+                                } 
+                                else {
                                     echo 'You have no Notifications. Kindly refresh the page to see if you have any new notifications.';
                                 }
                             ?>
