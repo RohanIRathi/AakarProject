@@ -61,6 +61,10 @@ isValidUser();
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Notification
                         </a>
+                        <a class="nav-link" href="emp_leave_pass_3.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Employee leave pass
+                        </a>
                         <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

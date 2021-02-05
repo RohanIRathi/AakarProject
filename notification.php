@@ -60,40 +60,13 @@
         }
         
     }
-    
-    
 
 ?>
 
 <?php
-//showing leave passes ONLY FOR HOD
 
-if($_SESSION['type'] === 'HOD'){
-    echo 'hod<br>';
-    $tomorrow  = mktime(0, 0, 0, date("m")+1  , date("d")+1, date("Y"));
-    $yesterday  = mktime(0, 0, 0, date("m")-1  , date("d"), date("Y"));
-    $lastmonth = mktime(0, 0, 0, date("m")-1, date("d"),   date("Y"));
-    $nextyear  = mktime(0, 0, 0, date("m"),   date("d"),   date("Y")+1);
-    echo '<br>Tomorrow : '.$tomorrow.'<br>Yesterday : '.$yesterday;
-    echo '<br>Last Month : '.$lastmonth;
-    echo '<br>Next Year : '.$nextyear.'<br>';
-    function fetchEmpLeavePass($link) {
-        $lT = strtotime('today midnight');
-        $rT = strtotime('tomorrow');
-        $query = 'SELECT `emp_name`,`Purpose`,`start_time`,`end_time` FROM `emp_leave_pass` WHERE `hod_id` = '.$_SESSION['id'].' AND `timestamp` BETWEEN '.$lT.' AND '.$rT.' ';
-
-        if($result = mysqli_query($link,$query)) {
-            while($row = mysqli_fetch_array($result)) {
-                echo '<br>';
-                print_r($row);
-                echo '<br>';
-            }
-        } else {
-            echo '<br>error : '.mysqli_error($link);
-        }
-        
-        
-    }fetchEmpLeavePass($link);
+if($_SESSION['type']=== 'Employee') {
+    showAcceptedOrRejectedLeavePass($link);
 }
 
 ?>

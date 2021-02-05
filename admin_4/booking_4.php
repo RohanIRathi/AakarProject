@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include('header_4.php');
     include('navbar_4.php');
 ?>
