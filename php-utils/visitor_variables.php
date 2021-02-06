@@ -1,5 +1,6 @@
 <?php
 
+    //print_r($_POST);
     $first_name = mysqli_real_escape_string($link, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($link, $_POST['last_name']);
     $email = mysqli_real_escape_string($link, $_POST['email']);
@@ -9,8 +10,8 @@
     //$photoid = mysqli_real_escape_string($link, $_POST['img']);
     $photoidvalue = mysqli_real_escape_string($link, $_POST['Govt_ID']);
     $phone = mysqli_real_escape_string($link, $_POST['phone_no']);
-    $purpose = mysqli_real_escape_string($link, $_POST['optradio']);
-    $hospitality = mysqli_real_escape_string($link, $_POST['optradio1']);
+    $purpose = mysqli_real_escape_string($link, $_POST['optradio1']);
+    $hospitality = mysqli_real_escape_string($link, $_POST['optradio3']);
     if(isset($_POST['conference']))
     {
         $conference = 'TRUE';
