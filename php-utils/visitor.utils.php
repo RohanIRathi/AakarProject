@@ -10,17 +10,17 @@ if(!function_exists("addNewVisitor")) {
           </b></div>';
             return;
         }
-        include('../php-utils/sendMail.php');
+        //include('../php-utils/sendMail.php');
         //include('../php-utils/sendSms.php');
-
+        echo $tokenId;
         $hashedTokenId = password_hash($tokenId,PASSWORD_BCRYPT);
 
         $query = "INSERT INTO `visitor` (`first_name`,`last_name`,`email`,`purpose`,`time`,`noofvisitors`,`photo_id_no`,`hospitality`,`conference`,`conference_room`,`room_purpose`,`start_time`,`end_time`,`visitee`,`tokenid`,`phone_no`,`dateofappointment`) VALUES ('".$first_name."','".$last_name."','".$email."','".$purpose."','".$timeStamp."',".$novisitors.",'".$photoidvalue."','".$hospitality."','".$conference."','".$room_no."','".$room_purpose."','".$start_time."','".$end_time."','".$visiteeId."','".$hashedTokenId."','".$phone."','".$dateOfAppointment."')";
 
         if(mysqli_query($link,$query)){
             echo '<div class="alert alert-success" role="alert">
-            <b>Appointment Booking successful.</b>
-          </div>';
+                <b>Appointment Booking successful.</b>
+            </div>';
         } else {
             echo '<br>error : '.mysqli_error($link);
         }

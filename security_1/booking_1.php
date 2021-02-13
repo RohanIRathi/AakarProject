@@ -79,6 +79,7 @@
         //echo $query;
         if(mysqli_query($link,$query)) {
             //echo 'success';
+            
         } else {
             //echo mysqli_error($link);
         }
@@ -107,11 +108,71 @@ if(isset($_POST['verify_btn'])) {
         
         $query = "UPDATE `visitor` SET `status` = 'REQUEST_SENT',`start_time` = '".time()."' WHERE `id` = ".$_POST['id'];
         mysqli_query($link,$query);
+        
+        
 
     } else {
         echo '<div class="alert alert-danger" role="alert">
-        <b>Token Id is Invalid.</b>
-      </div>';
+                <b>Token Id is Invalid.</b>
+            </div>';
+    }
+}
+
+function reqExpired($link) {
+
+    $tenSecsBehind = mktime(date("G"), date("i"), date("s")-10, date("m")  , date("d"), date("Y"));
+    //hour,minute,seconds,month,day,year
+    //https://www.php.net/manual/en/function.mktime.php
+    //echo date("F j, Y, g:i a",$tenSecsBehind);
+    //echo '<br>'.$tenSecsBehind;
+    $query = "UPDATE `visitor` SET `status` = 'REQUEST_EXP' WHERE `status` = 'REQUEST_SENT' AND `start_time` < ".$tenSecsBehind;
+
+    if(mysqli_query($link,$query)) {
+        //echo 'success';
+    } else {
+        echo mysqli_error($link);
+    }
+
+}
+
+function getExpiredReq($link) {
+    $query = "SELECT `id`,`first_name`,`last_name`,`status` from `visitor` WHERE `status` = 'REQUEST_EXP'";
+    $result = mysqli_query($link,$query);
+    if($result == TRUE) {
+        return $result;
+    } else {
+        return NULL;
+    }
+    echo mysqli_error($link);
+    
+}
+reqExpired($link);
+
+$result = getExpiredReq($link);
+if($result == TRUE) {
+    while($row = mysqli_fetch_array($result)) {
+        echo '<div class="alert alert-warning" role="alert">
+        <form method="POST">
+        <button type="submit" name="closeExp" class="btn">&#10006;</button>
+            Request for visitor <b>'.$row['first_name'].' '.$row['last_name'].' </b> has <b>expired</b>. 
+        <input type="hidden" name="id" value="'.$row['id'].'">
+            <input type="hidden" name="status" value="'.$row['status'].'">
+
+            </form>
+        </div>';
+    }
+    
+}
+
+if(isset($_POST['closeExp'])) {
+    $query = "UPDATE `visitor` SET `status` = 'REQUEST_EXP_1' WHERE `id` = ".$_POST['id']." AND `status` = 'REQUEST_EXP'";
+
+    //echo $query;
+
+    if(mysqli_query($link,$query)) {
+        $result = getExpiredReq($link);
+    } else {
+        echo mysqli_error($link);
     }
 }
 
@@ -215,7 +276,6 @@ if(isset($_POST['verify_btn'])) {
 <?php
 include('footer_1.php'); 
 ?>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

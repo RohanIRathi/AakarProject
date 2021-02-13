@@ -83,6 +83,22 @@ if(isset($_POST['closeNotificationEmp'])) {
   }
 
 ?>
+
+<?php
+
+function getExpiredReqForEmp($link) {
+    $query = "SELECT `id`,`first_name`,`last_name`,`status`,`email`,`phone_no` from `visitor` WHERE `status` = 'REQUEST_EXP_1'";
+    $result = mysqli_query($link,$query);
+    if($result == TRUE) {
+        return $result;
+    } else {
+        return NULL;
+    }
+    echo mysqli_error($link);
+    
+}
+
+?>
     
     <main style="margin-top: 30px;">
         <div class="container-fluid">
@@ -93,7 +109,37 @@ if(isset($_POST['closeNotificationEmp'])) {
                     </h6>
                 </div>
                 <div class="card-body">
+                <?php
+
+$result = getExpiredReqForEmp($link);
+if($result == TRUE) {
+    while($row = mysqli_fetch_array($result)) {
+        echo '<div class="alert alert-warning" role="alert">
+        <form method="POST">
+            You had a visitor but since you weren\'t available, the appointment was expired/cancelled. You may contact the visitor and set up another appointment. Visitor details : <br><b>Name : '.$row['first_name'].' '.$row['last_name'].' <br> Email : '.$row['email'].'<br>Phone Number : '.$row['phone_no'].'</b>
+        <input type="hidden" name="id" value="'.$row['id'].'">
+            <input type="hidden" name="status" value="'.$row['status'].'">
+            <button type="submit" name="closeExpEmp" class="btn">&#10006;</button>
+            </form>
+        </div>';
+    }
+    
+}
+
+if(isset($_POST['closeExpEmp'])) {
+    //print_r($_POST);
+    $query = "UPDATE `visitor` SET `status` = 'REQUEST_EXP_FIN' WHERE `id` = ".$_POST['id']." AND `status` = 'REQUEST_EXP_1'";
+    //echo '<br>'.$query;
+    if(mysqli_query($link,$query)) {
+        //echo '<br>success';
+    } else {
+        echo '<br>'.mysqli_error($link);
+    }
+    
+}
+?>
                     <div class="table-responsive">
+                    
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <?php
@@ -110,11 +156,11 @@ if(isset($_POST['closeNotificationEmp'])) {
                                     $arr = showAcceptedOrRejectedLeavePass($link);
                                     if($arr) {
                                         echo $arr;
-                                    } else {
+                                    } else if(!$result) {
                                         echo 'You have no Notifications. Kindly refresh the page to see if you have any new notifications.';
                                     }
                                 } 
-                                else {
+                                else if(!$result) {
                                     echo 'You have no Notifications. Kindly refresh the page to see if you have any new notifications.';
                                 }
                             ?>
@@ -132,10 +178,10 @@ if(isset($_POST['closeNotificationEmp'])) {
             </div>
 
         </div>
-        <!-- /.container-fluid
-        Tomorrow : 1612463400
-Yesterday : 1609698600
-Last Month : 1609698600
-Next Year : 1643913000
- -->
+       <script>
+        setTimeout(() => {
+            location.reload();
+        },10000);
+       </script>
+
     </main>
