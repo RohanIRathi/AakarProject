@@ -98,8 +98,7 @@ function getExpiredReqForEmp($link) {
     
 }
 
-?>
-    
+?>  
     <main style="margin-top: 30px;">
         <div class="container-fluid">
             <!-- DataTales Example -->
@@ -114,12 +113,12 @@ function getExpiredReqForEmp($link) {
 $result = getExpiredReqForEmp($link);
 if($result == TRUE) {
     while($row = mysqli_fetch_array($result)) {
-        echo '<div class="alert alert-warning" role="alert">
+        echo '<div class="alert alert-warning form-exp" role="alert">
         <form method="POST">
             You had a visitor but since you weren\'t available, the appointment was expired/cancelled. You may contact the visitor and set up another appointment. Visitor details : <br><b>Name : '.$row['first_name'].' '.$row['last_name'].' <br> Email : '.$row['email'].'<br>Phone Number : '.$row['phone_no'].'</b>
         <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="'.$row['status'].'">
-            <button type="submit" name="closeExpEmp" class="btn">&#10006;</button>
+            <button type="submit" name="closeExpEmp" class="exp-btn btn ">&#10006;</button>
             </form>
         </div>';
     }
@@ -136,6 +135,16 @@ if(isset($_POST['closeExpEmp'])) {
         echo '<br>'.mysqli_error($link);
     }
     
+}
+
+if(isset($_POST['closeEmpExp'])) {
+    $query = "UPDATE `emp_leave_pass` SET `status` = 'REQ_EXP_FIN' WHERE `leave_pass_id` = ".$_POST['id']." AND `status` = 'REQ_EXP'";
+    //echo '<br>'.$query;
+    if(mysqli_query($link,$query)) {
+        //echo '<br>success';
+    } else {
+        echo '<br>'.mysqli_error($link);
+    }
 }
 ?>
                     <div class="table-responsive">
@@ -154,8 +163,14 @@ if(isset($_POST['closeExpEmp'])) {
                                 </tr>';
                                 } else if($_SESSION['type']=== 'Employee') {
                                     $arr = showAcceptedOrRejectedLeavePass($link);
-                                    if($arr) {
+                                    updateExpEmpReq($link);
+                                    $expiredEmpReq = getExpEmpReq($link);
+                                    $temp = showPendingLeavePasses($link);
+                                    
+                                    if($arr || $temp || $expiredEmpReq) {
                                         echo $arr;
+                                        echo $temp;
+                                        echo $expiredEmpReq;
                                     } else if(!$result) {
                                         echo 'You have no Notifications. Kindly refresh the page to see if you have any new notifications.';
                                     }

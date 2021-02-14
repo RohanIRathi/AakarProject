@@ -106,6 +106,12 @@ if($rowcount > 0) {
     </div>
 </main>
 
+<script>
+setTimeout(() => {
+    location.reload();
+},10000);
+</script>
+
 <?php
 include('footer_3.php');
 include('scripts_3.php');
