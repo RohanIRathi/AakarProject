@@ -166,7 +166,6 @@ if(isset($_POST['closeEmpExp'])) {
                                     updateExpEmpReq($link);
                                     $expiredEmpReq = getExpEmpReq($link);
                                     $temp = showPendingLeavePasses($link);
-                                    
                                     if($arr || $temp || $expiredEmpReq) {
                                         echo $arr;
                                         echo $temp;
