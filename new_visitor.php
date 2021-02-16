@@ -80,7 +80,7 @@
                                                     <input type="radio" class="form-control form-control-user" name="optradio1">Personal
                                                 </label>
                                                 <label class="radio-inline  mr-3">
-                                                    <input type="radio"class="form-control form-control-user" name="optradio2">Industrial
+                                                    <input type="radio"class="form-control form-control-user" name="optradio1">Industrial
                                                 </label>
                                             </div>
                                         </div>
@@ -91,10 +91,10 @@
                                                     <input type="radio" class="form-control form-control-user" name="optradio3">Breakfast
                                                 </label>
                                                 <label class="radio-inline mr-3">
-                                                    <input type="radio" class="form-control form-control-user" name="optradio4">Lunch
+                                                    <input type="radio" class="form-control form-control-user" name="optradio3">Lunch
                                                 </label>
                                                 <label class="radio-inline  mr-3">
-                                                    <input type="radio"class="form-control form-control-user" name="optradio5">Dinner
+                                                    <input type="radio"class="form-control form-control-user" name="optradio3">Dinner
                                                 </label>
                                             </div>
                                         </div>
