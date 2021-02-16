@@ -9,6 +9,7 @@ $link = connectionToDB($host, $username, $pass, $db);
 
 if(isset($_POST['registerbtn'])) {
     signUpUser($link,'security',$_SESSION['id']);
+    echo $unsetData;
 }
 
 $result = getUserData($link,'security',$_SESSION['id']);

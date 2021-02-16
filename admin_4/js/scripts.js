@@ -19,4 +19,10 @@
         e.preventDefault();
         $("body").toggleClass("sb-sidenav-toggled");
     });
+
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+      }
 })(jQuery);
+
+//877462

@@ -55,6 +55,7 @@
 
         if(mysqli_query($link,$query)) {
             $populate = showNotifications($link);
+            echo $unsetData;
         } else {
             echo mysqli_error($link);
         }
@@ -77,6 +78,7 @@ if(isset($_POST['closeNotificationEmp'])) {
     //echo $query;
     if(mysqli_query($link,$query)) {
       //echo 'success';
+      echo $unsetData;
     } else {
       echo mysqli_error($link);
     }
@@ -131,6 +133,7 @@ if(isset($_POST['closeExpEmp'])) {
     //echo '<br>'.$query;
     if(mysqli_query($link,$query)) {
         //echo '<br>success';
+        echo $unsetData;
     } else {
         echo '<br>'.mysqli_error($link);
     }
@@ -142,6 +145,7 @@ if(isset($_POST['closeEmpExp'])) {
     //echo '<br>'.$query;
     if(mysqli_query($link,$query)) {
         //echo '<br>success';
+        echo $unsetData;
     } else {
         echo '<br>'.mysqli_error($link);
     }

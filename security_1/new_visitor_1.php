@@ -58,6 +58,7 @@ include('navbar_1.php');
         include('../php-utils/visitor.utils.php');
         $visiteeId = $_POST['option'];
         addNewVisitorAppointment($link,$visiteeId);
+        echo $unsetData;
         
     }
 

@@ -79,6 +79,7 @@
         //echo $query;
         if(mysqli_query($link,$query)) {
             //echo 'success';
+            echo $unsetData;
             
         } else {
             //echo mysqli_error($link);
@@ -116,6 +117,7 @@ if(isset($_POST['verify_btn'])) {
                 <b>Token Id is Invalid.</b>
             </div>';
     }
+    echo $unsetData;
 }
 
 function reqExpired($link) {
@@ -171,6 +173,7 @@ if(isset($_POST['closeExp'])) {
 
     if(mysqli_query($link,$query)) {
         $result = getExpiredReq($link);
+        echo $unsetData;
     } else {
         echo mysqli_error($link);
     }
