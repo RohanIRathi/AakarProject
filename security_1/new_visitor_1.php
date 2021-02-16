@@ -1,58 +1,68 @@
 <?php
-    include('../php-utils/db/db.variables.php');
-    include('../php-utils/db/db.connection.php');
-
-    $mysqli = connectionToDB($host, $username, $pass, $db);
-
-    if(!empty($_POST["add_btn"])) {
-        $first_name = $mysqli -> real_escape_string($_POST['first_name']);
-        $last_name = $mysqli -> real_escape_string($_POST['last_name']);
-        $email = $mysqli -> real_escape_string($_POST['email']);
-        $date = $mysqli -> real_escape_string($_POST['date']);
-        $time = $mysqli -> real_escape_string($_POST['time']);
-        $no_of_visitors = $mysqli -> real_escape_string($_POST['no_of_visitor']);
-        $id_photo = $mysqli -> real_escape_string($_POST['id_photo']);
-        $id_number = $mysqli -> real_escape_string($_POST['id_number']);
-        $phone_no = $mysqli -> real_escape_string($_POST['phone_no']);
-        $purpose = $mysqli -> real_escape_string($_POST['purpose']);
-        $hospitality = $mysqli -> real_escape_string($_POST['hospitality']);
-        if(!empty($_POST['conference']))
-        {
-            $conference = 'TRUE';
-            $room_no = $mysqli -> real_escape_string($_POST['room_no']);
-            $room_purpose = $mysqli -> real_escape_string($_POST['room_purpose']);
-            $start_time = $mysqli -> real_escape_string($_POST['start_time']);
-            $end_time = $mysqli -> real_escape_string($_POST['end_time']);
-        }
-        else
-        {
-            $conference = 'FALSE';
-            $room_no = null;
-            $room_purpose = null;
-            $start_time = null;
-            $end_time = null;
-        }
-
-
-        $query = "INSERT INTO `visitor`( `first_name`, `last_name`, `email`, `purpose`, `time`, `noofvisitors`, `photo_id_no`, `hospitality`, `conference`, `conference_room`, `room_purpose`, `start_time`, `end_time`, `visitee`) VALUES ($first_name,$last_name,$email,$purpose,$time,$no_of_visitor,$id_number,$hospitality,'0',$room_no,$room_purpose,$start_time,$end_time,'')";
-
-    	$result = mysql_query($mysqli,$query);
-    	if ($result == TRUE){
-    		echo "Data Inserted!";
-    	}
-    	else{
-    		echo "Data Not Inserted";
-    	}
-    }
-
-?>
-<?php
-session_start();
 include('header_1.php'); 
 include('navbar_1.php'); 
 ?>
+<?php
+
+    include('../php-utils/db/db.variables.php');
+    include('../php-utils/db/db.connection.php');
+
+    $link = connectionToDB($host, $username, $pass, $db);
+
+    function generateEmpList($link) {
+        $query = "SELECT `id`,`first_name`,`last_name` from `admin`";
+        $result = mysqli_query($link,$query);
+        $empIdArr = array();
+        $empNameArr = array();
+        while($row = mysqli_fetch_array($result)) {
+            array_push($empIdArr,$row['id']);
+            $name = $row['first_name'].' '.$row['last_name'];
+            array_push($empNameArr,$name);
+        }
+
+        $query = "SELECT `hod_id`,`first_name`,`last_name` from `hod` WHERE `hod_id` != `admin_id`";
+        $result = mysqli_query($link,$query);
+        echo mysqli_error($link);
+        while($row = mysqli_fetch_array($result)) {
+            array_push($empIdArr,$row['hod_id']);
+            $name = $row['first_name'].' '.$row['last_name'];
+            array_push($empNameArr,$name);
+        }
+
+        $query = "SELECT `employee_id`,`first_name`,`last_name` from `employee` WHERE `employee_id` != `hod_id`";
+        $result = mysqli_query($link,$query);
+        echo mysqli_error($link);
+        while($row = mysqli_fetch_array($result)) {
+            array_push($empIdArr,$row['employee_id']);
+            $name = $row['first_name'].' '.$row['last_name'];
+            array_push($empNameArr,$name);
+        }
+
+        //print_r($empIdArr);
+        //print_r($empNameArr);
+        $str = "";
+        for($i=0;$i<sizeof($empIdArr);$i++) {
+            $str.='<option value="'.$empIdArr[$i].'">'.$empNameArr[$i].'</option>';
+        } //echo $str;
+        return $str;
+
+    }
+    $str = generateEmpList($link);
+
+?>
 <main>
     <div class="container">
+    <?php
+    if(isset($_POST["add_btn"])) {
+        include('../php-utils/visitor_variables.php');
+        include('../php-utils/visitor.utils.php');
+        $visiteeId = $_POST['option'];
+        addNewVisitorAppointment($link,$visiteeId);
+        echo $unsetData;
+        
+    }
+
+    ?>
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card o-hidden border-0 shadow-lg my-5">
@@ -99,6 +109,8 @@ include('navbar_1.php');
                                             <div class="form-group pb-2">
                                                 <label>Date</label>
                                                 <input type="date" class="form-control form-control-user" placeholder="Enter Date"
+                                                value="yyyy-MM-dd" 
+                                                id="currentDate" 
                                                 name="date"required >
                                             </div>
                                         </div>
@@ -106,6 +118,8 @@ include('navbar_1.php');
                                             <div class="form-group pb-2">
                                                 <label>Time</label>
                                                 <input type="time" class="form-control form-control-user" placeholder="Enter Time"
+                                                value="HH:mm" 
+                                                id="currentTime" 
                                                 name="time"required>
                                             </div>
                                         </div>
@@ -161,10 +175,11 @@ include('navbar_1.php');
                                         <div class="col">   
                                             <div class="form-group pb-2">  
                                             <select id="employee"  name="option" class="form-control" placeholder='Choose employee' >
-                                                <option>Employee 1</option>
-                                                <option>Employee 2</option>
-                                                <option>Employee 3</option>
-                                                <option>Employee 4</option>
+                                                <?php
+
+    echo $str;
+
+?>
                                             </select>
                                             </div>
                                         </div>
@@ -216,8 +231,16 @@ include('navbar_1.php');
             </div>
         </div>
     </div>
+     
 </main>
 <?php 
 include('footer_1.php'); 
 include('scripts_1.php'); 
  ?>
+<script>
+var date = new Date();
+var currentDate = date.toISOString().slice(0,10);
+var currentTime = date.getHours() + ':' + date.getMinutes();
+document.getElementById('currentDate').value = currentDate;
+document.getElementById('currentTime').value = currentTime;
+</script>

@@ -2,6 +2,9 @@
 session_start();
 include('header_4.php'); 
 include('navbar_4.php'); 
+include('../php-utils/db/db.variables.php');
+include('../php-utils/db/db.connection.php');
+$link = connectionToDB($host, $username, $pass, $db);
 ?>
 <main style="margin-top: 30px;">
     <div class="container-fluid">

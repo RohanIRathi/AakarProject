@@ -75,6 +75,7 @@ $result = getUserData($link,'employee',$_SESSION['id']);
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
+                                    <th> Employee Id</th>
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> Role </th>
@@ -88,6 +89,7 @@ $result = getUserData($link,'employee',$_SESSION['id']);
 while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 
 echo '<tr>
+<td>'.$row['id'].'</td>
 <td>'.$row['first_name'].' '.$row['last_name'].'</td>
 <td>'.$row['email'].'</td>
 <td>Employee</td>

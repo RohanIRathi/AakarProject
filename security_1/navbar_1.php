@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include('../php-utils/login.utils.php');
 userLogout();
 isValidUser();

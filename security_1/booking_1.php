@@ -1,11 +1,6 @@
 <?php
-    session_start();
-    include('../php-utils/login.utils.php');
-    userLogout();
-    isValidUser(); 
     include('header_1.php'); 
     include('navbar_1.php');
-    
 ?>
 
 <?php 
@@ -14,8 +9,7 @@
     $link = connectionToDB($host, $username, $pass, $db);
 
     function showUpcomingData($link)
-    {
-        
+    {   
         $query = "SELECT * FROM visitor WHERE `dateofappointment` = '".date("m-d-y")."' AND `status` = 'BOOKED'";
         $result = mysqli_query($link,$query);
         if ($result == TRUE) {
@@ -41,23 +35,26 @@
         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
             if( strcmp($row['status'],'ACCEPTED_1') ===0 ) {
                 $popAccepted[1] .= '<div class="alert alert-success" role="alert">
+                <form method="POST">
+                <button type="submit" name="closeNotification" class="btn">&#10006;</button>
                     Access to <b>'.$row['first_name'].' '.$row['last_name'].' </b> has been <b>GRANTED<b>. 
 
-            <form method="POST">
+            
             <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="acc">
-            <button type="submit" name="closeNotification" class="btn">&#10006;</button>
+            
             </form>
 
                 </div>';
             } else if(strcmp($row['status'],'REJECTED_1') ===0) {
                 $popAccepted[1] .= '<div class="alert alert-danger" role="alert">
+                <form method="POST">
+                <button type="submit" name="closeNotification" class="btn">&#10006;</button>
                     Access to <b>'.$row['first_name'].' '.$row['last_name'].'</b> has been <b>REJECTED<b>.
 
-                    <form method="POST">
+                    
             <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="rej">
-            <button type="submit" name="closeNotification" class="btn">&#10006;</button>
             </form>
                 </div>';
             } else {
@@ -82,6 +79,8 @@
         //echo $query;
         if(mysqli_query($link,$query)) {
             //echo 'success';
+            echo $unsetData;
+            
         } else {
             //echo mysqli_error($link);
         }
@@ -108,13 +107,75 @@ if(isset($_POST['verify_btn'])) {
             <b>Token Id is Valid. Request sent.</b>
             </div>';
         
-        $query = "UPDATE `visitor` SET `status` = 'REQUEST_SENT' WHERE `id` = ".$_POST['id'];
+        $query = "UPDATE `visitor` SET `status` = 'REQUEST_SENT',`start_time` = '".time()."' WHERE `id` = ".$_POST['id'];
         mysqli_query($link,$query);
+        
+        
 
     } else {
         echo '<div class="alert alert-danger" role="alert">
-        <b>Token Id is Invalid.</b>
-      </div>';
+                <b>Token Id is Invalid.</b>
+            </div>';
+    }
+    echo $unsetData;
+}
+
+function reqExpired($link) {
+
+    $tenSecsBehind = mktime(date("G"), date("i"), date("s")-10, date("m")  , date("d"), date("Y"));
+    //hour,minute,seconds,month,day,year
+    //https://www.php.net/manual/en/function.mktime.php
+    //echo date("F j, Y, g:i a",$tenSecsBehind);
+    //echo '<br>'.$tenSecsBehind;
+    $query = "UPDATE `visitor` SET `status` = 'REQUEST_EXP' WHERE `status` = 'REQUEST_SENT' AND `start_time` < ".$tenSecsBehind;
+
+    if(mysqli_query($link,$query)) {
+        //echo 'success';
+    } else {
+        echo mysqli_error($link);
+    }
+
+}
+
+function getExpiredReq($link) {
+    $query = "SELECT `id`,`first_name`,`last_name`,`status` from `visitor` WHERE `status` = 'REQUEST_EXP'";
+    $result = mysqli_query($link,$query);
+    if($result == TRUE) {
+        return $result;
+    } else {
+        return NULL;
+    }
+    echo mysqli_error($link);
+    
+}
+reqExpired($link);
+
+$result = getExpiredReq($link);
+if($result == TRUE) {
+    while($row = mysqli_fetch_array($result)) {
+        echo '<div class="alert alert-warning" role="alert">
+        <form method="POST">
+        <button type="submit" name="closeExp" class="btn">&#10006;</button>
+            Request for visitor <b>'.$row['first_name'].' '.$row['last_name'].' </b> has <b>expired</b>. 
+        <input type="hidden" name="id" value="'.$row['id'].'">
+            <input type="hidden" name="status" value="'.$row['status'].'">
+
+            </form>
+        </div>';
+    }
+    
+}
+
+if(isset($_POST['closeExp'])) {
+    $query = "UPDATE `visitor` SET `status` = 'REQUEST_EXP_1' WHERE `id` = ".$_POST['id']." AND `status` = 'REQUEST_EXP'";
+
+    //echo $query;
+
+    if(mysqli_query($link,$query)) {
+        $result = getExpiredReq($link);
+        echo $unsetData;
+    } else {
+        echo mysqli_error($link);
     }
 }
 
@@ -131,23 +192,25 @@ if(isset($_POST['verify_btn'])) {
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th> Name </th>
-                                    <th> Email </th>
-                                    <th> No.of Visitors </th>
-                                    <th> Time </th>
-                                    <th> TOKEN ID </th>
-                                    <th> VERIFY TOKEN ID </th>
-                                    <th> Out </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
+                        <?php 
                                     $dataArray=showUpcomingData($link);
-                                    while ($data=mysqli_fetch_assoc($dataArray)) {
-                                        
+                                    $rC = $dataArray->num_rows;
+                                    if($rC>0) {
+                                        echo '<thead>
+                                        <tr>
+                                            <th> Name </th>
+                                            <th> Email </th>
+                                            <th> No.of Visitors </th>
+                                            <th> Time </th>
+                                            <th> TOKEN ID </th>
+                                            <th> VERIFY TOKEN ID </th>
+                                        </tr>
+                                    </thead>';
+                                        while ($data=mysqli_fetch_assoc($dataArray)) {
                                  ?>
+                            
+                            <tbody>
+                                
                                 <tr>
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
@@ -163,13 +226,11 @@ if(isset($_POST['verify_btn'])) {
                                             <input type="hidden" name="id" value="<?php
                                             echo $data['id']; ?>">
                                             <button type="submit" name="verify_btn" class="btn btn-success"> VERIFY</button>
-                                        </td>
-                                        <td>
-                                            <button type="submit" name="out_btn" class="btn btn-danger"> OUT</button>
-                                        </td>
                                     </form>
                                 </tr>
                                 <?php 
+                                    }} else {
+                                        echo 'No upcoming Appointments';
                                     }
                                  ?>
                             </tbody>
@@ -178,6 +239,32 @@ if(isset($_POST['verify_btn'])) {
                     </div>
                 </div>
             </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Upcoming Employee Leaves 
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th> Sample </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                    <td>Sample Row</td>
+                              </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            
 
         </div>
         <!-- /.container-fluid -->
@@ -192,7 +279,6 @@ if(isset($_POST['verify_btn'])) {
 <?php
 include('footer_1.php'); 
 ?>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

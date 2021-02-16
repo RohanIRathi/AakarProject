@@ -1,11 +1,11 @@
 <?php
-
+session_start();
 include('../php-utils/login.utils.php');
 isValidUser();
 userLogout();
 
 ?>
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark sticky-top">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="booking_4.php">Aakar Foundation</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -69,12 +69,13 @@ userLogout();
                             Notifications
                         </a>
                         
+
                         <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Charts
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="php_spreadsheet_export.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tables
                             </a>

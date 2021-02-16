@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('header_4.php'); 
 include('navbar_4.php'); 
 
@@ -14,7 +13,10 @@ if(isset($_POST['add_btn'])) {
     //echo 'heyyy clicked';
     addNewVisitorAppointment($link,$_SESSION['id']);
     //echo '<br>Function ended';
+    echo $unsetData;
 } 
+
+//178076
 
 
 

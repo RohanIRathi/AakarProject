@@ -3,7 +3,7 @@
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
     $link = connectionToDB($host, $username, $pass, $db);
-
+    //showing visitor accept or reject 
     function showNotifications($link){
         $query = "SELECT `id`,`first_name`,`last_name`,`email`,`noofvisitors`,`time` FROM `visitor` WHERE `visitee` = ".$_SESSION['id']." AND `status` = 'REQUEST_SENT' ";
 
@@ -37,7 +37,7 @@
 ?>
 
 <?php
-
+    //if accept or reject button is clicked
     if(isset($_POST['accept_btn']) || isset($_POST['reject_btn'])) {
         if(isset($_POST['accept_btn'])){
             $x = true;
@@ -55,6 +55,7 @@
 
         if(mysqli_query($link,$query)) {
             $populate = showNotifications($link);
+            echo $unsetData;
         } else {
             echo mysqli_error($link);
         }
@@ -62,7 +63,44 @@
     }
 
 ?>
+
+<?php
+if(isset($_POST['closeNotificationEmp'])) {
+    $a = false;
+    if($_POST['status'] === 'acc') {
+      $a = true;
+    }
+  
+    $query = "UPDATE `emp_leave_pass` SET `status` = '".(
+      ($a ? 'ACCEPTED_2' : 'REJECTED_F')
+      )."' WHERE `leave_pass_id` = ".$_POST['id']; 
+  
+    //echo $query;
+    if(mysqli_query($link,$query)) {
+      //echo 'success';
+      echo $unsetData;
+    } else {
+      echo mysqli_error($link);
+    }
+  }
+
+?>
+
+<?php
+
+function getExpiredReqForEmp($link) {
+    $query = "SELECT `id`,`first_name`,`last_name`,`status`,`email`,`phone_no` from `visitor` WHERE `status` = 'REQUEST_EXP_1'";
+    $result = mysqli_query($link,$query);
+    if($result == TRUE) {
+        return $result;
+    } else {
+        return NULL;
+    }
+    echo mysqli_error($link);
     
+}
+
+?>  
     <main style="margin-top: 30px;">
         <div class="container-fluid">
             <!-- DataTales Example -->
@@ -72,7 +110,49 @@
                     </h6>
                 </div>
                 <div class="card-body">
+                <?php
+
+$result = getExpiredReqForEmp($link);
+if($result == TRUE) {
+    while($row = mysqli_fetch_array($result)) {
+        echo '<div class="alert alert-warning form-exp" role="alert">
+        <form method="POST">
+            You had a visitor but since you weren\'t available, the appointment was expired/cancelled. You may contact the visitor and set up another appointment. Visitor details : <br><b>Name : '.$row['first_name'].' '.$row['last_name'].' <br> Email : '.$row['email'].'<br>Phone Number : '.$row['phone_no'].'</b>
+        <input type="hidden" name="id" value="'.$row['id'].'">
+            <input type="hidden" name="status" value="'.$row['status'].'">
+            <button type="submit" name="closeExpEmp" class="exp-btn btn ">&#10006;</button>
+            </form>
+        </div>';
+    }
+    
+}
+
+if(isset($_POST['closeExpEmp'])) {
+    //print_r($_POST);
+    $query = "UPDATE `visitor` SET `status` = 'REQUEST_EXP_FIN' WHERE `id` = ".$_POST['id']." AND `status` = 'REQUEST_EXP_1'";
+    //echo '<br>'.$query;
+    if(mysqli_query($link,$query)) {
+        //echo '<br>success';
+        echo $unsetData;
+    } else {
+        echo '<br>'.mysqli_error($link);
+    }
+    
+}
+
+if(isset($_POST['closeEmpExp'])) {
+    $query = "UPDATE `emp_leave_pass` SET `status` = 'REQ_EXP_FIN' WHERE `leave_pass_id` = ".$_POST['id']." AND `status` = 'REQ_EXP'";
+    //echo '<br>'.$query;
+    if(mysqli_query($link,$query)) {
+        //echo '<br>success';
+        echo $unsetData;
+    } else {
+        echo '<br>'.mysqli_error($link);
+    }
+}
+?>
                     <div class="table-responsive">
+                    
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <?php
@@ -85,7 +165,20 @@
                                     <th> ACCEPT </th>
                                     <th> REJECT </th>
                                 </tr>';
-                                } else {
+                                } else if($_SESSION['type']=== 'Employee') {
+                                    $arr = showAcceptedOrRejectedLeavePass($link);
+                                    updateExpEmpReq($link);
+                                    $expiredEmpReq = getExpEmpReq($link);
+                                    $temp = showPendingLeavePasses($link);
+                                    if($arr || $temp || $expiredEmpReq) {
+                                        echo $arr;
+                                        echo $temp;
+                                        echo $expiredEmpReq;
+                                    } else if(!$result) {
+                                        echo 'You have no Notifications. Kindly refresh the page to see if you have any new notifications.';
+                                    }
+                                } 
+                                else if(!$result) {
                                     echo 'You have no Notifications. Kindly refresh the page to see if you have any new notifications.';
                                 }
                             ?>
@@ -103,5 +196,10 @@
             </div>
 
         </div>
-        <!-- /.container-fluid -->
+       <script>
+        setTimeout(() => {
+            location.reload();
+        },10000);
+       </script>
+
     </main>

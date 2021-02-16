@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('header_4.php');
 include('navbar_4.php');
 include('../php-utils/db/db.variables.php');
@@ -11,6 +10,7 @@ $link = connectionToDB($host, $username, $pass, $db);
 if(isset($_POST['registerbtn'])) {
 
     signUpUser($link,'admin',$_SESSION['id']);
+    echo $unsetData;
 
 }
 $result = getUserData($link,'admin',$_SESSION['id']);
@@ -75,6 +75,7 @@ $result = getUserData($link,'admin',$_SESSION['id']);
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
+                                    <th> Employee ID</th>
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> Role </th>
@@ -88,6 +89,7 @@ $result = getUserData($link,'admin',$_SESSION['id']);
 while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 
 echo '<tr>
+<td>'.$row['id'].'</td>
 <td>'.$row['first_name'].' '.$row['last_name'].'</td>
 <td>'.$row['email'].'</td>
 <td>Admin</td>

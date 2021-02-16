@@ -2,9 +2,17 @@
     if(!function_exists("checkValidPass")) {
         // declare your function
         function checkValidPass($type,$email,$link,$password) {
-    
             $type = strtolower($type);
-            $query = "SELECT `id`,`password`,`first_name` FROM `".$type."` WHERE `email` = '".$email."'";
+            $id = "";
+            if($type == "hod") {
+                $id = "hod_id";
+            } else if($type == "employee") {
+                $id = "employee_id";
+            } else {
+                $id = "id";
+            }
+            echo ' id : '.$id.'<br>';
+            $query = "SELECT `".$id."`,`password`,`first_name`,`last_name` FROM `".$type."` WHERE `email` = '".$email."'";
             $success = false;
             if($result = mysqli_query($link,$query)) {
                 if($row = mysqli_fetch_array($result)) {
@@ -30,8 +38,9 @@
             }
     
             if($success) {
-                $userCred['id'] = $row['id']; 
+                $userCred['id'] = $row[$id]; 
                 $userCred['first_name'] = $row['first_name'];
+                $userCred['last_name'] = $row['last_name'];
                 return $userCred;
             } else {
                 return NULL;
@@ -83,8 +92,6 @@
                 session_destroy();
                 header('location: ../login.php');
                 exit;
-                
-                
             }
         }
     }

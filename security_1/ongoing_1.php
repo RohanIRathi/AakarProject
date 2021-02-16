@@ -15,7 +15,8 @@
         $query = "UPDATE `visitor` SET `end_time` = '".$t."', `status` = 'ACCEPTED_FINISHED' WHERE `id` = ".$_POST['id'];
 
         if(mysqli_query($link,$query)) {
-            echo 'success';
+            //echo 'success';
+            echo $unsetData;
         } else {
             echo mysqli_error($link);
         }
@@ -70,6 +71,7 @@
     </main>
     <?php
     include('footer_1.php');
+    //280843
     ?>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

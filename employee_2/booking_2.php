@@ -1,8 +1,6 @@
 <?php
-    session_start();
+    //echo '<br>id : '.$_SESSION['id'].'<br>';
     include('../php-utils/login.utils.php');
-    userLogout();
-    isValidUser();
     include('header_2.php');
     include('navbar_2.php');
 

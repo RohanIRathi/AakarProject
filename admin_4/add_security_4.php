@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('header_4.php');
 include('navbar_4.php');
 include('../php-utils/db/db.variables.php');
@@ -10,6 +9,7 @@ $link = connectionToDB($host, $username, $pass, $db);
 
 if(isset($_POST['registerbtn'])) {
     signUpUser($link,'security',$_SESSION['id']);
+    echo $unsetData;
 }
 
 $result = getUserData($link,'security',$_SESSION['id']);
@@ -75,7 +75,7 @@ $result = getUserData($link,'security',$_SESSION['id']);
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> ID </th>
+                                    <th> Employee ID </th>
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> Role </th>

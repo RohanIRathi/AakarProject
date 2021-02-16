@@ -22,10 +22,19 @@ if(!function_exists("signUpUser")) {
     $success = false; 
     $error = false;
     if(checkIfEmailAlreadyExists($userCred['email'],$type,$link)) {
-      $error = 'User already exists!';
+      $error = 'Email Id already exists!';
     } else {
       
-      $query = "INSERT INTO `".$type."`( `email`, `password`,`first_name`,`last_name`".
+      $id = "";
+      if($type == "hod") {
+        $id = "hod_id";
+      } else if($type == "employee") {
+        $id = "employee_id";
+      } else {
+        $id = "id";
+      }
+
+      $query = "INSERT INTO `".$type."`( `".$id."`,`email`, `password`,`first_name`,`last_name`".
       (
         (strcmp($type,'admin')==0 || strcmp($type,'security')==0) ? "" : 
         (
@@ -33,11 +42,11 @@ if(!function_exists("signUpUser")) {
         )
       )
   
-      .") VALUES ('".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
+      .") VALUES ('".$userCred['employee_Id']."','".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
   
       ( 
       (strcmp($type,'admin')==0 || strcmp($type,'security')==0) 
-      ? "" : ",".$assignedBy."" 
+      ? "" : ",'".$assignedBy."'" 
       )
       
       .")";
@@ -46,7 +55,8 @@ if(!function_exists("signUpUser")) {
       if(mysqli_query($link, $query)) {
         $success = true;
       } else {
-        $error =  mysqli_error($link);
+        //$error =  mysqli_error($link);
+        $error = 'Employee Id already exists!';
         //return array(false,'Something went wrong!');
       }
     }
