@@ -1,15 +1,15 @@
 <?php
-    include('header_1.php'); 
+    include('header_1.php');
     include('navbar_1.php');
 ?>
 
-<?php 
+<?php
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
     $link = connectionToDB($host, $username, $pass, $db);
 
     function showUpcomingData($link)
-    {   
+    {
         $query = "SELECT * FROM visitor WHERE `dateofappointment` = '".date("m-d-y")."' AND `status` = 'BOOKED'";
         $result = mysqli_query($link,$query);
         if ($result == TRUE) {
@@ -40,7 +40,7 @@
                     Access to <b>'.$row['first_name'].' '.$row['last_name'].' </b> has been <b>GRANTED<b>. 
             <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="acc">
-            
+
             </form>
 
                 </div>';
@@ -58,7 +58,7 @@
                 Request to visit for <b> '.$row['first_name'].' '.$row['last_name'].' </b> has been sent. The request is <b>PENDING</b>.
                 </div>';
             }
-            
+
         }
         if($popAccepted[0] != ''){
             return $popAccepted;
@@ -76,7 +76,7 @@
         if(mysqli_query($link,$query)) {
             //echo 'success';
             echo $unsetData;
-            
+
         } else {
             //echo mysqli_error($link);
         }
@@ -84,7 +84,7 @@
 
     }
 
-    
+
  ?>
 
 <?php
@@ -102,11 +102,11 @@ if(isset($_POST['verify_btn'])) {
         echo '<div class="alert alert-success" role="alert">
             <b>Token Id is Valid. Request sent.</b>
             </div>';
-        
+
         $query = "UPDATE `visitor` SET `status` = 'REQUEST_SENT',`start_time` = '".time()."' WHERE `id` = ".$_POST['id'];
         mysqli_query($link,$query);
-        
-        
+
+
 
     } else {
         echo '<div class="alert alert-danger" role="alert">
@@ -143,7 +143,7 @@ function getExpiredReq($link) {
         return NULL;
     }
     echo mysqli_error($link);
-    
+
 }
 reqExpired($link);
 
@@ -153,14 +153,14 @@ if($result == TRUE) {
         echo '<div class="alert alert-warning" role="alert">
         <form method="POST">
         <button type="submit" name="closeExp" class="btn">&#10006;</button>
-            Request for visitor <b>'.$row['first_name'].' '.$row['last_name'].' </b> has <b>expired</b>. 
+            Request for visitor <b>'.$row['first_name'].' '.$row['last_name'].' </b> has <b>expired</b>.
         <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="'.$row['status'].'">
 
             </form>
         </div>';
     }
-    
+
 }
 
 if(isset($_POST['closeExp'])) {
@@ -190,7 +190,7 @@ if(isset($_POST['closeExp'])) {
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <?php 
+                        <?php
                                     $dataArray=showUpcomingData($link);
                                     $rC = $dataArray->num_rows;
                                     if($rC>0) {
@@ -206,18 +206,18 @@ if(isset($_POST['closeExp'])) {
                                     </thead>';
                                         while ($data=mysqli_fetch_assoc($dataArray)) {
                                  ?>
-                            
+
                             <tbody>
-                                
+
                                 <tr>
                                     <td><?php echo $data["first_name"]." ".$data["last_name"] ?></td>
                                     <td><?php echo $data["email"] ?></td>
                                     <td><?php echo $data["noofvisitors"] ?></td>
                                     <td><?php echo date("F j, Y, g:i a",$data["time"]); ?></td>
-                                    
+
                                     <form method="POST">
                                         <td>
-                                            <input name="scan_id" placeholder="TOKEN ID" 
+                                            <input name="scan_id" placeholder="TOKEN ID"
                                             type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==6) return false;">
                                         </td>
                                         <td>
@@ -226,7 +226,7 @@ if(isset($_POST['closeExp'])) {
                                             <button type="submit" name="verify_btn" class="btn btn-success"> VERIFY</button>
                                     </form>
                                 </tr>
-                                <?php 
+                                <?php
                                     }} else {
                                         echo 'No upcoming Appointments';
                                     }
@@ -237,32 +237,6 @@ if(isset($_POST['closeExp'])) {
                     </div>
                 </div>
             </div>
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Upcoming Employee Leaves 
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th> Sample </th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                    <td>Sample Row</td>
-                              </tr>
-
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
-            
 
         </div>
         <!-- /.container-fluid -->
@@ -275,7 +249,7 @@ if(isset($_POST['closeExp'])) {
         ?>
     </main>
 <?php
-include('footer_1.php'); 
+include('footer_1.php');
 ?>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

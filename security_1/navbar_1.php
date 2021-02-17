@@ -56,6 +56,10 @@ isValidUser();
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Ongoing Visit
                         </a>
+                        <a class="nav-link" href="Ongoingleavepass_1.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Ongoing Leave Pass
+                        </a>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="large">Logged in as: Security</div>
