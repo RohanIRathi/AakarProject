@@ -257,5 +257,10 @@ include('footer_1.php');
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="js/scripts.js"></script>
     </body>
+    <script>
+        setTimeout(() => {
+            location.reload();
+        },10000);
+   </script>
 
     </html>

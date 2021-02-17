@@ -70,7 +70,6 @@
     </main>
     <?php
     include('footer_1.php');
-    //280843
     ?>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -78,5 +77,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
     </body>
+
+    <script>
+        setTimeout(() => {
+            location.reload();
+        },10000);
+   </script>
 
     </html>

@@ -22,7 +22,7 @@ include('navbar_1.php');
 
         $query = "SELECT `hod_id`,`first_name`,`last_name` from `hod` WHERE `hod_id` != `admin_id`";
         $result = mysqli_query($link,$query);
-        echo mysqli_error($link);
+        //echo mysqli_error($link);
         while($row = mysqli_fetch_array($result)) {
             array_push($empIdArr,$row['hod_id']);
             $name = $row['first_name'].' '.$row['last_name'];
@@ -31,7 +31,7 @@ include('navbar_1.php');
 
         $query = "SELECT `employee_id`,`first_name`,`last_name` from `employee` WHERE `employee_id` != `hod_id`";
         $result = mysqli_query($link,$query);
-        echo mysqli_error($link);
+        //echo mysqli_error($link);
         while($row = mysqli_fetch_array($result)) {
             array_push($empIdArr,$row['employee_id']);
             $name = $row['first_name'].' '.$row['last_name'];
@@ -59,7 +59,6 @@ include('navbar_1.php');
         $visiteeId = $_POST['option'];
         addNewVisitorAppointment($link,$visiteeId);
         echo $unsetData;
-        
     }
 
     ?>
@@ -144,10 +143,10 @@ include('navbar_1.php');
                                             <div class="form-group pb-2">
                                                 <label>Purpose Of Visit</label><br>
                                                 <label class="radio-inline  mr-3">
-                                                    <input type="radio" class="form-control form-control-user" name="optradio">Personal
+                                                    <input type="radio" class="form-control form-control-user" name="optradio1">Personal
                                                 </label>
                                                 <label class="radio-inline  mr-3">
-                                                    <input type="radio"class="form-control form-control-user" name="optradio">Industrial
+                                                    <input type="radio"class="form-control form-control-user" name="optradio1">Industrial
                                                 </label>
                                             </div>
                                         </div>
@@ -155,13 +154,13 @@ include('navbar_1.php');
                                             <div class="form-group pb-2">
                                                 <label>Hospitality</label><br>
                                                 <label class="radio-inline mr-3">
-                                                    <input type="radio" class="form-control form-control-user" name="optradio1">Breakfast
+                                                    <input type="radio" class="form-control form-control-user" name="optradio3">Breakfast
                                                 </label>
                                                 <label class="radio-inline mr-3">
-                                                    <input type="radio" class="form-control form-control-user" name="optradio1">Lunch
+                                                    <input type="radio" class="form-control form-control-user" name="optradio3">Lunch
                                                 </label>
                                                 <label class="radio-inline  mr-3">
-                                                    <input type="radio"class="form-control form-control-user" name="optradio1">Dinner
+                                                    <input type="radio"class="form-control form-control-user" name="optradio3">Dinner
                                                 </label>
                                             </div>
                                         </div>
@@ -175,11 +174,7 @@ include('navbar_1.php');
                                         <div class="col">   
                                             <div class="form-group pb-2">  
                                             <select id="employee"  name="option" class="form-control" placeholder='Choose employee' >
-                                                <?php
-
-    echo $str;
-
-?>
+                                                <?php echo $str;?>
                                             </select>
                                             </div>
                                         </div>
@@ -231,16 +226,16 @@ include('navbar_1.php');
             </div>
         </div>
     </div>
-     
+    
 </main>
 <?php 
-include('footer_1.php'); 
-include('scripts_1.php'); 
- ?>
+    include('footer_1.php'); 
+    include('scripts_1.php'); 
+?>
 <script>
 var date = new Date();
 var currentDate = date.toISOString().slice(0,10);
-var currentTime = date.getHours() + ':' + date.getMinutes();
+//var currentTime = date.getHours() + ':' + date.getMinutes();
 document.getElementById('currentDate').value = currentDate;
-document.getElementById('currentTime').value = currentTime;
+//document.getElementById('currentTime').value = currentTime;
 </script>

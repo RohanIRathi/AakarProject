@@ -4,9 +4,7 @@
     * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
     */
 
-   setTimeout(() => {
-       location.reload();
-   },10000);
+   
     (function($) {
     "use strict";
 
