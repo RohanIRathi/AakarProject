@@ -38,8 +38,6 @@
                 <form method="POST">
                 <button type="submit" name="closeNotification" class="btn">&#10006;</button>
                     Access to <b>'.$row['first_name'].' '.$row['last_name'].' </b> has been <b>GRANTED<b>. 
-
-            
             <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="acc">
             
@@ -51,15 +49,13 @@
                 <form method="POST">
                 <button type="submit" name="closeNotification" class="btn">&#10006;</button>
                     Access to <b>'.$row['first_name'].' '.$row['last_name'].'</b> has been <b>REJECTED<b>.
-
-                    
             <input type="hidden" name="id" value="'.$row['id'].'">
             <input type="hidden" name="status" value="rej">
             </form>
                 </div>';
             } else {
                 $popAccepted[1] .=  '<div class="alert alert-primary" role="alert">
-                Request to visit for <b> '.$row['first_name'].' '.$row['last_name'].' </b> is <b>PENDING</b>.
+                Request to visit for <b> '.$row['first_name'].' '.$row['last_name'].' </b> has been sent. The request is <b>PENDING</b>.
                 </div>';
             }
             
@@ -118,11 +114,12 @@ if(isset($_POST['verify_btn'])) {
             </div>';
     }
     echo $unsetData;
+    echo $reloadPage;
 }
 
 function reqExpired($link) {
 
-    $tenSecsBehind = mktime(date("G"), date("i"), date("s")-10, date("m")  , date("d"), date("Y"));
+    $tenSecsBehind = mktime(date("G"), date("i"), date("s")-30, date("m")  , date("d"), date("Y"));
     //hour,minute,seconds,month,day,year
     //https://www.php.net/manual/en/function.mktime.php
     //echo date("F j, Y, g:i a",$tenSecsBehind);
@@ -174,6 +171,7 @@ if(isset($_POST['closeExp'])) {
     if(mysqli_query($link,$query)) {
         $result = getExpiredReq($link);
         echo $unsetData;
+        echo $reloadPage;
     } else {
         echo mysqli_error($link);
     }

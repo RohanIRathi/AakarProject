@@ -10,4 +10,5 @@
             window.history.replaceState( null, null, window.location.href );
         }
     </script>';
+    $reloadPage = '<script>location.reload();</script>'
 ?>

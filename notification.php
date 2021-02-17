@@ -134,6 +134,7 @@ if(isset($_POST['closeExpEmp'])) {
     if(mysqli_query($link,$query)) {
         //echo '<br>success';
         echo $unsetData;
+        echo $reloadPage;
     } else {
         echo '<br>'.mysqli_error($link);
     }
