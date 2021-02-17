@@ -127,6 +127,7 @@ function reqExpired($link) {
     $query = "UPDATE `visitor` SET `status` = 'REQUEST_EXP' WHERE `status` = 'REQUEST_SENT' AND `start_time` < ".$tenSecsBehind;
 
     if(mysqli_query($link,$query)) {
+        $unsetData;
         //echo 'success';
     } else {
         echo mysqli_error($link);

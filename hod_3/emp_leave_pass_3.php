@@ -34,9 +34,11 @@ if(isset($_POST['accept_btn']) || isset($_POST['reject_btn'])) {
   //echo $query;
 
   if(mysqli_query($link,$query)) {
-      $result = fetchEmpLeavePass($link);
+    $result = fetchEmpLeavePass($link);
+    echo $unsetData;
+
   } else {
-      echo mysqli_error($link);
+    echo mysqli_error($link);
   }
   
 }

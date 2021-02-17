@@ -60,6 +60,11 @@ function updateExpEmpReq($link) {
 
     if(mysqli_query($link,$query)) {
         //echo 'success';
+        echo '<script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+        </script>';
     } else {
         echo mysqli_error($link);
     }

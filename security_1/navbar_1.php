@@ -38,7 +38,11 @@ isValidUser();
                         <div class="sb-sidenav-menu-heading">Core</div>
                         <a class="nav-link" href="booking_1.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
+                            Upcoming Visitor Appointments
+                        </a>
+                        <a class="nav-link" href="Ongoingleavepass_1.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Employee Leaves
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -55,10 +59,6 @@ isValidUser();
                         <a class="nav-link" href="ongoing_1.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Ongoing Visit
-                        </a>
-                        <a class="nav-link" href="Ongoingleavepass_1.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Ongoing Leave Pass
                         </a>
                 </div>
                 <div class="sb-sidenav-footer">
