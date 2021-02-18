@@ -9,6 +9,15 @@ USE `aakar`;
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Feb 18, 2021 at 09:21 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.5
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -45,7 +54,8 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `first_name`, `last_name`) VALUES
 ('00001', '', 'admin@gmail.com', '$2y$10$rSDD/KcGB9Yd6KRJNhSCmef9fbnaJ0B9nlmThEeNtsdF77bG8QoM2', 'Admin', ''),
 ('00002', '', 'siddharthkothari655@gmail.com', '$2y$10$OWPwst9ma9nPi6GxRPaYWukfQZXNGpx8OVVYQYwT9WN.oNABPoyRO', 'Siddharth', 'Kothari'),
-('00003', '', 'shrinidhi.21810366@viit.ac.in', '$2y$10$j9TKwq1oKAtOCZb2kH.hu.3gM1.6x.qqbR0S8j6anYgysI8abPsTK', 'Shrinidhi', ' -');
+('00003', '', 'shrinidhi.21810366@viit.ac.in', '$2y$10$j9TKwq1oKAtOCZb2kH.hu.3gM1.6x.qqbR0S8j6anYgysI8abPsTK', 'Shrinidhi', ' -'),
+('000056', '', 'rohan@gmail.com', '$2y$10$I0ATYk/1IbBI3aPY03Qnt.0Cxy2pSSMCEQ9OqQLK.A1p3YN5u8S0S', 'Rohan', 'Rathi');
 
 -- --------------------------------------------------------
 
@@ -70,7 +80,8 @@ CREATE TABLE `employee` (
 INSERT INTO `employee` (`employee_id`, `username`, `email`, `password`, `first_name`, `last_name`, `hod_id`) VALUES
 ('00001', '', 'admin@gmail.com', '$2y$10$ZDYsPNnsiqUL6QonhFIloOnlbWsH3q/l4tiGWK.xcPoqES/ZXQuHm', 'Admin', '', '00001'),
 ('00003', '', 'vknk986@gmail.com', '$2y$10$8q4mX94SZvG28dbwbhhj/uYOrHC2RxpiJaCIeWgcZQaOml4Cj5rAu', 'Vinay', 'Kothari', '00003'),
-('00004', '', 'dhwanikothari.nmims@gmail.com', '$2y$10$/wpvGHi1MwlA6qMBpweJZOm.R8RaaTb0gUyKN7.R5EsPvXKNRzglq', 'Dhwani', 'Kothari', '00003');
+('00004', '', 'dhwanikothari.nmims@gmail.com', '$2y$10$/wpvGHi1MwlA6qMBpweJZOm.R8RaaTb0gUyKN7.R5EsPvXKNRzglq', 'Dhwani', 'Kothari', '00003'),
+('001001', '', 'yash@gmail.com', '$2y$10$ZhGyxHHFL88ifXsv39WmZO0yWoNIKh2zZeXNDUtpDWnzRPuO.meQy', 'yash ', 'M', '000056');
 
 -- --------------------------------------------------------
 
@@ -87,16 +98,18 @@ CREATE TABLE `emp_leave_pass` (
   `start_time` varchar(20) NOT NULL,
   `end_time` varchar(20) NOT NULL,
   `timestamp` varchar(50) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(20) NOT NULL,
+  `actual_start_time` varchar(20) NOT NULL,
+  `actual_end_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `emp_leave_pass`
 --
 
-INSERT INTO `emp_leave_pass` (`leave_pass_id`, `employee_id`, `emp_name`, `hod_id`, `Purpose`, `start_time`, `end_time`, `timestamp`, `status`) VALUES
-(11, '00004', 'Dhwani Kothari', '00003', 'next year', '19:28', '19:28', '1643913000', 'REQ_SENT'),
-(12, '00004', 'Dhwani Kothari', '00003', 'To collect very important documents and laptop of my son from his temporary address studying in VIIT college.', '19:28', '19:28', '1612447099', 'REQ_SENT');
+INSERT INTO `emp_leave_pass` (`leave_pass_id`, `employee_id`, `emp_name`, `hod_id`, `Purpose`, `start_time`, `end_time`, `timestamp`, `status`, `actual_start_time`, `actual_end_time`) VALUES
+(27, '001001', 'yash  M', '000056', 'Purpose', '17:40', '23:23', '1613563820', 'REQ_EXP_FIN', '', ''),
+(28, '001001', 'yash  M', '000056', 'Purpose', '17:40', '23:23', '1613563859', 'ACCEPTED_FIN', '1613563913', '1613563947');
 
 -- --------------------------------------------------------
 
@@ -120,7 +133,8 @@ CREATE TABLE `hod` (
 
 INSERT INTO `hod` (`hod_id`, `username`, `email`, `password`, `first_name`, `last_name`, `admin_id`) VALUES
 ('00001', '', 'admin@gmail.com', '$2y$10$oIpRCA0tbZyHJc7O2XgMWOg2HXHpGq6RovOKAnSlmtl4mnv9o5po6', 'Admin', '', '00001'),
-('00003', '', 'vknk986@gmail.com', '$2y$10$lGenWXiiqrwm/6WRV.l0M.zOZkWDF2ckwokYI46FOc6vClG6jOwKy', 'Vinay', 'Kothari', '00002');
+('00003', '', 'vknk986@gmail.com', '$2y$10$lGenWXiiqrwm/6WRV.l0M.zOZkWDF2ckwokYI46FOc6vClG6jOwKy', 'Vinay', 'Kothari', '00002'),
+('000056', '', 'rohan@gmail.com', '$2y$10$trmaUkh62Nf5EQ9TGJtXjurxypeNULBd40mWy2A4Xw.6FCDyyXtXy', 'Rohan  ', 'Rathi', '00001');
 
 -- --------------------------------------------------------
 
@@ -174,6 +188,13 @@ CREATE TABLE `visitor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `visitor`
+--
+
+INSERT INTO `visitor` (`id`, `first_name`, `last_name`, `email`, `purpose`, `photo_id`, `time`, `noofvisitors`, `photo_id_no`, `hospitality`, `conference`, `conference_room`, `room_purpose`, `start_time`, `end_time`, `visitee`, `tokenid`, `phone_no`, `dateofappointment`, `status`) VALUES
+(45, 'Siddharth', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1613584380', 1, 1, 0, 0, '', '', '1613563621', '', '00001', '$2y$10$VqK/LvUNTWky5MiN1g.OTul3djbZsfw73i379XvAxKCv7WHWztGLu', '7021019903', '02-17-21', 'REQUEST_EXP_FIN');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -225,13 +246,13 @@ ALTER TABLE `visitor`
 -- AUTO_INCREMENT for table `emp_leave_pass`
 --
 ALTER TABLE `emp_leave_pass`
-  MODIFY `leave_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `leave_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `visitor`
 --
 ALTER TABLE `visitor`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables
