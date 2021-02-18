@@ -5,6 +5,22 @@ include('navbar_4.php');
 include('../php-utils/db/db.variables.php');
 include('../php-utils/db/db.connection.php');
 $link = connectionToDB($host, $username, $pass, $db);
+$filter = $_GET['data'];
+switch($filter) {
+    case 'tot_reg':
+        echo date('d-m-Y') . "<br>";
+        $query = "SELECT * FROM visitor WHERE dateofappointment LIKE " . date("d-m-y") . "%";
+    case 'tot_visitors':
+        $query = 'SELECT * FROM visitor WHERE';
+    case 'not_visited':
+        $query = 'SELECT * FROM visitor WHERE';
+    default:
+        $php_errormsg = '404 - PAGE NOT FOUND!';
+}
+if($query)
+{
+    echo $query;
+}
 ?>
 <main style="margin-top: 30px;">
     <div class="container-fluid">
