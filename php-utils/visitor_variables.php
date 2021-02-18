@@ -61,7 +61,7 @@
     }
 
     //echo '<br>Exact date : '.date("F j, Y, g:i a",$timeStamp);
-    $dateOfAppointment = date("m-d-y",$timeStamp);
+    $dateOfAppointment = date("d-m-y",$timeStamp);
     $tokenId = rand(100000,999999);
 
 
