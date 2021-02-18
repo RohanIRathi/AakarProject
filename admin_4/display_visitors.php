@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('header_4.php'); 
 include('navbar_4.php'); 
 include('../php-utils/db/db.variables.php');
@@ -8,18 +7,25 @@ $link = connectionToDB($host, $username, $pass, $db);
 $filter = $_GET['data'];
 switch($filter) {
     case 'tot_reg':
-        echo date('d-m-Y') . "<br>";
-        $query = "SELECT * FROM visitor WHERE dateofappointment LIKE " . date("d-m-y") . "%";
+        $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM visitor WHERE `dateofappointment` LIKE '".date('d-m-y')."%'";
+        break;
     case 'tot_visitors':
         $query = 'SELECT * FROM visitor WHERE';
+        break;
     case 'not_visited':
-        $query = 'SELECT * FROM visitor WHERE';
+        $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM visitor WHERE `status` = 'BOOKED' OR `status` = 'REQUEST_EXP_FIN'";
+        break;
     default:
         $php_errormsg = '404 - PAGE NOT FOUND!';
 }
 if($query)
 {
     echo $query;
+    $result = mysqli_query($link,$query);
+    if(!$result)
+        echo "<div class='alert alert-danger'>No data available!</div>";
+    // $row = mysqli_fetch_assoc($result);
+    // echo $row;
 }
 ?>
 <main style="margin-top: 30px;">
@@ -41,23 +47,38 @@ if($query)
                                 <th> Email </th>
                                 <th> No.of Visitors </th>
                                 <th> Date </th>
-                                <th> Time </th>
+                                <th> Start Time </th>
+                                <th> End Time </th>
                                 <th> Room Name </th>
-                                <th> Con Time </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
+                        <?php
+                            if($result)
+                            {
+                                while($row = $result -> fetch_assoc())
+                                {
+                                    $start_time = 'NA'; $end_time = 'NA';
+                                    if(!$row['conference_room'])
+                                        $row['conference_room'] = "NA";
+                                    if($row['start_time'])
+                                        $start_time = date("h:i A", $row['start_time']);
+                                    if($row['end_time'])
+                                        $end_time = date("h:i A", $row['end_time']);
+                                    echo "<tbody>";
+                                    echo "<tr>";
+                                    echo "<td>".$row['id']."</td>";
+                                    echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
+                                    echo "<td>".$row['email']."</td>";
+                                    echo "<td>".$row['noofvisitors']."</td>";
+                                    echo "<td>".date('dS M, Y', $row['time'])."</td>";
+                                    echo "<td>".$start_time."</td>";
+                                    echo "<td>".$end_time."</td>";
+                                    echo "<td>".$row['conference_room']."</td>";
+                                    echo "</tr>";
+                                    echo "</tbody>";
+                                }
+                            }
+                        ?>
                     </table>
 
                 </div>
