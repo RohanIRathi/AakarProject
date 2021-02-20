@@ -10,12 +10,13 @@ switch($filter) {
         $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM visitor WHERE `dateofappointment` LIKE '".date('d-m-y')."%'";
         break;
     case 'tot_visitors':
-        $query = 'SELECT * FROM visitor WHERE';
+        $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM visitor WHERE `status` = 'Accepted_1' OR `status` = 'ONGOING'";
         break;
     case 'not_visited':
         $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM visitor WHERE `status` = 'BOOKED' OR `status` = 'REQUEST_EXP_FIN'";
         break;
     default:
+        $query = false;
         $php_errormsg = '404 - PAGE NOT FOUND!';
 }
 if($query)
@@ -26,6 +27,11 @@ if($query)
         echo "<div class='alert alert-danger'>No data available!</div>";
     // $row = mysqli_fetch_assoc($result);
     // echo $row;
+}
+elseif ($php_errormsg)
+{
+    $result = false;
+    echo "<div class='alert alert-danger'>".$php_errormsg."</div>";
 }
 ?>
 <main style="margin-top: 30px;">
