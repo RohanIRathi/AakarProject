@@ -25,8 +25,6 @@ if($query)
     $result = mysqli_query($link,$query);
     if(!$result)
         echo "<div class='alert alert-danger'>No data available!</div>";
-    // $row = mysqli_fetch_assoc($result);
-    // echo $row;
 }
 elseif ($php_errormsg)
 {
