@@ -31,7 +31,7 @@ if(!function_exists("addNewVisitor")) {
 if(!function_exists("showData")) {
     function showData($link) {
         
-        $query = "SELECT * FROM `visitor` WHERE `visitee` = ".$_SESSION['id']." AND `dateofappointment` = '".date("m-d-y")."' AND `status` = 'BOOKED'";
+        $query = "SELECT * FROM `visitor` WHERE `visitee` = ".$_SESSION['id']." AND `dateofappointment` = '".date("d-m-y")."' AND `status` = 'BOOKED'";
         $result = mysqli_query($link,$query);
         if ($result == TRUE) {
             return $result;

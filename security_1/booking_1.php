@@ -10,7 +10,7 @@
 
     function showUpcomingData($link)
     {
-        $query = "SELECT * FROM visitor WHERE `dateofappointment` = '".date("m-d-y")."' AND `status` = 'BOOKED'";
+        $query = "SELECT * FROM visitor WHERE `dateofappointment` = '".date("d-m-y")."' AND `status` = 'BOOKED'";
         $result = mysqli_query($link,$query);
         if ($result == TRUE) {
             return $result;
@@ -105,16 +105,16 @@ if(isset($_POST['verify_btn'])) {
 
         $query = "UPDATE `visitor` SET `status` = 'REQUEST_SENT',`start_time` = '".time()."' WHERE `id` = ".$_POST['id'];
         mysqli_query($link,$query);
-
-
+        echo $unsetData;
+        echo $reloadPage;
 
     } else {
         echo '<div class="alert alert-danger" role="alert">
                 <b>Token Id is Invalid.</b>
             </div>';
+        echo $unsetData;
     }
-    echo $unsetData;
-    echo $reloadPage;
+    
 }
 
 function reqExpired($link) {
