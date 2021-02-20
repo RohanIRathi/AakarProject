@@ -15,7 +15,7 @@ if(!function_exists("addNewVisitor")) {
         echo $tokenId;
         $hashedTokenId = password_hash($tokenId,PASSWORD_BCRYPT);
 
-        $query = "INSERT INTO `visitor` (`first_name`,`last_name`,`email`,`purpose`,`time`,`noofvisitors`,`photo_id_no`,`hospitality`,`conference`,`conference_room`,`room_purpose`,`start_time`,`end_time`,`visitee`,`tokenid`,`phone_no`,`dateofappointment`) VALUES ('".$first_name."','".$last_name."','".$email."','".$purpose."','".$timeStamp."',".$novisitors.",'".$photoidvalue."','".$hospitality."','".$conference."','".$room_no."','".$room_purpose."','".$start_time."','".$end_time."','".$visiteeId."','".$hashedTokenId."','".$phone."','".$dateOfAppointment."')";
+        $query = "INSERT INTO `visitor` (`first_name`,`last_name`,`email`,`purpose`,`time`,`noofvisitors`,`photo_id_no`,`hospitality`,`conference`,`conference_room`,`room_purpose`,`start_time`,`end_time`,`visitee`,`tokenid`,`phone_no`,`dateofappointment`,`status`) VALUES ('".$first_name."','".$last_name."','".$email."','".$purpose."','".$timeStamp."',".$novisitors.",'".$photoidvalue."','".$hospitality."','".$conference."','".$room_no."','".$room_purpose."','".$start_time."','".$end_time."','".$visiteeId."','".$hashedTokenId."','".$phone."','".$dateOfAppointment."'.'BOOKED')";
 
         if(mysqli_query($link,$query)){
             echo '<div class="alert alert-success" role="alert">
