@@ -88,7 +88,7 @@ $result = getUserData($link,'employee',$_SESSION['id']);
 while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 
 echo '<tr>
-<td>'.$row['id'].'</td>
+<td>'.$row['employee_id'].'</td>
 <td>'.$row['first_name'].' '.$row['last_name'].'</td>
 <td>'.$row['email'].'</td>
 <td>Employee</td>
