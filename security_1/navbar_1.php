@@ -1,49 +1,40 @@
+  
 <?php
 session_start();
 include('../php-utils/login.utils.php');
-userLogout();
 isValidUser();
+userLogout();
+
 ?>
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="booking_1.php">Aakar Foundation</a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <span class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 navbar-brand" >
-            Welcome,
-            <?php
-                echo $_SESSION['firstname'];
-            ?>
-        </span>
-        <!-- Navbar-->
-        <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Activity Log</a>
-                    <div class="dropdown-divider"></div>
-                    <form method='POST'>
-                        <button class="dropdown-item" type='submit' name='logout-btn'>Logout</button>
+
+<body>
+    <nav class="sb-topnav navbar navbar-expand navbar-light sticky-top" style="padding-left: 0; padding-top: 0; padding-bottom: 0; z-index: 1040;">
+        <a class="navbar-brand" href="" style="padding: 0;"><img class="logo" src="css/logo.jpg" alt="Aakar Foundry" width="auto" height="56px"></a> <a class="logout-button pl-3" id="sidebarToggle"><i class="fas fa-bars text-white"></i></a>
+        <ul class="navbar-nav ml-auto ">
+            <li class="nav-item">
+                <form method='POST'>
+                        <button class="dropdown-item" type='submit' name='logout-btn'><i class="fas fa-power-off fa-2x text-white"></i></button>
                     </form>
-                </div>
             </li>
         </ul>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #173F5F;">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <div class="profile_info pb-2">
+                            <i class="fas fa-user-circle fa-3x pb-1"style="color:white"></i>
+                            <h4 class="profile-info-text pt-2">
+                                <?php
+                                    echo $_SESSION['firstname'];
+                                ?></h4>
+                            <h4 class="profile-info-text pb-3" style="font-size: small;">Security</h4>
+                        </div>
                         <a class="nav-link" href="booking_1.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Upcoming Visitor Appointments
+                            Dashboard
                         </a>
-                        <a class="nav-link" href="Ongoingleavepass_1.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Employee Leaves
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Registration
@@ -59,9 +50,6 @@ isValidUser();
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Ongoing Visit
                         </a>
-                </div>
-                <div class="sb-sidenav-footer">
-                    <div class="large">Logged in as: Security</div>
                 </div>
             </nav>
         </div>
