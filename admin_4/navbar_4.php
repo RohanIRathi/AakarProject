@@ -44,7 +44,10 @@ userLogout();
                             <div class="sb-nav-link-icon"><i class="fa fa-user fa-fw"></i></div>
                             HOD Registration
                         </a>
-                        
+                        <a class="nav-link" href="add_employee_4.php">
+                        <div class="sb-nav-link-icon"><i class="fa fa-user fa-fw"></i></div>
+                        Employee Registration
+                        </a>
                         <a class="nav-link" href="add_security_4.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-user fa-fw"></i></div>
                             Security Registration

@@ -76,12 +76,7 @@ if(!function_exists("signUpUser")) {
 if(!function_exists("getUserData")) {
   function getUserData($link,$type,$assignedBy) {
 
-    $query = "SELECT * FROM `".$type."` ".
-    (
-      (strcmp($type,'employee')==0) ? "WHERE `hod_id` = ".$assignedBy : ""
-
-    )
-    .";";
+    $query = "SELECT * FROM `".$type."`;";
     //echo $query;
     $result = mysqli_query($link,$query);
     if(!$result) {

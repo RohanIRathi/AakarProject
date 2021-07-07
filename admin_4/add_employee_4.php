@@ -1,15 +1,36 @@
 <?php
-include('header_3.php');
-include('navbar_3.php');
+include('header_4.php');
+include('navbar_4.php');
 include('../php-utils/db/db.variables.php');
 include('../php-utils/db/db.connection.php');
 include('../php-utils/signup.utils.php');
 
 $link = connectionToDB($host, $username, $pass, $db);
 
+function generateEmpList($link) {
+    $query = "SELECT `hod_id`,`first_name`,`last_name` from `hod`";
+    $result = mysqli_query($link,$query);
+    //echo mysqli_error($link);
+    $empIdArr = array();
+    $empNameArr = array();
+    while($row = mysqli_fetch_array($result)) {
+        array_push($empIdArr,$row['hod_id']);
+        $name = $row['first_name'].' '.$row['last_name'];
+        array_push($empNameArr,$name);
+    }
+    $str = "";
+    for($i=0;$i<sizeof($empIdArr);$i++) {
+        $str.='<option value="'.$empIdArr[$i].'">'.$empNameArr[$i].'</option>';
+    } //echo $str;
+    return $str;
+}
+
+$str = generateEmpList($link);
+
 if(isset($_POST['registerbtn'])) {
 
-    signUpUser($link,'employee',$_SESSION['id']);
+    $hodId = $_POST['option'];
+    signUpUser($link,'employee',$hodId);
 
 }
 $result = getUserData($link,'employee',$_SESSION['id']);
@@ -51,6 +72,12 @@ $result = getUserData($link,'employee',$_SESSION['id']);
                                 <label>Confirm Password</label>
                                 <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password" required>
                             </div>
+                            <div class="form-group pb-2">
+                            <label>Choose HOD</label>  
+                                <select id="employee"  name="option" class="form-control" placeholder='Choose HOD' >
+                                    <?php echo $str;?>
+                                </select>
+                                </div>
                             <input type="hidden" name="usertype" value="admin">
 
                         </div>
@@ -78,7 +105,7 @@ $result = getUserData($link,'employee',$_SESSION['id']);
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> Role </th>
-                                    <th> EDIT </th>
+                                    <th> ASSIGNED HOD ID </th>
                                     <th> DELETE </th>
                                 </tr>
                             </thead>
@@ -92,9 +119,7 @@ echo '<tr>
 <td>'.$row['first_name'].' '.$row['last_name'].'</td>
 <td>'.$row['email'].'</td>
 <td>Employee</td>
-<td>
-<button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
-</td>
+<td>'.$row['hod_id'].'</td>
 <td>
 <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
 </td>
@@ -111,6 +136,6 @@ echo '<tr>
         </div>
     </main>
 		<?php
-		include('footer_3.php');
-		include('scripts_3.php');
+		include('footer_4.php');
+		include('scripts_4.php');
 		?>
