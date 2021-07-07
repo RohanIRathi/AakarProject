@@ -51,6 +51,10 @@ userLogout();
                                 <a class="nav-link" href="#">Delete visitor</a>
                             </nav>
                         </div>
+                        <a class="nav-link" href="emp_leave_pass_3.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Employee leave pass
+                        </a>
                         <a class="nav-link" href="notification_3.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Notification

@@ -8,42 +8,58 @@ if(isset($_POST['Submit_btn'])) {
     $link = connectionToDB($host, $username, $pass, $db);
     $purpose = mysqli_real_escape_string($link,$_POST['purpose']);
     $sT = mysqli_real_escape_string($link,$_POST['start_time']);
+    $arr = array_map('intval', explode(':', $sT));
+    //$sT = date('H:i', $st);
+    $stT = mktime($arr[0], $arr[1], date("s"), date("m")  , date("d"), date("Y"));
     $eT = mysqli_real_escape_string($link,$_POST['end_time']);
-
+    $arr = array_map('intval', explode(':', $eT));
+    $etT = mktime($arr[0], $arr[1], date("s"), date("m")  , date("d"), date("Y"));
+    //echo $stT.'<br>';
+    //echo $etT;
+    $error = false;
+    if($stT < time() || $etT < time() || $etT < $stT) {
+        echo '<div class="alert alert-danger" role="alert">
+        Enter Valid start and end time
+      </div>';
+        $error = true;
+    }
     $query = "SELECT `hod_id` from `employee` WHERE `employee_id` = '".$_SESSION['id']."'";
     $time = time();
     $hodId = "";
-    if($result = mysqli_query($link,$query)) {
-        while($row = mysqli_fetch_array($result)) {
-            $hodId = $row['hod_id'];
+    if(!$error) {
+        if($result = mysqli_query($link,$query)) {
+            while($row = mysqli_fetch_array($result)) {
+                $hodId = $row['hod_id'];
+            }
+        } else {
+            echo mysqli_error($link);
         }
-    } else {
+        $empName = $_SESSION['firstname'].' '.$_SESSION['lastname'];
+        //echo 'hiii'.$hodId;
+        $query = "INSERT INTO `emp_leave_pass`(`employee_id`,`emp_name`,`hod_id`,`Purpose`,`start_time`,`end_time`,`timestamp`,`status`) VALUES ('".$_SESSION['id']."','".$empName."','".$hodId."','".$purpose."','".$sT."','".$eT."','".$time."','REQ_SENT')";
+    
+        $queryToFetchHodEmail = "SELECT `email` from `hod` WHERE `hod_id` = '".$hodId."'";
+        $email = "";
+        if($result = mysqli_query($link,$queryToFetchHodEmail)) {
+            while($row = mysqli_fetch_array($result)) {
+                $email = $row['email'];
+            }
+        } else {
+            echo mysqli_error($link);
+        }
+    
+        $subject = 'Employee Leave Pass Request';
+        $message = '<b>You have a new Employee Leave pass Request.</b><br>Employee <b>'.$empName.'</b> (Employee Id : '.$_SESSION['id'].') has requested a leave pass for <br><b>Purpose : '.$purpose.'</b><br> Tentative Start Time : '.$sT.', End Time : '.$eT.'<br>You can either accept or reject the request by logging in the Aakar Software. The request will be expired in 2 minutes.';
+        include('../php-utils/sendMail.php');
+        if(mysqli_query($link,$query)) {
+            echo '<div class="alert alert-success" role="alert">
+                    <b>Request Sent!</b>
+                  </div>';
+        }
+    
         echo mysqli_error($link);
     }
-    $empName = $_SESSION['firstname'].' '.$_SESSION['lastname'];
-    //echo 'hiii'.$hodId;
-    $query = "INSERT INTO `emp_leave_pass`(`employee_id`,`emp_name`,`hod_id`,`Purpose`,`start_time`,`end_time`,`timestamp`,`status`) VALUES ('".$_SESSION['id']."','".$empName."','".$hodId."','".$purpose."','".$sT."','".$eT."','".$time."','REQ_SENT')";
-
-    $queryToFetchHodEmail = "SELECT `email` from `hod` WHERE `hod_id` = '".$hodId."'";
-    $email = "";
-    if($result = mysqli_query($link,$queryToFetchHodEmail)) {
-        while($row = mysqli_fetch_array($result)) {
-            $email = $row['email'];
-        }
-    } else {
-        echo mysqli_error($link);
-    }
-
-    $subject = 'Employee Leave Pass Request';
-    $message = '<b>You have a new Employee Leave pass Request.</b><br>Employee <b>'.$empName.'</b> (Employee Id : '.$_SESSION['id'].') has requested a leave pass for <br><b>Purpose : '.$purpose.'</b><br> Tentative Start Time : '.$sT.', End Time : '.$eT.'<br>You can either accept or reject the request by logging in the Aakar Software. The request will be expired in 2 minutes.';
-    include('../php-utils/sendMail.php');
-    if(mysqli_query($link,$query)) {
-        echo '<div class="alert alert-success" role="alert">
-                <b>Request Sent!</b>
-              </div>';
-    }
-
-    echo mysqli_error($link);
+    
 }
 
 ?>

@@ -11,7 +11,7 @@
         $email = mysqli_real_escape_string($link,$_POST['email']);
         $password = mysqli_real_escape_string($link,$_POST['passwordd']);
         $type = mysqli_real_escape_string($link,$_POST['option']);
-        echo 'type : '.$type.'<br>';
+        //echo 'type : '.$type.'<br>';
         $userCredArr = checkValidPass($type,$email,$link,$password);
         if($userCredArr != NULL){
         

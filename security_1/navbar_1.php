@@ -46,6 +46,10 @@ userLogout();
                                 <a class="nav-link" href="#">Delete visitor</a>
                             </nav>
                         </div>
+                        <a class="nav-link" href="Ongoingleavepass_1.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Employee Leaves
+                        </a>
                         <a class="nav-link" href="ongoing_1.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Ongoing Visit
