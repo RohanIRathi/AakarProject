@@ -51,7 +51,7 @@ function showPendingLeavePasses($link) {
 }
 
 function updateExpEmpReq($link) {
-  $tenSecsBehind = mktime(date("G"), date("i")-2, date("s"), date("m")  , date("d"), date("Y"));
+  $tenSecsBehind = mktime(date("G"), date("i")-30, date("s"), date("m")  , date("d"), date("Y"));
     //hour,minute,seconds,month,day,year
     //https://www.php.net/manual/en/function.mktime.php
     //echo date("F j, Y, g:i a",$tenSecsBehind);

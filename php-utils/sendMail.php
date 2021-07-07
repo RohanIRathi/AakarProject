@@ -6,7 +6,7 @@ $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 if(mail($email,$subject,$message,$headers)) {
     //echo '<br>Mail Sent!';
 } else {
-    echo "<br>Not sent";
+    //echo "<br>Not sent";
 }
 
 ?>
