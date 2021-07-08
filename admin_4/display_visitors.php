@@ -11,15 +11,12 @@ if(isset($_POST['search_btn'])) {
         Enter Valid Date!
       </div>';
     } else {
-        print_r($_POST);
+        //print_r($_POST);
         $newDate = date("d/m/Y", strtotime($_POST['date']));
         
         switch($filter) {
-            case 'tot_reg':
-                $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM visitor WHERE `dateofappointment` LIKE '".date('d-m-y')."%'";
-                break;
             case 'tot_visitors':
-                $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM visitor WHERE `status` = 'Accepted_1' OR `status` = 'ONGOING'";
+                $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM `visitor` WHERE `status` = 'Accepted_1' OR `status` = 'ONGOING'";
                 break;
             case 'emp_leave_pass':
                 $query = "SELECT `employee_id`, `emp_name`, `hod_id`, `purpose`, `Purpose`, `start_time`, `end_time`,`actual_start_time`,`actual_end_time`,`reason` FROM `emp_leave_pass` WHERE (`status` = 'ONGOING' OR `status` = 'ACCEPTED_FIN') AND `date_of_leave` = '".$newDate."'";
@@ -30,7 +27,7 @@ if(isset($_POST['search_btn'])) {
         }
         if($query)
         {
-            echo '<br>'.$query;
+            //echo '<br>'.$query;
             $result = mysqli_query($link,$query);
             if(!$result)
                 echo "<div class='alert alert-danger'>No data available!<br>".mysqli_error($link)."</div>";
@@ -51,17 +48,27 @@ if(isset($_POST['search_btn'])) {
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Upcoming Appointments
-                        <button type="button" class="ml-3 btn btn-primary text-left" data-toggle="modal" data-target="#addadminprofile" href="new_visitor_4.php">Add</button>
-                    </h6>
+<?php
+    echo '<h6 class="m-0 font-weight-bold text-primary">';
+    switch($filter) {
+        case 'tot_visitors':
+            echo 'Total Visitors';
+            break;
+        case 'emp_leave_pass':
+            echo 'Total Employee Leave Passes';
+            break;
+        default:
+            
+    }
+    echo '</h6>';
+?>                    
                     <form class="user" action="#" method="POST">
-                        
                         <div class="form-group pb-2">
-                            <label>Date Of Search</label>
+                            <label>Enter Date</label>
                             <input type="date" class="form-control form-control-user" placeholder="Enter Date"
                             name="date"required >
                         </div>
-                        <input type="submit" name="search_btn" value="Add" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">
+                        <input type="submit" name="search_btn" value="Search" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">
                     </form>
                 </div>
             <div class="card-body">

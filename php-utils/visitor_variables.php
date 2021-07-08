@@ -64,5 +64,4 @@
     $dateOfAppointment = date("d-m-y",$timeStamp);
     $tokenId = rand(100000,999999);
 
-
 ?>
