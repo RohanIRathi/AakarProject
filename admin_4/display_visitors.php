@@ -77,11 +77,12 @@ echo '
 <th> EMP Name </th>
 <th> HOD ID </th>
 <th> Purpose </th>
+<th> Detailed Purpose </th>
 <th> Requested Start Time </th>
 <th> Requested End Time </th>
 <th> Actual Start Time </th>
 <th> Actual End Time </th>
-<th> Reason </th>
+
 </tr>
 ';
 }
@@ -108,12 +109,13 @@ echo '
             echo "<td>".$row['employee_id']."</td>";
             echo "<td>".$row['emp_name']."</td>";
             echo "<td>".$row['hod_id']."</td>";
+            echo "<td><b>".$row['reason']."</b></td>";
             echo "<td>".$row['Purpose']."</td>";
             echo "<td>".date('h:i a',strToTime($row['start_time']))."</td>";
             echo "<td>".date('h:i a',strToTime($row['end_time']))."</td>";
             echo "<td>".date('h:i a',$row['actual_start_time'])."</td>";
             echo "<td>".$actual_end_time."</td>";
-            echo "<td>".(strcmp($row['reason'],'personal') === 0 ? "Personal" : "Professional")."</td>";
+            
             /*echo "<td>".$row['id']."</td>";
             echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
             echo "<td>".$row['email']."</td>";

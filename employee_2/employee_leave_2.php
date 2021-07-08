@@ -5,6 +5,7 @@ include('navbar_2.php');
 if(isset($_POST['Submit_btn'])) {
     include('../php-utils/db/db.variables.php');
     include('../php-utils/db/db.connection.php');
+    //print_r($_POST);
     $link = connectionToDB($host, $username, $pass, $db);
     $purpose = mysqli_real_escape_string($link,$_POST['purpose']);
     $sT = mysqli_real_escape_string($link,$_POST['start_time']);
@@ -37,7 +38,7 @@ if(isset($_POST['Submit_btn'])) {
         }
         $empName = $_SESSION['firstname'].' '.$_SESSION['lastname'];
         //echo 'hiii'.$hodId;
-        $query = "INSERT INTO `emp_leave_pass`(`employee_id`,`emp_name`,`hod_id`,`Purpose`,`start_time`,`end_time`,`timestamp`,`status`,`date_of_leave`) VALUES ('".$_SESSION['id']."','".$empName."','".$hodId."','".$purpose."','".$sT."','".$eT."','".$time."','REQ_SENT','".$date."')";
+        $query = "INSERT INTO `emp_leave_pass`(`employee_id`,`emp_name`,`hod_id`,`Purpose`,`start_time`,`end_time`,`timestamp`,`status`,`date_of_leave`,`reason`) VALUES ('".$_SESSION['id']."','".$empName."','".$hodId."','".$purpose."','".$sT."','".$eT."','".$time."','REQ_SENT','".$date."','".$_POST['purpose-radio']."')";
     
         $queryToFetchHodEmail = "SELECT `email` from `hod` WHERE `hod_id` = '".$hodId."'";
         $email = "";
@@ -81,13 +82,22 @@ if(isset($_POST['Submit_btn'])) {
                                     <div class="form-group pb-2">
                                         <label>Purpose Of Leave</label><br>
                                         <label class="radio-inline  mr-3">
-                                            <input type="radio" class="form-control form-control-user" name="purpose">Personal
+                                            <input type="radio" class="form-control form-control-user" 
+                                            value="Personal"
+                                            name="purpose-radio"
+                                            required>Personal
                                         </label>
                                         <label class="radio-inline  mr-3">
-                                            <input type="radio"class="form-control form-control-user" name="purpose">Official
+                                            <input type="radio"class="form-control form-control-user" 
+                                            value="Official"
+                                            name="purpose-radio"
+                                            required>Official
                                         </label>
                                     </div>
-                            
+                                    <div class="form-group">
+                                        <input type="text" name="purpose" class="form-control form-control-user" placeholder="Detailed Reason"
+                                        required>
+                                    </div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group pb-2">

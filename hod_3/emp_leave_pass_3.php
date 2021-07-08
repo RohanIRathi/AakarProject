@@ -8,21 +8,21 @@ $link = connectionToDB($host, $username, $pass, $db);
 function fetchEmpLeavePass($link) {
     $lT = strtotime('today midnight');
     $rT = strtotime('tomorrow');
-    $query = 'SELECT `leave_pass_id`,`emp_name`,`Purpose`,`start_time`,`end_time` FROM `emp_leave_pass` WHERE `hod_id` = '.$_SESSION['id'].' AND `status`="REQ_SENT" AND `timestamp` BETWEEN '.$lT.' AND '.$rT.' ';
+    $query = 'SELECT `leave_pass_id`,`emp_name`,`Purpose`,`start_time`,`end_time`,`reason` FROM `emp_leave_pass` WHERE `hod_id` = '.$_SESSION['id'].' AND `status`="REQ_SENT" AND `timestamp` BETWEEN '.$lT.' AND '.$rT.' ';
 
     if($result = mysqli_query($link,$query)) {
-        return $result;
+      return $result;
     } else {
-        echo '<br>error : '.mysqli_error($link);
+      echo '<br>error : '.mysqli_error($link);
     }
 }
 
 //if accept or reject button is clicked
 if(isset($_POST['accept_btn']) || isset($_POST['reject_btn'])) {
   if(isset($_POST['accept_btn'])){
-      $x = true;
+    $x = true;
   } else {
-      $x = false;
+    $x = false;
   }
   //print_r($_POST);
   $query = "UPDATE `emp_leave_pass`
@@ -69,6 +69,7 @@ if($rowcount === 0) {
   echo '<tr>
           <th>Emp Name</th>
           <th>Purpose</th>
+          <th>Detailed Purpose</th>
           <th>Start Time</th>
           <th>End time</th>
           <th>Accept</th>
@@ -82,7 +83,9 @@ if($rowcount === 0) {
 <?php
 if($rowcount > 0) {
   while($row = mysqli_fetch_array($result)) {
-    echo '<form method="POST"> <tr><td>'.$row['emp_name'].'</td>';
+    echo '<form method="POST"> 
+    <tr><td>'.$row['emp_name'].'</td>';
+    echo '<td>'.$row['reason'].'</td>';
     echo '<td>'.$row['Purpose'].'</td>';
     echo '<td>'.date('h:i a',strtotime($row['start_time'])).'</td>';
     echo '<td>'.date('h:i a',strtotime($row['end_time'])).'</td>';
