@@ -65,6 +65,10 @@ $result = getUserData($link,'employee',$_SESSION['id']);
                                 <input type="text" name="employee ID" class="form-control" placeholder="Enter Employee ID" required>
                             </div>
                             <div class="form-group">
+                                <label>Phone No.</label>
+                                <input type="text" name="phone_no" class="form-control" placeholder="Enter Phone No." required>
+                            </div>
+                            <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                             </div>
@@ -104,6 +108,7 @@ $result = getUserData($link,'employee',$_SESSION['id']);
                                     <th> Employee Id</th>
                                     <th> Username </th>
                                     <th> Email </th>
+                                    <th> Phone No. </th>
                                     <th> Role </th>
                                     <th> ASSIGNED HOD ID </th>
                                     <th> DELETE </th>
@@ -118,6 +123,7 @@ echo '<tr>
 <td>'.$row['employee_id'].'</td>
 <td>'.$row['first_name'].' '.$row['last_name'].'</td>
 <td>'.$row['email'].'</td>
+<td>'.$row['phone_no'].'</td>
 <td>Employee</td>
 <td>'.$row['hod_id'].'</td>
 <td>
