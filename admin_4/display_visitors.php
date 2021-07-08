@@ -53,15 +53,22 @@ if(isset($_POST['search_btn'])) {
             <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Upcoming Appointments
                         <button type="button" class="ml-3 btn btn-primary text-left" data-toggle="modal" data-target="#addadminprofile" href="new_visitor_4.php">Add</button>
-                    </h6>
-                    <form class="user" action="#" method="POST">
-                        
-                        <div class="form-group pb-2">
-                            <label>Date Of Search</label>
+                    </h6><br>
+                    
+                    <form class="form-inline user" action="#" method="POST">
+                        <div class="input-group">
+                            <label>Date Of Search </label>
+                            <input type="date" class="form-control rounded ml-3" placeholder="Enter Date"name="date"required >
+                            <input type="submit" name="search_btn" value="Add" class="ml-3 btn btn-outline-primary rounded">
+                        </div>
+                        <!-- <div class="input-group">
+                            <label>Date Of Search </label>
                             <input type="date" class="form-control form-control-user" placeholder="Enter Date"
                             name="date"required >
                         </div>
-                        <input type="submit" name="search_btn" value="Add" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">
+                        <div class="input-group" >
+                            <input type="submit" name="search_btn" value="Add" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">
+                        </div> -->
                     </form>
                 </div>
             <div class="card-body">
