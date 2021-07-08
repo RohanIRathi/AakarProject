@@ -46,7 +46,7 @@ $result = getUserData($link,'admin',$_SESSION['id']);
                             </div>
                             <div class="form-group">
                                 <label>Phone No.</label>
-                                <input type="text" name="phone_no" class="form-control" placeholder="Enter Phone No." required>
+                                <input type="text" name="phone_no" class="form-control" pattern="[6-9]\d{9}" title="Enter Valid Number"placeholder="Enter Phone No." required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
@@ -84,8 +84,7 @@ $result = getUserData($link,'admin',$_SESSION['id']);
                                     <th> Email </th>
                                     <th> Phone No. </th>
                                     <th> Role </th>
-                                    <th> EDIT </th>
-                                    <th> DELETE </th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,12 +98,6 @@ echo '<tr>
 <td>'.$row['email'].'</td>
 <td>'.$row['phone_no'].'</td>
 <td>Admin</td>
-<td>
-<button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
-</td>
-<td>
-<button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
-</td>
 </tr>';
 
 }
