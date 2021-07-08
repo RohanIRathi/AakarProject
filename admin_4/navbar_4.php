@@ -10,11 +10,16 @@
       <nav class="sb-topnav navbar navbar-expand navbar-light sticky-top" style="padding-left: 0; padding-top: 0; padding-bottom: 0; z-index: 1040;">
           <a class="navbar-brand" href="" style="padding: 0;"><img class="logo" src="css/logo.jpg" alt="Aakar Foundry" width="auto" height="56px"></a> <a class="logout-button pl-3" id="sidebarToggle"><i class="fas fa-bars text-white"></i></a>
           <ul class="navbar-nav ml-auto ">
-              <li class="nav-item">
-                  <form method='POST'>
-                      <button class="dropdown-item" type='submit' name='logout-btn'><i class="fas fa-power-off fa-2x text-white"></i></button>
-                  </form>
-              </li>
+            <li class="nav-item">
+                <form method='POST'>
+                    <a href="resetpass_4.php"class="btn btn-outline-warning mr-2" type='submit' name='reset-btn'>Reset Password</a>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form method='POST'>
+                    <button class="btn btn-outline-danger ml-2" type='submit' name='logout-btn'><i class="fas fa-power-off fa-1x text-white"></i></button>
+                </form>
+            </li>
           </ul>
       </nav>
       <div id="layoutSidenav">
@@ -51,17 +56,10 @@
                               <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
                               Security Registration
                           </a>
-                          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                          <a class="nav-link" href="new_visitor_4.php">
                               <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                              Registration
-                              <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                              ADD appointment
                           </a>
-                          <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                              <nav class="sb-sidenav-menu-nested nav">
-                                  <a class="nav-link" href="new_visitor_4.php">ADD appointment</a>
-                                  <a class="nav-link" href="#">Delete visitor</a>
-                              </nav>
-                          </div>
                           <a class="nav-link" href="notification_4.php">
                               <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                               Notifications
