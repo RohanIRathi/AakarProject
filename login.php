@@ -8,11 +8,11 @@
     $error = NULL;
     if(!empty($_POST["login_btn"])) {
         //echo 'Set!';
-        $email = mysqli_real_escape_string($link,$_POST['email']);
+        $empId = mysqli_real_escape_string($link,$_POST['emp_id']);
         $password = mysqli_real_escape_string($link,$_POST['passwordd']);
         $type = mysqli_real_escape_string($link,$_POST['option']);
         //echo 'type : '.$type.'<br>';
-        $userCredArr = checkValidPass($type,$email,$link,$password);
+        $userCredArr = checkValidPass($type,$empId,$link,$password);
         if($userCredArr != NULL){
         
             
@@ -81,7 +81,7 @@
 
                                     <form class="user"name="form1" method="POST">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-user" placeholder="Enter Email..." required>
+                                            <input type="text" name="emp_id" class="form-control form-control-user" placeholder="Enter Employee Id" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="passwordd" class="form-control form-control-user" placeholder="Password" required>

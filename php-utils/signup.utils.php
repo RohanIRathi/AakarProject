@@ -34,7 +34,7 @@ if(!function_exists("signUpUser")) {
         $id = "id";
       }
 
-      $query = "INSERT INTO `".$type."`( `".$id."`,`email`, `password`,`first_name`,`last_name`".
+      $query = "INSERT INTO `".$type."`( `".$id."`,`email`, `password`,`first_name`,`last_name`,`phone_no`".
       (
         (strcmp($type,'admin')==0 || strcmp($type,'security')==0) ? "" : 
         (
@@ -42,7 +42,7 @@ if(!function_exists("signUpUser")) {
         )
       )
   
-      .") VALUES ('".$userCred['employee_Id']."','".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."'".
+      .") VALUES ('".$userCred['employee_Id']."','".$userCred['email']."','".$userCred['password']."','".$userCred['firstName']."','".$userCred['lastName']."','".$userCred['phone_no']."'".
   
       ( 
       (strcmp($type,'admin')==0 || strcmp($type,'security')==0) 

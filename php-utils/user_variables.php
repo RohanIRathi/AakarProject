@@ -7,7 +7,7 @@
     $firstName = mysqli_real_escape_string($link,$_POST['firstname']);
     $lastName = mysqli_real_escape_string($link,$_POST['lastname']);
     $employeeId = mysqli_real_escape_string($link,$_POST['employee_ID']);
+    $phoneNo = mysqli_real_escape_string($link,$_POST['phone_no']);
 
-
-    $userCred = array("email"=>$email,"password"=>$password,"firstName"=>$firstName,"lastName"=>$lastName,"employee_Id" => $employeeId);
+    $userCred = array("email"=>$email,"password"=>$password,"firstName"=>$firstName,"lastName"=>$lastName,"employee_Id" => $employeeId,"phone_no"=>$phoneNo);
 ?>

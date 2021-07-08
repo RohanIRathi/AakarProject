@@ -1,7 +1,7 @@
 <?php
     if(!function_exists("checkValidPass")) {
         // declare your function
-        function checkValidPass($type,$email,$link,$password) {
+        function checkValidPass($type,$empId,$link,$password) {
             $type = strtolower($type);
             $id = "";
             if($type == "hod") {
@@ -12,7 +12,7 @@
                 $id = "id";
             }
             echo ' id : '.$id.'<br>';
-            $query = "SELECT `".$id."`,`password`,`first_name`,`last_name` FROM `".$type."` WHERE `email` = '".$email."'";
+            $query = "SELECT `".$id."`,`password`,`first_name`,`last_name` FROM `".$type."` WHERE `".$id."` = '".$empId."'";
             $success = false;
             if($result = mysqli_query($link,$query)) {
                 if($row = mysqli_fetch_array($result)) {
