@@ -14,13 +14,14 @@ if(isset($_POST['Submit_btn'])) {
     $eT = mysqli_real_escape_string($link,$_POST['end_time']);
     $arr = array_map('intval', explode(':', $eT));
     $etT = mktime($arr[0], $arr[1], date("s"), date("m")  , date("d"), date("Y"));
+    $date = date('d/m/Y', time());
     //echo $stT.'<br>';
     //echo $etT;
     $error = false;
     if($stT < time() || $etT < time() || $etT < $stT) {
         echo '<div class="alert alert-danger" role="alert">
-        Enter Valid start and end time
-      </div>';
+                Enter Valid start and end time
+              </div>';
         $error = true;
     }
     $query = "SELECT `hod_id` from `employee` WHERE `employee_id` = '".$_SESSION['id']."'";
@@ -36,7 +37,7 @@ if(isset($_POST['Submit_btn'])) {
         }
         $empName = $_SESSION['firstname'].' '.$_SESSION['lastname'];
         //echo 'hiii'.$hodId;
-        $query = "INSERT INTO `emp_leave_pass`(`employee_id`,`emp_name`,`hod_id`,`Purpose`,`start_time`,`end_time`,`timestamp`,`status`) VALUES ('".$_SESSION['id']."','".$empName."','".$hodId."','".$purpose."','".$sT."','".$eT."','".$time."','REQ_SENT')";
+        $query = "INSERT INTO `emp_leave_pass`(`employee_id`,`emp_name`,`hod_id`,`Purpose`,`start_time`,`end_time`,`timestamp`,`status`,`date_of_leave`) VALUES ('".$_SESSION['id']."','".$empName."','".$hodId."','".$purpose."','".$sT."','".$eT."','".$time."','REQ_SENT','".$date."')";
     
         $queryToFetchHodEmail = "SELECT `email` from `hod` WHERE `hod_id` = '".$hodId."'";
         $email = "";
