@@ -117,32 +117,32 @@ include('navbar_4.php');
 ?>
 <div class="container">
     <br />
-    <h3 align="center">Employees Report</h3>
+    <h3 class="text-center">Employee's Leave Pass Report</h3>
     <br />
     <div class="panel panel-default">
         <div class="panel-heading">
-            <form method="post">
-                <div class="row">
-
-                    <div class="col-md-3" align="center">
-                        Start Date <input type="date" name="starting"></div>
-                    <div class="col-md-3" align="center">
-                        End Date <input type="date" name="ending"></div>
-
-                    <div class=" col-md-4" align="center">
-                        <select name="reason_type" class="form-control input-sm">
-                            <option value="Personal">Personal Leave</option>
-                            <option value="Official">Professional Leave</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2" align="center">
-                        <input type="submit" name="download" class="btn btn-primary btn-sm" value="Download" />
-                    </div>
+            <form class="form-inline"method="post">
+                <div class="input-group">
+					<label class="ml-5">Start Date :</label>
+					<input type="date" class="form-control rounded ml-3 mr-3"  name="starting">
+				</div>
+                <div class="input-group">
+					<label>End Date :</label>
+					<input type="date" class="form-control rounded ml-3 mr-3"  name="ending">
+				</div>
+                <div class="input-group">
+                    <select name="reason_type" class="form-control input-sm">
+                        <option value="Personal">Personal Leave</option>
+                        <option value="Official">Professional Leave</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <input type="submit" name="download" class="ml-3 btn btn-outline-primary rounded" value="Download" />
                 </div>
             </form>
             <?php echo $start_date_error; ?>
             <?php echo $end_date_error; ?><br>
-            *Note that after download the data will get deleted permenantly.
+            <p style="color:red;">Note that after download the data will get deleted permenantly.</p>
         </div>
 
 
