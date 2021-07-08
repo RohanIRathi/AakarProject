@@ -12,7 +12,6 @@ $query = "SELECT * FROM visitor ORDER BY id ";
 $statement = $connect->prepare($query);
 $statement->execute();
 $result = $statement->fetchAll();
-//added by abhay
 $start_date_error = '';
 $end_date_error = '';
 
@@ -47,22 +46,42 @@ if (isset($_POST["export"])) {
 		$active_sheet->setCellValue('D1', "Email");
 		$active_sheet->setCellValue('E1', "Time");
 		$active_sheet->setCellValue('F1', "No of Visitors");
-		$active_sheet->setCellValue('G1', "Start Time");
-		$active_sheet->setCellValue('H1', "End Time");
+		$active_sheet->setCellValue('G1', "Visitee ID");
+		$active_sheet->setCellValue('H1', "Start Time");
+		$active_sheet->setCellValue('I1', "End Time");
+		$active_sheet->setCellValue('J1', "Purpose");
+		$active_sheet->setCellValue('K1', "Hostpitality");
+		$active_sheet->setCellValue('L1', "Conference");
+		$active_sheet->setCellValue('M1', "Conference Room No");
+		$active_sheet->setCellValue('N1', "Room Purpose");
+		$active_sheet->setCellValue('O1', "Date");
+		$active_sheet->setCellValue('P1', "Phone No");
+		$active_sheet->setCellValue('Q1', "Status");
 
 
 		$count = 2;
 
 		foreach ($result2 as $row) {
 			$dt = date('Y-m-d h:i:s', $row['time']);
+			$start_dt = date('F j, Y, g:i a', (int)$row["start_time"]);
+			$end_dt = date('F j, Y, g:i a', (int)$row["end_time"]);
 			$active_sheet->setCellValue('A' . $count, $row["id"]);
 			$active_sheet->setCellValue('B' . $count, $row["first_name"]);
 			$active_sheet->setCellValue('C' . $count, $row["last_name"]);
 			$active_sheet->setCellValue('D' . $count, $row["email"]);
 			$active_sheet->setCellValue('E' . $count, $dt);
 			$active_sheet->setCellValue('F' . $count, $row["noofvisitors"]);
-			$active_sheet->setCellValue('G' . $count, $row["start_time"]);
-			$active_sheet->setCellValue('H' . $count, $row["end_time"]);
+			$active_sheet->setCellValue('G' . $count, $row["visitee"]);
+			$active_sheet->setCellValue('H' . $count, $start_dt);
+			$active_sheet->setCellValue('I' . $count, $end_dt);
+			$active_sheet->setCellValue('J' . $count, $row["purpose"]);
+			$active_sheet->setCellValue('K' . $count, $row["hospitality"]);
+			$active_sheet->setCellValue('L' . $count, $row["conference"]);
+			$active_sheet->setCellValue('M' . $count, $row["conference_room"]);
+			$active_sheet->setCellValue('N' . $count, $row["room_purpose"]);
+			$active_sheet->setCellValue('O' . $count, $row["dateofappointment"]);
+			$active_sheet->setCellValue('P' . $count, $row["phone_no"]);
+			$active_sheet->setCellValue('Q' . $count, $row["status"]);
 
 			$count = $count + 1;
 		}
@@ -103,34 +122,33 @@ include('navbar_4.php');
 ?>
 <div class="container">
 	<br />
-	<h3 align="center">Visitor's Report</h3>
+	<h3 align="center">Visitors Report</h3>
 	<br />
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<form class="form-inline"method="post">
-				<!--<div class="col-md-2" align="center">User Data</div>-->
-				<div class="input-group">
-					<label class="ml-5">Start Date :</label>
-					<input type="date" class="form-control rounded ml-3 mr-3"  name="start">
-				</div>
-				<div class="input-group">
-					<label>End Date :</label>
-					<input type="date" class="form-control rounded ml-3 mr-3"  name="end">
-				</div>
-				<div class="input-group">
-					<select name="file_type ml-3 mr-3" class="form-control">
-						<!--<option value="Xlsx">Xlsx</option>
-					<option value="Xls">Xls</option>-->
-						<option value="Csv">Csv</option>
-					</select>
-				</div>
-				<div class="input-group">
-					<input type="submit" name="export" class="ml-3 btn btn-outline-primary rounded" value="Download" />
+			<form method="post">
+				<div class="row">
+					<!--<div class="col-md-2" align="center">User Data</div>-->
+					<div class="col-md-3" align="center">
+						Start Date <input type="date" name="start"></div>
+					<div class="col-md-3" align="center">
+						End Date <input type="date" name="end"></div>
+					<div class="col-md-4">
+						<select name="file_type" class="form-control input-sm">
+							<!--<option value="Xlsx">Xlsx</option>
+                      	<option value="Xls">Xls</option>-->
+							<option value="Csv">Csv</option>
+						</select>
+					</div>
+					<br></br>
+					<div class="col-md-2">
+						<input type="submit" name="export" class="btn btn-primary btn-sm" value="Download" />
+					</div>
 				</div>
 			</form>
 			<?php echo $start_date_error; ?>
 			<?php echo $end_date_error; ?><br>
-			<p style="color:red;">Note that after download the data will get deleted permenantly.</p>
+			*Note that after download the data will get deleted permenantly.
 		</div>
 		<div class="panel-body">
 			<div class="table-responsive">
@@ -142,8 +160,17 @@ include('navbar_4.php');
 						<th>Email</th>
 						<th>Time</th>
 						<th>No of Visitors</th>
+						<th>Visitee ID</th>
 						<th>Start Time</th>
 						<th>End Time</th>
+						<th>Purpose</th>
+						<th>Hostpitality</th>
+						<th>Conference</th>
+						<th>Conference Room No</th>
+						<th>Room Purpose</th>
+						<th>Date</th>
+						<th>Phone No</th>
+						<th>Status</th>
 					</tr>
 					<?php
 					if (isset($result)) {
@@ -160,8 +187,20 @@ include('navbar_4.php');
       					<td>' . $row["email"] . '</td>
       					<td>' . $dt . '</td>
       					<td>' . $row["noofvisitors"] . '</td>
+						  <td>' . $row["visitee"] . '</td>
       					<td>' . $start_dt . '</td>
       					<td>' . $end_dt . '</td>
+						  <td>' . $row["purpose"] . '</td>
+						  <td>' . $row["hospitality"] . '</td>
+						  <td>' . $row["conference"] . '</td>
+						  <td>' . $row["conference_room"] . '</td>
+						  <td>' . $row["room_purpose"] . '</td>
+
+						  <td>' . $row["dateofappointment"] . '</td>
+						  <td>' . $row["phone_no"] . '</td>
+						  <td>' . $row["status"] . '</td>
+
+						
       					</tr>
       					';
 						}
