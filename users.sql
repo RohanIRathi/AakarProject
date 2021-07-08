@@ -5,25 +5,7 @@ USE `aakar`;
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 04, 2021 at 03:05 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
-
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Feb 18, 2021 at 09:21 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
-
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Feb 20, 2021 at 08:49 AM
+-- Generation Time: Jul 08, 2021 at 06:01 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -40,6 +22,128 @@ SET time_zone = "+00:00";
 --
 -- Database: `aakar`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` varchar(20) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` text DEFAULT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `email`, `password`, `first_name`, `last_name`) VALUES
+('00001', '', 'admin@gmail.com', '$2y$10$rSDD/KcGB9Yd6KRJNhSCmef9fbnaJ0B9nlmThEeNtsdF77bG8QoM2', 'Admin', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee`
+--
+
+CREATE TABLE `employee` (
+  `employee_id` varchar(20) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` text NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `hod_id` varchar(20) NOT NULL,
+  `hod_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`employee_id`, `username`, `email`, `password`, `first_name`, `last_name`, `hod_id`, `hod_name`) VALUES
+('30001', '', 'employee1@gmail.com', '$2y$10$yAEkOUZ.Kmc1mf65ksb6t.Q5g7jJEwlWvbNm35OQ92unHBkhYhEjO', 'EMP', '1', '20001', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `emp_leave_pass`
+--
+
+CREATE TABLE `emp_leave_pass` (
+  `leave_pass_id` int(11) NOT NULL,
+  `employee_id` varchar(20) NOT NULL,
+  `emp_name` varchar(40) NOT NULL,
+  `hod_id` varchar(20) NOT NULL,
+  `Purpose` text NOT NULL,
+  `start_time` varchar(20) NOT NULL,
+  `end_time` varchar(20) NOT NULL,
+  `timestamp` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `actual_start_time` varchar(20) NOT NULL,
+  `actual_end_time` varchar(20) NOT NULL,
+  `date_of_leave` varchar(10) NOT NULL,
+  `reason` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `emp_leave_pass`
+--
+
+INSERT INTO `emp_leave_pass` (`leave_pass_id`, `employee_id`, `emp_name`, `hod_id`, `Purpose`, `start_time`, `end_time`, `timestamp`, `status`, `actual_start_time`, `actual_end_time`, `date_of_leave`, `reason`) VALUES
+(52, '30001', 'EMP 1', '20001', 'Reason', '12:17', '14:18', '1625712562', 'ACCEPTED_FIN', '1625713828', '1625713843', '08/07/2021', 'profession'),
+(53, '30001', 'EMP 2', '20001', 'Reason', '12:38', '14:38', '1625713695', 'ONGOING', '1625714619', '', '08/07/2021', 'personal');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hod`
+--
+
+CREATE TABLE `hod` (
+  `hod_id` varchar(20) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` text NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `admin_id` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hod`
+--
+
+INSERT INTO `hod` (`hod_id`, `username`, `email`, `password`, `first_name`, `last_name`, `admin_id`) VALUES
+('20001', '', 'hod@gmail.com', '$2y$10$no4wP.ZB0GrdO/YYD7lzqOiD9ZiSGV9qtyJEipLmo2eBLa8t9DLQW', 'HOD', '1', '00001'),
+('20002', '', 'hod2@gmail.com', '$2y$10$M4z5eXjba4qMkVDo0rvktOGUZdOaAgsTUxZEXu3nmw54Gp5glkyba', 'HOD', '2', '00001');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `security`
+--
+
+CREATE TABLE `security` (
+  `id` varchar(20) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` text NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `security`
+--
+
+INSERT INTO `security` (`id`, `username`, `email`, `password`, `first_name`, `last_name`) VALUES
+('10001', '', 'admin_security@gmail.com', '$2y$10$z5qh8BHQb1zxnEeyfBVayOXYcJaWWPTGABv4nxI.BmFL0nTlFjsby', 'Admin', '');
 
 -- --------------------------------------------------------
 
@@ -71,16 +175,42 @@ CREATE TABLE `visitor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `visitor`
---
-
-INSERT INTO `visitor` (`id`, `first_name`, `last_name`, `email`, `purpose`, `photo_id`, `time`, `noofvisitors`, `photo_id_no`, `hospitality`, `conference`, `conference_room`, `room_purpose`, `start_time`, `end_time`, `visitee`, `tokenid`, `phone_no`, `dateofappointment`, `status`) VALUES
-(47, 'Vinay', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1613843580', 1, 12, 0, 0, '', '', '1613806663', '1613806688', '00001', '$2y$10$ZosZ6m3LxFyfxRx74jzzAO6ULpaim1bGfO14j3EfAojcdF.EfD2Gm', '7021019903', '20-02-21', 'ACCEPTED_FINISHED'),
-(48, 'Siddharth', 'Kothari', 'siddharthkothari655@gmail.com', 'on', '', '1613843580', 1, 1, 0, 0, '', '', '', '', '00001', '$2y$10$Pqp7TZjbgHzE30jWGL7r0.2Z52DvOpgEXDlhnGqYAC.Q63MsMxw8m', '7021019903', '20-02-21', 'BOOKED');
-
---
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`employee_id`),
+  ADD KEY `FKK` (`hod_id`);
+
+--
+-- Indexes for table `emp_leave_pass`
+--
+ALTER TABLE `emp_leave_pass`
+  ADD PRIMARY KEY (`leave_pass_id`),
+  ADD KEY `empIdFD` (`employee_id`),
+  ADD KEY `hodIdFK` (`hod_id`);
+
+--
+-- Indexes for table `hod`
+--
+ALTER TABLE `hod`
+  ADD PRIMARY KEY (`hod_id`),
+  ADD KEY `FK` (`admin_id`);
+
+--
+-- Indexes for table `security`
+--
+ALTER TABLE `security`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `visitor`
@@ -93,10 +223,39 @@ ALTER TABLE `visitor`
 --
 
 --
+-- AUTO_INCREMENT for table `emp_leave_pass`
+--
+ALTER TABLE `emp_leave_pass`
+  MODIFY `leave_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
 -- AUTO_INCREMENT for table `visitor`
 --
 ALTER TABLE `visitor`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `employee`
+--
+ALTER TABLE `employee`
+  ADD CONSTRAINT `FKK` FOREIGN KEY (`hod_id`) REFERENCES `hod` (`hod_id`);
+
+--
+-- Constraints for table `emp_leave_pass`
+--
+ALTER TABLE `emp_leave_pass`
+  ADD CONSTRAINT `empIdFD` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`),
+  ADD CONSTRAINT `hodIdFK` FOREIGN KEY (`hod_id`) REFERENCES `hod` (`hod_id`);
+
+--
+-- Constraints for table `hod`
+--
+ALTER TABLE `hod`
+  ADD CONSTRAINT `FK` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

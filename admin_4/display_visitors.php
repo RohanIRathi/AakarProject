@@ -22,7 +22,7 @@ if(isset($_POST['search_btn'])) {
                 $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM visitor WHERE `status` = 'Accepted_1' OR `status` = 'ONGOING'";
                 break;
             case 'emp_leave_pass':
-                $query = "SELECT `employee_id`, `emp_name`, `hod_id`, `purpose`, `Purpose`, `start_time`, `end_time`,`actual_start_time`,`actual_end_time` FROM `emp_leave_pass` WHERE (`status` = 'ONGOING' OR `status` = 'ACCEPTED_FIN') AND `date_of_leave` = '".$newDate."'";
+                $query = "SELECT `employee_id`, `emp_name`, `hod_id`, `purpose`, `Purpose`, `start_time`, `end_time`,`actual_start_time`,`actual_end_time`,`reason` FROM `emp_leave_pass` WHERE (`status` = 'ONGOING' OR `status` = 'ACCEPTED_FIN') AND `date_of_leave` = '".$newDate."'";
                 break;
             default:
                 $query = false;
@@ -81,6 +81,7 @@ echo '
 <th> Requested End Time </th>
 <th> Actual Start Time </th>
 <th> Actual End Time </th>
+<th> Reason </th>
 </tr>
 ';
 }
@@ -112,6 +113,7 @@ echo '
             echo "<td>".date('h:i a',strToTime($row['end_time']))."</td>";
             echo "<td>".date('h:i a',$row['actual_start_time'])."</td>";
             echo "<td>".$actual_end_time."</td>";
+            echo "<td>".(strcmp($row['reason'],'personal') === 0 ? "Personal" : "Professional")."</td>";
             /*echo "<td>".$row['id']."</td>";
             echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
             echo "<td>".$row['email']."</td>";
