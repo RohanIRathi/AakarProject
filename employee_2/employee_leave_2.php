@@ -78,11 +78,16 @@ if(isset($_POST['Submit_btn'])) {
                                     <h1 class="h4 text-gray-900 mb-4">Leave Pass</h1>
                                 </div>
                                 <form class="user" action="#" method="POST">
-                                    <div class="form-group">
-                                        <label>Purpose of leave</label>
-                                        <input type="text" name="purpose" class="form-control form-control-user" placeholder="Purpose....">
+                                    <div class="form-group pb-2">
+                                        <label>Purpose Of Leave</label><br>
+                                        <label class="radio-inline  mr-3">
+                                            <input type="radio" class="form-control form-control-user" name="purpose">Personal
+                                        </label>
+                                        <label class="radio-inline  mr-3">
+                                            <input type="radio"class="form-control form-control-user" name="purpose">Official
+                                        </label>
                                     </div>
-                                    
+                            
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group pb-2">
