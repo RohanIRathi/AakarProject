@@ -103,33 +103,34 @@ include('navbar_4.php');
 ?>
 <div class="container">
 	<br />
-	<h3 align="center">Visitors Report</h3>
+	<h3 align="center">Visitor's Report</h3>
 	<br />
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<form method="post">
-				<div class="row">
-					<!--<div class="col-md-2" align="center">User Data</div>-->
-					<div class="col-md-3" align="center">
-						Start Date <input type="date" name="start"></div>
-					<div class="col-md-3" align="center">
-						End Date <input type="date" name="end"></div>
-					<div class="col-md-4">
-						<select name="file_type" class="form-control input-sm">
-							<!--<option value="Xlsx">Xlsx</option>
-                      	<option value="Xls">Xls</option>-->
-							<option value="Csv">Csv</option>
-						</select>
-					</div>
-					<br></br>
-					<div class="col-md-2">
-						<input type="submit" name="export" class="btn btn-primary btn-sm" value="Download" />
-					</div>
+			<form class="form-inline"method="post">
+				<!--<div class="col-md-2" align="center">User Data</div>-->
+				<div class="input-group">
+					<label class="ml-5">Start Date :</label>
+					<input type="date" class="form-control rounded ml-3 mr-3"  name="start">
+				</div>
+				<div class="input-group">
+					<label>End Date :</label>
+					<input type="date" class="form-control rounded ml-3 mr-3"  name="end">
+				</div>
+				<div class="input-group">
+					<select name="file_type ml-3 mr-3" class="form-control">
+						<!--<option value="Xlsx">Xlsx</option>
+					<option value="Xls">Xls</option>-->
+						<option value="Csv">Csv</option>
+					</select>
+				</div>
+				<div class="input-group">
+					<input type="submit" name="export" class="ml-3 btn btn-outline-primary rounded" value="Download" />
 				</div>
 			</form>
 			<?php echo $start_date_error; ?>
 			<?php echo $end_date_error; ?><br>
-			*Note that after download the data will get deleted permenantly.
+			<p style="color:red;">Note that after download the data will get deleted permenantly.</p>
 		</div>
 		<div class="panel-body">
 			<div class="table-responsive">

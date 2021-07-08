@@ -32,7 +32,7 @@ userLogout();
                             <h4 class="profile-info-text pb-3" style="font-size: small;">HOD</h4>
                         </div>
                         <a class="nav-link" href="booking_3.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
                             Dashboard
                         </a>
                         

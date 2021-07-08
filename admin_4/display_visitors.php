@@ -13,10 +13,10 @@ if(isset($_POST['search_btn'])) {
     } else {
         //print_r($_POST);
         $newDate = date("d/m/Y", strtotime($_POST['date']));
-        
+        $visDate = date("d-m-y", strtotime($_POST['date']));
         switch($filter) {
             case 'tot_visitors':
-                $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room` FROM `visitor` WHERE `status` = 'Accepted_1' OR `status` = 'ONGOING'";
+                $query = "SELECT `id`, `first_name`, `last_name`, `email`, `noofvisitors`, `time`, `start_time`, `end_time`, `conference_room`,`visitee` FROM `visitor` WHERE (`status` = 'ACCEPTED_FINISHED' OR `status` = 'ONGOING') AND `dateofappointment` = '".$visDate."'";
                 break;
             case 'emp_leave_pass':
                 $query = "SELECT `employee_id`, `emp_name`, `hod_id`, `purpose`, `Purpose`, `start_time`, `end_time`,`actual_start_time`,`actual_end_time`,`reason` FROM `emp_leave_pass` WHERE (`status` = 'ONGOING' OR `status` = 'ACCEPTED_FIN') AND `date_of_leave` = '".$newDate."'";
@@ -60,15 +60,23 @@ if(isset($_POST['search_btn'])) {
         default:
             
     }
-    echo '</h6>';
+    echo '</h6><br>';
 ?>                    
-                    <form class="user" action="#" method="POST">
-                        <div class="form-group pb-2">
+                    
+                    <form class="form-inline user" action="#" method="POST">
+                        <div class="input-group">
                             <label>Enter Date</label>
+                            <input type="date" class="form-control rounded ml-3" placeholder="Enter Date"name="date"required >
+                            <input type="submit" name="search_btn" value="Search" class="ml-3 btn btn-outline-primary rounded">
+                        </div>
+                        <!-- <div class="input-group">
+                            <label>Date Of Search </label>
                             <input type="date" class="form-control form-control-user" placeholder="Enter Date"
                             name="date"required >
                         </div>
-                        <input type="submit" name="search_btn" value="Search" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">
+                        <div class="input-group" >
+                            <input type="submit" name="search_btn" value="Add" class="btn btn-primary btn-user btn-block" style="border-radius: 10rem;">
+                        </div> -->
                     </form>
                 </div>
             <div class="card-body">
@@ -92,6 +100,17 @@ echo '
 
 </tr>
 ';
+} else if(isset($result) && strcmp($filter,'tot_visitors') ===0) {
+    echo '
+    <tr>
+    <th> Visitor Name </th>
+    <th> Visitor Mail </th>
+    <th> Visitee Id </th>
+    <th> No of Visitors </th>
+    <th> Start Time </th>
+    <th> End Time </th>
+    </tr>
+    ';
 }
 
 ?>
@@ -131,8 +150,27 @@ echo '
             echo "<td>".$start_time."</td>";
             echo "<td>".$end_time."</td>";
             echo "<td>".$row['conference_room']."</td>";
-            echo "</tr>";*/
+           ;*/
+            echo "</tr>";
             echo "</tbody>";
+        }
+    } else if(isset($result) && strcmp($filter,'tot_visitors') ===0) {
+        echo "<div class='row'>
+                <b>".str_repeat('&nbsp;', 5)."Date : ".$visDate."</b>
+            </div>";
+        while($row = $result -> fetch_assoc())
+        {
+            echo "<tbody>";
+            echo "<tr>";
+            echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
+            echo "<td>".$row['email']."</td>";
+            echo "<td>".$row['visitee']."</td>";
+            echo "<td>".$row['noofvisitors']."</td>";
+            echo "<td>".date('h:i a',$row['start_time'])."</td>";
+            echo "<td>".date('h:i a',$row['end_time'])."</td>";
+            echo "</tr>";
+            echo "</tbody>";
+            //print_r($row);
         }
     }
 ?>
