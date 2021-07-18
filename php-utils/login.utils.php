@@ -11,7 +11,7 @@
             } else {
                 $id = "id";
             }
-            echo ' id : '.$id.'<br>';
+            //echo ' id : '.$id.'<br>';
             $query = "SELECT `".$id."`,`password`,`first_name`,`last_name` FROM `".$type."` WHERE `".$id."` = '".$empId."'";
             $success = false;
             if($result = mysqli_query($link,$query)) {

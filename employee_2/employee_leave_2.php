@@ -52,7 +52,7 @@ if(isset($_POST['Submit_btn'])) {
     
         $subject = 'Employee Leave Pass Request';
         $message = '<b>You have a new Employee Leave pass Request.</b><br>Employee <b>'.$empName.'</b> (Employee Id : '.$_SESSION['id'].') has requested a leave pass for <br><b>Purpose : '.$purpose.'</b><br> Tentative Start Time : '.$sT.', End Time : '.$eT.'<br>You can either accept or reject the request by logging in the Aakar Software. The request will be expired in 2 minutes.';
-        include('../php-utils/sendMail.php');
+        //include('../php-utils/sendMail.php');
         if(mysqli_query($link,$query)) {
             echo '<div class="alert alert-success" role="alert">
                     <b>Request Sent!</b>
