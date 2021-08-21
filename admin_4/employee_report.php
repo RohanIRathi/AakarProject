@@ -21,19 +21,20 @@ if (isset($_POST["download"])) {
     $et_ = strtotime($_POST['ending']);
     $reason_ = $_POST['reason_type'];
 
-    $converted_st = date('Y-m-d', ($st_));
-    $converted_et = date('Y-m-d', ($et_));
+    $converted_st = date('d-m-Y', ($st_));
+    $converted_et = date('d-m-Y', ($et_));
     if (empty($st_)) {
         $start_date_error = '<label class="text-danger">Start Date is required</label>';
     } else if (empty($et_)) {
         $end_date_error = '<label class="text-danger">End Date is required</label>';
     } else {
 
-        $query2 = "SELECT * FROM emp_leave_pass  where `reason`=:reason; INTERSECT (SELECT * from emp_leave_pass where `date_of_leave` BETWEEN :start_time AND :end_time ORDER BY leave_pass_id )";
+        
+        $query2 = "SELECT * FROM emp_leave_pass  where `reason`= :reason AND (`timestamp` BETWEEN :start_t AND :end_t)" ;
         $statement2 = $connect->prepare($query2);
         $statement2->bindParam(":reason", $reason_);
-        $statement2->bindParam(":start_time", $st_);
-        $statement2->bindParam(":end_time", $et_);
+        $statement2->bindParam(":start_t", $st_);
+        $statement2->bindParam(":end_t", $et_);
         $statement2->execute();
         $result2 = $statement2->fetchAll();
 
@@ -62,9 +63,9 @@ if (isset($_POST["download"])) {
 
         foreach ($result2 as $row) {
             $ast = date(' g:i a', (int)$row["actual_start_time"]);
-            $aet = date(' g:i a', (int)$row["actual_start_time"]);
-            $st =  date(' g:i a', (int)$row["start_time"]);
-            $et =  date(' g:i a', (int)$row["end_time"]);
+            $aet = date(' g:i a', (int)$row["actual_end_time"]);
+            // $st =  date(' g:i a', (int)$row["start_time"]);
+            // $et =  date(' g:i a', (int)$row["end_time"]);
 
             $active_sheet->setCellValue('A' . $count, $row["leave_pass_id"]);
             $active_sheet->setCellValue('B' . $count, $row["employee_id"]);
@@ -72,8 +73,8 @@ if (isset($_POST["download"])) {
             $active_sheet->setCellValue('D' . $count, $row["hod_id"]);
             $active_sheet->setCellValue('E' . $count, $row["reason"]);
             $active_sheet->setCellValue('F' . $count, $row["Purpose"]);
-            $active_sheet->setCellValue('G' . $count, $st);
-            $active_sheet->setCellValue('H' . $count, $et);
+            $active_sheet->setCellValue('G' . $count, $row["start_time"]);
+            $active_sheet->setCellValue('H' . $count, $row["end_time"]);
             $active_sheet->setCellValue('I' . $count, $ast);
             $active_sheet->setCellValue('J' . $count, $aet);
             $active_sheet->setCellValue('K' . $count, $row["date_of_leave"]);
@@ -121,15 +122,15 @@ include('navbar_4.php');
     <br />
     <div class="panel panel-default">
         <div class="panel-heading">
-            <form class="form-inline"method="post">
+            <form class="form-inline" method="post">
                 <div class="input-group">
-					<label class="ml-5">Start Date :</label>
-					<input type="date" class="form-control rounded ml-3 mr-3"  name="starting">
-				</div>
+                    <label class="ml-5">Start Date :</label>
+                    <input type="date" class="form-control rounded ml-3 mr-3" name="starting">
+                </div>
                 <div class="input-group">
-					<label>End Date :</label>
-					<input type="date" class="form-control rounded ml-3 mr-3"  name="ending">
-				</div>
+                    <label>End Date :</label>
+                    <input type="date" class="form-control rounded ml-3 mr-3" name="ending">
+                </div>
                 <div class="input-group">
                     <select name="reason_type" class="form-control input-sm">
                         <option value="Personal">Personal Leave</option>
@@ -170,9 +171,9 @@ include('navbar_4.php');
                         foreach ($result as $row) {
 
                             $ast = date(' g:i a', (int)$row["actual_start_time"]);
-                            $aet = date(' g:i a', (int)$row["actual_start_time"]);
-                            $st =  date(' g:i a', (int)$row["start_time"]);
-                            $et =  date(' g:i a', (int)$row["end_time"]);
+                            $aet = date(' g:i a', (int)$row["actual_end_time"]);
+                            // $st =  date(' g:i a', (int)$row["start_time"]);
+                            // $et =  date(' g:i a', (int)$row["end_time"]);
                             echo '
 						<tr>
       					<td>' . $row["leave_pass_id"] . '</td>
@@ -181,8 +182,8 @@ include('navbar_4.php');
       					<td>' . $row["hod_id"] . '</td>
 						<td>' . $row["reason"] . '</td>
       					<td>' . $row["Purpose"] . '</td>
-      					<td>' . $st . '</td>
-      					<td>' . $et . '</td>
+      					<td>' . $row["start_time"] . '</td>
+      					<td>' . $row["end_time"] . '</td>
 						<td>' . $ast . '</td>
 						<td>' . $aet . '</td>
 						<td>' . $row["date_of_leave"] . '</td>
@@ -200,7 +201,7 @@ include('navbar_4.php');
 </div>
 <br />
 <br />
-
+<script>$('#date').datepicker({ dateFormat: 'dd/mm/yy' }).val();</script>
 </body>
 
 </html>
