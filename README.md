@@ -17,7 +17,7 @@ The WebApp can be divided into 2 major applications:
 	* HOD
 	* Employee
 	* Security
-![Login Page](screenshots/login.jpeg)
+![Login Page](screenshots/Login.jpeg)
 
 <br><br>
 
