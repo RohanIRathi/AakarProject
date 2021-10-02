@@ -97,12 +97,14 @@ Only an admin can register another user. Depending upon which tab the registrati
 ![Admin: Visit Approval](screenshots/Admin-VisitNotification.jpeg)
 
 	After the admin approves the visit, a notification will be sent to the Security Guard mentioning that the entry has been granted and then the Security can allow the visitor in the premises
+
 ![Entry Granted](screenshots/EntryGranted.jpeg)
 
 <br><br>
 
 5. **Ongoing Visits (Security)**:
 	After the visit is completed, the security can go to the *Ongoing Visit* tab in the Side-Navbar and click on the *Out* button to mark the visit complete
+
 ![Ongoing Visit](screenshots/OngoingVisits.jpeg)
 
 <br><br>
